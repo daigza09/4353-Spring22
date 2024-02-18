@@ -14,7 +14,7 @@ function Header() {
         <Link to="/LogIn" className="flex items-center text-white">
           Log In
         </Link>
-        <Link to="/Contact" className="flex items-center text-white">
+        <Link to="/Signup" className="flex items-center text-white">
           Sign Up
         </Link>
       </div>
