@@ -7,12 +7,18 @@ function Header() {
         Left Text Test
       </div>
 
-      <div className="ml-auto">
+      <div className="flex items-center md:space-x-10">
         <Link to="/Home" className="flex items-center text-white">
           Home
         </Link>
         <Link to="/Contact" className="flex items-center text-white">
-          Contact
+          Contact Us
+        </Link>
+        <Link to="/Contact" className="flex items-center text-white">
+          Log In
+        </Link>
+        <Link to="/Contact" className="flex items-center text-white">
+          Sign Up
         </Link>
       </div>
     </header>
