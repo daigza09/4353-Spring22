@@ -4,7 +4,6 @@ import Data from "../assets/data.json";
 
 function History() {
   const [data, setData] = useState(Data);
-  console.log(Data);
   return (
     <main>
       <div className="flex items-center justify-center">
