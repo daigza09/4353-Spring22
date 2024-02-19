@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function FuelForm() {
     const [gasLocation, setGasLocation] = useState('');
@@ -8,6 +8,7 @@ function FuelForm() {
     const [pricePerGallon, setPricePerGallon] = useState('');
     const [deliveryDate, setDeliveryDate] = useState('');
     const [deliveryAddress, setDeliveryAddress] = useState('');
+    const [total, setTotal] = useState('');
 
     const handleGasLocationChange = (e) => {
         setGasLocation(e.target.value);
@@ -35,6 +36,18 @@ function FuelForm() {
     const handleDeliveryAddressChange = (e) => {
         setDeliveryAddress(e.target.value);
     };
+    const handleTotalChange = () => {
+        if(isNaN(parseFloat(numGallons)) || isNaN(parseFloat(pricePerGallon))){
+            setTotal('0.00');
+        }else{
+            const calculatedTotal = parseFloat(numGallons) * parseFloat(pricePerGallon);
+            setTotal(calculatedTotal.toFixed(2));
+        }
+    };
+    useEffect(() => {
+        handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
+    }, [numGallons, pricePerGallon]);
+    
 
     return (
     <main className="flex flex-col items-center justify-center h-screen bg-cover">
@@ -116,7 +129,16 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">Total</div>
+        <div className="flex flex-col items-left">
+            <label htmlFor="total">Total:</label>
+            <input
+                type="text"
+                id="total"
+                value={total}
+                readOnly
+                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
+            />
+        </div>
         <div>Order Button</div>
     </main>
   );
