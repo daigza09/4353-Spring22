@@ -6,6 +6,7 @@ function History() {
   const [data, setData] = useState(Data);
   return (
     <main>
+      <h1>TEST</h1>
       <div className="flex items-center justify-center">
         <table className="w-11/12 border-collapse">
           <thead className="border-solid border-2 border-gray bg-white text-left">
