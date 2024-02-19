@@ -139,7 +139,21 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div>Order Button</div>
+        <div>
+            <button
+                style={{
+                borderRadius: '8px',
+                padding: '12px', // Adjust the padding as needed
+                height: '50px', // Adjust the height as needed
+                color: 'white',
+                backgroundColor: '#02353c', // Your desired color
+                border: 'none', // Remove default button border
+                cursor: 'pointer', // Change cursor on hover
+                }}
+            >
+            Order
+        </button>
+        </div>
     </main>
   );
 }
