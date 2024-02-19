@@ -48,9 +48,25 @@ function FuelForm() {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [numGallons, pricePerGallon]);
     
-
+    const handleOrderClick = () => {
+        // Validate if any of the input fields are empty
+        if (
+            !gasLocation ||
+            !fuelType ||
+            !numGallons ||
+            !purchaseDate ||
+            !pricePerGallon ||
+            !deliveryDate ||
+            !deliveryAddress
+        ) {
+            alert('Please fill out all the fields before placing an order.');
+        } else {
+            // Perform the order action
+            alert('Order placed successfully!');
+        }
+    };
     return (
-    <main className="grid grid-cols-2 gap-1 h-screen bg-cover">
+    <main className="grid grid-cols-2 gap-4 items-center justify-center h-screen mx-auto">
         <div className="flex flex-col items-center space-y-2">
             <label htmlFor="gasLocation">Gas Location:</label>
             <select
@@ -139,20 +155,21 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div>
-            <button
-                style={{
-                borderRadius: '8px',
-                padding: '12px', // Adjust the padding as needed
-                height: '50px', // Adjust the height as needed
-                color: 'white',
-                backgroundColor: '#02353c', // Your desired color
-                border: 'none', // Remove default button border
-                cursor: 'pointer', // Change cursor on hover
-                }}
-            >
-            Order
-        </button>
+        <div className="flex flex-col items-center space-y-2 col-span-2">
+                <button
+                    onClick={() => handleOrderClick()}
+                    style={{
+                        borderRadius: '8px',
+                        padding: '12px', // Adjust the padding as needed
+                        height: '50px', // Adjust the height as needed
+                        color: 'white',
+                        backgroundColor: '#02353c', // Your desired color
+                        border: 'none', // Remove default button border
+                        cursor: 'pointer', // Change cursor on hover
+                    }}
+                >
+                    Order
+                </button>
         </div>
     </main>
   );
