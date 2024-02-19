@@ -6,4 +6,5 @@ body {
   background: linear-gradient(to bottom, #02353C, #E7E6DA);
   margin: 0;
   color: #fff; 
+  background-attachment: fixed;
 }
