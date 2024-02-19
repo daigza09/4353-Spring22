@@ -11,7 +11,7 @@ function Header() {
         <Link to="/Home" className="flex items-center text-white">
           Home
         </Link>
-        <Link to="/LogIn" className="flex items-center text-white">
+        <Link to="/Login" className="flex items-center text-white">
           Log In
         </Link>
         <Link to="/Signup" className="flex items-center text-white">
