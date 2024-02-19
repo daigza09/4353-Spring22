@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/LogIn";
 import Signup from "./pages/Signup";
+import FuelForm from "./pages/FuelForm";
 import './App.css';
 
 function App() {
@@ -11,11 +12,12 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/home" />} />
+        <Route index element={<Navigate to="/home" replace />} />
         <Route path="home" element={<Home />}/>
         <Route path="Contact" element={<Contact/>}/>
         <Route path="Login" element={<Login/>}/>
         <Route path="Signup" element={<Signup/>}/>
+        <Route path="FuelForm" element={<FuelForm/>}/>
       </Route>
     </Routes>
     </>
