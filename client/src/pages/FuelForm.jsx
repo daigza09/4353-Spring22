@@ -129,7 +129,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-left" style={{ marginBottom: '8px' }}>
             <label htmlFor="total">Total:</label>
             <input
                 type="text"
