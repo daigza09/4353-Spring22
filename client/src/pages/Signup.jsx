@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="p-4 rounded" style={{ width: '50%', minWidth: '300px', maxWidth: '500px', fontFamily: 'Barlow, SemiBold', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -63,6 +62,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+function Login(){
+    const [showPassword, setShowPassword] = useState(false);
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -61,10 +60,4 @@ function Login() {
     </main>
   );
 }
-
 export default Login;
-
-
-
-
-
