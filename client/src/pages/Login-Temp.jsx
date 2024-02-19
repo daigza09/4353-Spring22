@@ -1,20 +1,3 @@
-<<<<<<< HEAD:client/src/pages/Login.jsx
-import { Link } from "react-router-dom";
-function Login(){
-    return(
-        <main>
-            <h1>This is the Log In page</h1>
-            <h2>Testing </h2>
-        </main>
-    );
-}
-export default Login;
-
-
-
-
-
-=======
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 function Login(){
@@ -78,4 +61,3 @@ function Login(){
   );
 }
 export default Login;
->>>>>>> ff116e8cbe0c25f4090b3603f75e7c55f28a1fbd:client/src/pages/Login-Temp.jsx
