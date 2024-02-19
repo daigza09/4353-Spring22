@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Signup() {
+function Login() {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="p-4 rounded" style={{ width: '50%', minWidth: '300px', maxWidth: '500px', fontFamily: 'Barlow, SemiBold', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <h2 className="text-white mb-3" style={{ marginTop: '-80px', fontFamily: 'Barlow, SemiBold' }}>REGISTRATION</h2>
+        <h2 className="text-white mb-3" style={{ marginTop: '-80px', fontFamily: 'Barlow, SemiBold' }}>WELCOME BACK!</h2>
         <p className="text-white mb-5" style={{ fontFamily: 'Barlow, Light' }}>
-          Have an account, <Link to="/signin" className="text-white" style={{ fontFamily: 'Barlow, SemiBold' }}>Sign In</Link>
+          Don't have an account, <Link to="/signin" className="text-white" style={{ fontFamily: 'Barlow, SemiBold' }}>Sign Up</Link>
           </p>
         <form>
           <div className="mb-4">
@@ -61,4 +62,9 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
+
+
+
+
+
