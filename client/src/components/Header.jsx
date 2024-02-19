@@ -17,9 +17,6 @@ function Header() {
         <Link to="/Signup" className="flex items-center text-white">
           Sign Up
         </Link>
-        <Link to="/Signup" className="flex items-center text-white">
-          Estimate
-        </Link>
       </div>
     </header>
   );
