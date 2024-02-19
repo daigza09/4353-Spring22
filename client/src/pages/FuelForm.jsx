@@ -6,6 +6,8 @@ function FuelForm() {
     const [numGallons, setNumGallons] = useState('');
     const [purchaseDate, setPurchaseDate] = useState('');
     const [pricePerGallon, setPricePerGallon] = useState('');
+    const [deliveryDate, setDeliveryDate] = useState('');
+    const [deliveryAddress, setDeliveryAddress] = useState('');
 
     const handleGasLocationChange = (e) => {
         setGasLocation(e.target.value);
@@ -26,6 +28,12 @@ function FuelForm() {
     };
     const handlePurchaseDateChange = (e) => {
         setPurchaseDate(e.target.value);
+    };
+    const handleDeliveryDateChange = (e) => {
+        setDeliveryDate(e.target.value);
+    };
+    const handleDeliveryAddressChange = (e) => {
+        setDeliveryAddress(e.target.value);
     };
 
     return (
@@ -88,9 +96,26 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">Delivery Address</div>
-        <div className="flex flex-col items-left">Delivery Date</div>
-        <div className="flex flex-col items-left">Price Per Gallon</div>
+        <div className="flex flex-col items-left">
+            <label htmlFor="deliveryDate">Delivery Date:</label>
+            <input
+                type="date"
+                id="deliveryDate"
+                value={deliveryDate}
+                onChange={handleDeliveryDateChange}
+                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
+            />
+        </div>
+        <div className="flex flex-col items-left">
+            <label htmlFor="deliveryAddress">Delivery Address:</label>
+            <input
+                type="text"
+                id="deliveryAddress"
+                value={deliveryAddress}
+                onChange={handleDeliveryAddressChange}
+                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
+            />
+        </div>
         <div className="flex flex-col items-left">Total</div>
         <div>Order Button</div>
     </main>
