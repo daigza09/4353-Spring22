@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 function FuelForm(){
     return(
-        <main>
-            <h1>This is the Fuel Form page</h1>
+        <main className = "relative h-screen bg-cover">
+            <div>Gas Location</div>
+            <div>Fuel Type</div>
+            <div>Number of Gallons</div>
+            <div>Purchase Date</div>
+            <div>Delivery Address</div>
+            <div>Delivery Date</div>
+            <div>Price Per Gallon</div>
+            <div>Total</div>
+            <div></div>
         </main>
     );
 }
