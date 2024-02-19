@@ -50,8 +50,8 @@ function FuelForm() {
     
 
     return (
-    <main className="flex flex-col items-center justify-center h-screen bg-cover">
-        <div className="flex flex-col items-left">
+    <main className="grid grid-cols-2 gap-1 h-screen bg-cover">
+        <div className="flex flex-col items-center space-y-2">
             <label htmlFor="gasLocation">Gas Location:</label>
             <select
                 id="gasLocation"
@@ -65,7 +65,7 @@ function FuelForm() {
                 {/* Add more options as needed */}
             </select>
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-left space-y-2">
             <label htmlFor="fuelType">Fuel Type:</label>
             <select
                 id="fuelType"
@@ -78,7 +78,7 @@ function FuelForm() {
                 {/* Add more options as needed */}
             </select>
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-center space-y-2">
             <label htmlFor="numGallons"> Number of Gallons</label>
             <input
                 type="number"
@@ -89,7 +89,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-left space-y-2">
             <label htmlFor="pricePerGallon"> Price Per Gallon</label>
             <input
                 type="text"
@@ -99,7 +99,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-center space-y-2">
             <label htmlFor="purchaseDate">Purchase Date:</label>
             <input
                 type="date"
@@ -109,7 +109,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-left space-y-2">
             <label htmlFor="deliveryDate">Delivery Date:</label>
             <input
                 type="date"
@@ -119,7 +119,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left">
+        <div className="flex flex-col items-center space-y-2">
             <label htmlFor="deliveryAddress">Delivery Address:</label>
             <input
                 type="text"
@@ -129,7 +129,7 @@ function FuelForm() {
                 style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
             />
         </div>
-        <div className="flex flex-col items-left" style={{ marginBottom: '8px' }}>
+        <div className="flex flex-col items-left space-y-2" style={{ marginBottom: '8px' }}>
             <label htmlFor="total">Total:</label>
             <input
                 type="text"
