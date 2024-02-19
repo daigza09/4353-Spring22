@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/LogIn";
 import Signup from "./pages/Signup";
-import FormQ from "./pages/FormQ";
+import Estimate from "./pages/Estimate";
 import './App.css';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         <Route path="Contact" element={<Contact/>}/>
         <Route path="Login" element={<Login/>}/>
         <Route path="Signup" element={<Signup/>}/>
-        <Route path="FormQ" element ={<FormQ/>}/>
+        <Route path="Estimate" element={<Estimate/>}/>
       </Route>
     </Routes>
     </>
