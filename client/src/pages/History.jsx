@@ -4,6 +4,7 @@ import Data from "../assets/data.json";
 
 function History() {
   const [data, setData] = useState(Data);
+  console.log(Data);
   return (
     <main>
       <div className="flex items-center justify-center">
@@ -16,6 +17,7 @@ function History() {
               <th className="py-2 px-5 text-lg text-black">
                 Gallons Requested
               </th>
+              <th className="py-2 px-5 text-lg text-black">Transaction</th>
             </tr>
           </thead>
           <tbody>
@@ -33,6 +35,25 @@ function History() {
                 <td className="py-4 px-5 text-lg text-black">{current.Item}</td>
                 <td className="py-4 px-5 text-lg text-black">
                   {current.GallonsRequested}
+                </td>
+                <td
+                  className="py-4 px-5 text-lg text-black relative bg-green-500 rounded-full"
+                  style={{
+                    backgroundColor:
+                      current.Transaction === "Completed"
+                        ? "#18C964"
+                        : current.Transaction === "Failed"
+                        ? "#f58493"
+                        : "transparent",
+                    color:
+                      current.Transaction === "Completed"
+                        ? "#12A150"
+                        : current.Transaction === "Failed"
+                        ? "#F31260"
+                        : "inherit",
+                  }}
+                >
+                  {current.Transaction}
                 </td>
               </tr>
             ))}
