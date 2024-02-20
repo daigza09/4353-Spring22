@@ -5,6 +5,7 @@ import Contact from "./pages/Contact";
 import Signup from "./pages/Signup";
 import FuelForm from "./pages/FuelForm";
 import Login from "./pages/Login-Temp";
+import ProfileManagement from "./pages/ProfileManagement";
 import History from "./pages/History";
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           <Route path="History" element={<History />} />
           <Route path="FuelForm" element={<FuelForm />} />
+          <Route path="ProfileManagement" element={<ProfileManagement />} />
         </Route>
       </Routes>
     </>
