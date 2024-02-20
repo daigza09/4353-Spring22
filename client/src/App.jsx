@@ -4,7 +4,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Signup from "./pages/Signup";
 import FuelForm from "./pages/FuelForm";
-import Login from "./pages/LogIn";
+import Login from "./pages/Login-Temp";
+import ProfileManagement from "./pages/ProfileManagement";
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="Login" element={<Login/>}/>
         <Route path="Signup" element={<Signup/>}/>
         <Route path="FuelForm" element={<FuelForm/>}/>
+        <Route path="ProfileManagement" element={<ProfileManagement />}/>
       </Route>
     </Routes>
     </>

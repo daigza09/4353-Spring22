@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className="text-white text-2xl font-sans flex justify-between items-center p-4 py-5 fixed bottom-0 w-full">
       <div className="text-[#02353C]">
-        Test
+        Live Demo Change
       </div>
       
       <div className="text-[#02353C]">
