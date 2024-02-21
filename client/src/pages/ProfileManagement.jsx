@@ -10,8 +10,6 @@ function ProfileManagement() {
   const [contactNumber, setContactNumber] = useState('');
   const [city, setCity] = useState('');
   const [userLocation, setUserLocation] = useState('');
-  // no longer need this 
-  const [state, setState] = useState('');
   const [password, setPassword] = useState('');
 
   const handleFirstNameChange = (e) => {
@@ -51,12 +49,6 @@ function ProfileManagement() {
   // new function for state 
   const handleUserLocationChange = (e) => {
     setUserLocation(e.target.value);
-  };
-
-  // remove this 
-  const handleStateChange = (e) => {
-    setState(e.target.value);
-    setStateError('');
   };
 
   const handlePasswordChange = (e) => {
