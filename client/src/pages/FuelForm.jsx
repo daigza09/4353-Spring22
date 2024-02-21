@@ -104,6 +104,7 @@ function FuelForm() {
                     <label className = "text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
                     <select
                         id="gasLocation"
+                        name="gasLocation"
                         value={formData.gasLocation}
                         onChange={handleChange}
                         className="rounded-md p-2 h-10 text-black w-48"
@@ -120,6 +121,7 @@ function FuelForm() {
                     <label className = "text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
                     <select
                         id="fuelType"
+                        name="fuelType"
                         value={formData.fuelType}
                         onChange={handleFuelTypeChange}
                         className="rounded-md p-2 h-10 text-black w-48"
@@ -136,6 +138,7 @@ function FuelForm() {
                         <input
                             type="number"
                             id="numGallons"
+                            name="numGallons"
                             value={formData.numGallons}
                             onChange={handleChange}
                             step="0.1"
@@ -151,6 +154,7 @@ function FuelForm() {
                         <input
                             type="text"
                             id="pricePerGallon"
+                            name="pricePerGallon"
                             value={formData.pricePerGallon}
                             placeholder="0.00"
                             readOnly
@@ -162,6 +166,7 @@ function FuelForm() {
                         <input
                             type="date"
                             id="purchaseDate"
+                            name="purchaseDate"
                             value={formData.purchaseDate}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
@@ -175,6 +180,7 @@ function FuelForm() {
                         <input
                             type="date"
                             id="deliveryDate"
+                            name="deliveryDate"
                             value={formData.deliveryDate}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
@@ -188,6 +194,7 @@ function FuelForm() {
                         <input
                             type="text"
                             id="deliveryAddress"
+                            name="deliveryAddress"
                             placeholder="Street, City, State, ZIP"
                             value={formData.deliveryAddress}
                             onChange={handleChange}
