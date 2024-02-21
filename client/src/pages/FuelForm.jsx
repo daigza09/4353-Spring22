@@ -63,6 +63,7 @@ function FuelForm() {
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [formData.numGallons, formData.pricePerGallon]);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [formErrors, setFormErrors] = useState({
         gasLocation: false,
         fuelType: false,
@@ -90,7 +91,18 @@ function FuelForm() {
           setFormErrors(errors);
         } else {    
           // Display the success message
-          setShowSuccessMessage(true);
+            alert("Congratulations! You successfully created your order.");
+        // Optionally, you can reset the form data after successful submission
+            setFormData({
+                gasLocation: '',
+                fuelType: '',
+                numGallons: '',
+                purchaseDate: '',
+                pricePerGallon: '',
+                deliveryDate: '',
+                deliveryAddress: '',
+                total: '',
+            });
         }
       };
 
@@ -98,8 +110,14 @@ function FuelForm() {
         <main className="relative h-screen bg-cover">
             <div className="container mx-auto text-center relative flex items-center justify-center h-screen">
             <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflow: 'hidden' }}>
-                <h1 className = "text-3xl md:text-3xl mb-4"> Fuel Quote Order Form</h1>
-                <h2 className = "text-xl md:text-1xl mb-4">Caption</h2>
+            {showSuccessMessage ? (
+            <div className="text-3xl font-semibold text-[#05204A] mb-4">
+              Congratulations! You successfully created your account.
+            </div>
+          ) : (
+            <>
+                <h1 className = "text-3xl md:text-3xl mb-4"> Fuel Quote Form</h1>
+                <h2 className = "text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label className = "text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
                     <select
@@ -150,7 +168,7 @@ function FuelForm() {
                     )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="pricePerGallon"> Price Per Gallon:</label>
+                    <label className = "text-xl mb-2" htmlFor="pricePerGallon"> Suggested Price/Gallon:</label>
                         <input
                             type="text"
                             id="pricePerGallon"
@@ -234,9 +252,11 @@ function FuelForm() {
                     Order
                 </button>
                 </div>
+                </>
+                )}
                 </div>
             </div>
-            </main>
+        </main>
     );
 }
 
