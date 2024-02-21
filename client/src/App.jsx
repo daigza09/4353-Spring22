@@ -6,24 +6,26 @@ import Signup from "./pages/Signup";
 import FuelForm from "./pages/FuelForm";
 import Login from "./pages/Login-Temp";
 import ProfileManagement from "./pages/ProfileManagement";
-import './App.css';
+import History from "./pages/History";
+import "./App.css";
 
 function App() {
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/home" replace />} />
-        <Route path="home" element={<Home />}/>
-        <Route path="Contact" element={<Contact/>}/>
-        <Route path="Login" element={<Login/>}/>
-        <Route path="Signup" element={<Signup/>}/>
-        <Route path="FuelForm" element={<FuelForm/>}/>
-        <Route path="ProfileManagement" element={<ProfileManagement />}/>
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/home" replace />} />
+          <Route path="home" element={<Home />} />
+          <Route path="Contact" element={<Contact />} />
+          <Route path="Login" element={<Login />} />
+          <Route path="Signup" element={<Signup />} />
+          <Route path="History" element={<History />} />
+          <Route path="FuelForm" element={<FuelForm />} />
+          <Route path="ProfileManagement" element={<ProfileManagement />} />
+        </Route>
+      </Routes>
     </>
-  )
+  );
 }
 
 export default App;

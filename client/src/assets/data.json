@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 1,
+        "DeliveryDate":  "03/12/2024",
+        "Amount": 1234,
+        "Item": "Purchase",
+        "GallonsRequested": "ABC gallons",
+        "Transaction": "Completed"
+    },
+    {
+        "Id": 2,
+        "DeliveryDate":  "03/12/2024",
+        "Amount": 465,
+        "Item": "Subscription",
+        "GallonsRequested": "XYZ gallons",
+        "Transaction": "Completed"
+    },
+    {
+        "Id": 3,
+        "DeliveryDate":  "03/20/2024",
+        "Amount": 165,
+        "Item": "Purchase",
+        "GallonsRequested": "BUM gallons",
+        "Transaction": "Failed"
+    }
+]
