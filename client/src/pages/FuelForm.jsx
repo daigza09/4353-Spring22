@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 function FuelForm() {
     const [formData, setFormData] = useState({
         gasLocation: '',
@@ -96,7 +97,7 @@ function FuelForm() {
     return (
         <main className="relative h-screen bg-cover">
             <div className="container mx-auto text-center relative flex items-center justify-center h-screen">
-            <div className="py-14 px-40  max-h-full overflow-y-auto">
+            <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflow: 'hidden' }}>
                 <h1 className = "text-3xl md:text-3xl mb-4"> Fuel Quote Order Form</h1>
                 <h2 className = "text-xl md:text-1xl mb-4">Caption</h2>
                 <div className="container text-center relative flex flex-col items-center justify-center">
