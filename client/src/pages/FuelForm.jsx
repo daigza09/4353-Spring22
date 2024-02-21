@@ -49,7 +49,7 @@ function FuelForm() {
     }, [numGallons, pricePerGallon]);
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen flex-col">
             {/* Left side */}
             <div className="flex-1 p-8">
                 <div className="flex flex-col items-center">
@@ -143,22 +143,23 @@ function FuelForm() {
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
-                <div className="flex flex-col items-center">
-                    <button
-                        style={{
-                            borderRadius: '8px',
-                            padding: '12px',
-                            height: '50px',
-                            color: 'white',
-                            backgroundColor: '#02353c',
-                            border: 'none',
-                            cursor: 'pointer',
-                            width: '200px',
-                        }}
-                    >
-                        Order
-                    </button>
-                </div>
+            </div>
+            {/* Centered button beneath the two divs */}
+            <div className="flex justify-center mt-4">
+                <button
+                    style={{
+                        borderRadius: '8px',
+                        padding: '12px',
+                        height: '50px',
+                        color: 'white',
+                        backgroundColor: '#02353c',
+                        border: 'none',
+                        cursor: 'pointer',
+                        width: '200px',
+                    }}
+                >
+                    Order
+                </button>
             </div>
         </div>
     );
