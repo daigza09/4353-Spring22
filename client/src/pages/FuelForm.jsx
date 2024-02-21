@@ -50,10 +50,8 @@ function FuelForm() {
 
     return (
         <div className="flex h-screen flex-col">
-            {/* Left side */}
-            <div className="flex-1 p-8">
-                <div className="flex flex-col items-center">
-                    <label htmlFor="gasLocation">Gas Location:</label>
+            <div className="flex flex-col items-center">
+                <label htmlFor="gasLocation">Gas Location:</label>
                     <select
                         id="gasLocation"
                         value={gasLocation}
@@ -63,11 +61,10 @@ function FuelForm() {
                         <option value="01-TX">01-TX</option>
                         <option value="02-FL">02-FL</option>
                         <option value="03-NY">03-NY</option>
-                        {/* Add more options as needed */}
                     </select>
-                </div>
-                <div className="flex flex-col items-center">
-                    <label htmlFor="fuelType">Fuel Type:</label>
+            </div>
+            <div className="flex flex-col items-center">
+                <label htmlFor="fuelType">Fuel Type:</label>
                     <select
                         id="fuelType"
                         value={fuelType}
@@ -78,9 +75,9 @@ function FuelForm() {
                         <option value="Gasoline">Gasoline</option>
                         {/* Add more options as needed */}
                     </select>
-                </div>
-                <div className="flex flex-col items-center">
-                    <label htmlFor="numGallons"> Number of Gallons</label>
+            </div>
+            <div className="flex flex-col items-center">
+                <label htmlFor="numGallons"> Number of Gallons</label>
                     <input
                         type="number"
                         id="numGallons"
@@ -89,9 +86,9 @@ function FuelForm() {
                         step="0.1"
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
-                </div>
-                <div className="flex flex-col items-center">
-                    <label htmlFor="pricePerGallon"> Price Per Gallon</label>
+            </div>
+            <div className="flex flex-col items-center">
+                <label htmlFor="pricePerGallon"> Price Per Gallon</label>
                     <input
                         type="text"
                         id="pricePerGallon"
@@ -99,11 +96,8 @@ function FuelForm() {
                         readOnly
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
-                </div>
             </div>
-            {/* Right side */}
-            <div className="flex-1 p-8">
-                <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center">
                     <label htmlFor="purchaseDate">Purchase Date:</label>
                     <input
                         type="date"
@@ -112,9 +106,9 @@ function FuelForm() {
                         onChange={handlePurchaseDateChange}
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
-                </div>
-                <div className="flex flex-col items-center">
-                    <label htmlFor="deliveryDate">Delivery Date:</label>
+            </div>
+            <div className="flex flex-col items-center">
+                <label htmlFor="deliveryDate">Delivery Date:</label>
                     <input
                         type="date"
                         id="deliveryDate"
@@ -123,8 +117,8 @@ function FuelForm() {
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
-                <div className="flex flex-col items-center">
-                    <label htmlFor="deliveryAddress">Delivery Address:</label>
+            <div className="flex flex-col items-center">
+                <label htmlFor="deliveryAddress">Delivery Address:</label>
                     <input
                         type="text"
                         id="deliveryAddress"
@@ -133,8 +127,8 @@ function FuelForm() {
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
-                <div className="flex flex-col items-center" style={{ marginBottom: '8px' }}>
-                    <label htmlFor="total">Total:</label>
+            <div className="flex flex-col items-center" style={{ marginBottom: '8px' }}>
+                <label htmlFor="total">Total:</label>
                     <input
                         type="text"
                         id="total"
@@ -143,8 +137,6 @@ function FuelForm() {
                         className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
-            </div>
-            {/* Centered button beneath the two divs */}
             <div className="flex justify-center mt-4">
                 <button
                     style={{
