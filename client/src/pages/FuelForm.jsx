@@ -62,6 +62,36 @@ function FuelForm() {
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [formData.numGallons, formData.pricePerGallon]);
+    const [formErrors, setFormErrors] = useState({
+        gasLocation: false,
+        fuelType: false,
+        numGallons: false,
+        purchaseDate: false,
+        pricePerGallon: false,
+        deliveryDate: false,
+        deliveryAddress: false,
+        total: false,
+    });
+    const handleOrder= (e) => {
+        e.preventDefault(); // Prevent the form from submitting (to avoid page reload)
+    
+        // Check for empty fields
+        const errors = {};
+        let hasError = false;
+        for (const key in formData) {
+          if (formData[key].trim() === "") {
+            errors[key] = true;
+            hasError = true;
+          }
+        }
+    
+        if (hasError) {
+          setFormErrors(errors);
+        } else {    
+          // Display the success message
+          setShowSuccessMessage(true);
+        }
+      };
 
     return (
         <main className="relative h-screen bg-cover">
@@ -172,6 +202,8 @@ function FuelForm() {
                         width: '200px',
                         marginTop: '20px',
                     }}
+                    type="submit"
+                    onClick={handleOrder}
                 >
                     Order
                 </button>
