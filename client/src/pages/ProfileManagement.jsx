@@ -9,6 +9,8 @@ function ProfileManagement() {
   const [address2, setAddress2] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [city, setCity] = useState('');
+  const [userLocation, setUserLocation] = useState('');
+  // no longer need this 
   const [state, setState] = useState('');
   const [password, setPassword] = useState('');
 
@@ -45,7 +47,13 @@ function ProfileManagement() {
     setCity(e.target.value);
     setCityError('');
   };
+ 
+  // new function for state 
+  const handleUserLocationChange = (e) => {
+    setUserLocation(e.target.value);
+  };
 
+  // remove this 
   const handleStateChange = (e) => {
     setState(e.target.value);
     setStateError('');
@@ -55,6 +63,25 @@ function ProfileManagement() {
     setPassword(e.target.value);
     setPasswordError('');
   };
+
+  // validating if any fields empty
+  const handleUserClick = () => {
+    if (
+      !firstName || 
+      !lastName ||
+      !email ||
+      !address1 ||
+      !address2 ||
+      !contactNumber ||
+      !city ||
+      !userLocation ||
+      !password
+    ) {
+      alert('Please fill out all the fields before exiting the page.'); // missing a field 
+    } else {
+      alert('Successfully Saved!'); // saved all the user info 
+    }
+  }
 
   return (
     <main className="min-h-screen flex items-start">
@@ -161,18 +188,19 @@ function ProfileManagement() {
               />
             </div>
             <div>
-              <label htmlFor="state" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>State</label>
-              <input
-                type="text"
-                id="state"
-                placeholder="Enter State"
-                autoComplete="off"
-                name="state"
-                value={state}
-                onChange={handleStateChange}
+              <label htmlFor="userLocation" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>State</label>
+              <select
+                id="userLocation"
+                value={userLocation}
+                onChange={handleUserLocationChange}
                 className="form-input rounded-lg block w-full h-14 text-lg"
                 style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
-              />
+                >
+                  <option value="01-TX">01-TX</option>
+                  <option value="02-FL">02-FL</option>
+                  <option value="03-NY">03-NY</option>
+                </select>
+           
             </div>
             <div>
               <label htmlFor="password" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Password</label>
