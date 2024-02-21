@@ -1,6 +1,61 @@
 import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 
 function ProfileManagement() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+    setFirstNameError('');
+  };
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+    setLastNameError('');
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError('');
+  };
+
+  const handleAddress1Change = (e) => {
+    setAddress1(e.target.value);
+    setAddress1Error('');
+  };
+
+  const handleAddress2Change = (e) => {
+    setAddress2(e.target.value);
+    setAddress2Error('');
+  };
+
+  const handleContactNumberChange = (e) => {
+    setContactNumber(e.target.value);
+    setContactNumberError('');
+  };
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+    setCityError('');
+  };
+
+  const handleStateChange = (e) => {
+    setState(e.target.value);
+    setStateError('');
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordError('');
+  };
+
   return (
     <main className="min-h-screen flex items-start">
       <div className="p-6 rounded w-full sm:max-w-xl">
@@ -15,8 +70,10 @@ function ProfileManagement() {
                 placeholder="Enter First Name"
                 autoComplete="off"
                 name="firstName"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={firstName}
+                onChange={handleFirstNameChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
             <div>
@@ -27,8 +84,10 @@ function ProfileManagement() {
                 placeholder="Enter Last Name"
                 autoComplete="off"
                 name="lastName"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={lastName}
+                onChange={handleLastNameChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
             <div className="md:col-span-2">
@@ -39,8 +98,10 @@ function ProfileManagement() {
                     placeholder="Enter Email"
                     autoComplete="off"
                     name="email"
+                    value={email}
+                    onChange={handleEmailChange}
                     className="form-input rounded-lg block w-full h-14 text-lg"
-                    style={{ fontFamily: 'Barlow, SemiBold' }}
+                    style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
                 />
             </div>
             <div className="md:col-span-2">
@@ -51,8 +112,10 @@ function ProfileManagement() {
                 placeholder="Enter Address 1"
                 autoComplete="off"
                 name="address1"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={address1}
+                onChange={handleAddress1Change}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
               />
             </div>
             <div className="md:col-span-2">
@@ -63,8 +126,10 @@ function ProfileManagement() {
                 placeholder="Enter Address 2"
                 autoComplete="off"
                 name="address2"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={address2}
+                onChange={handleAddress2Change}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
               />
             </div>
             <div>
@@ -75,8 +140,10 @@ function ProfileManagement() {
                 placeholder="Enter Contact Number"
                 autoComplete="off"
                 name="contactNumber"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={contactNumber}
+                onChange={handleContactNumberChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
             <div>
@@ -87,8 +154,10 @@ function ProfileManagement() {
                 placeholder="Enter City"
                 autoComplete="off"
                 name="city"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={city}
+                onChange={handleCityChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
             <div>
@@ -99,8 +168,10 @@ function ProfileManagement() {
                 placeholder="Enter State"
                 autoComplete="off"
                 name="state"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={state}
+                onChange={handleStateChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
             <div>
@@ -111,8 +182,10 @@ function ProfileManagement() {
                 placeholder="Enter Password"
                 autoComplete="off"
                 name="password"
-                className="form-input rounded-lg block w-full h-14 text-lg" 
-                style={{ fontFamily: 'Barlow, SemiBold' }}
+                value={password}
+                onChange={handlePasswordChange}
+                className="form-input rounded-lg block w-full h-14 text-lg"
+                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
               />
             </div>
           </div>
@@ -137,7 +210,3 @@ function ProfileManagement() {
 }
 
 export default ProfileManagement;
-
-
-
-
