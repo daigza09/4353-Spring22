@@ -111,6 +111,9 @@ function FuelForm() {
                         <option value="02-FL">02-FL</option>
                         <option value="03-NY">03-NY</option>
                     </select>
+                    {formErrors.gasLocation && (
+                    <p className="text-red-500 text-sm">Please select a order location</p>
+                    )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label className = "text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
@@ -123,6 +126,9 @@ function FuelForm() {
                    <option value="Diesel">Diesel</option>
                    <option value="Gasoline">Gasoline</option>
                    </select>
+                   {formErrors.fuelType && (
+                    <p className="text-red-500 text-sm">Please select a fuel type.</p>
+                   )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label className = "text-xl mb-2" htmlFor="numGallons"> Number of Gallons:</label>
@@ -135,6 +141,9 @@ function FuelForm() {
                             placeholder="0.00"
                             className="rounded-md p-2 h-10 text-black w-48"
                     />
+                    {formErrors.numGallons && (
+                    <p className="text-red-500 text-sm">Please enter a fuel quantity.</p>
+                    )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label className = "text-xl mb-2" htmlFor="pricePerGallon"> Price Per Gallon:</label>
@@ -152,10 +161,13 @@ function FuelForm() {
                         <input
                             type="date"
                             id="purchaseDate"
-                           value={formData.purchaseDate}
-                           onChange={handleChange}
+                            value={formData.purchaseDate}
+                            onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
-                    />
+                        />
+                    {formErrors.purchaseDate && (
+                    <p className="text-red-500 text-sm">Please enter the desired order date.</p>
+                    )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label className = "text-xl mb-2" htmlFor="deliveryDate">Delivery Date:</label>
@@ -165,7 +177,10 @@ function FuelForm() {
                             value={formData.deliveryDate}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
-                    />
+                        />
+                    {formErrors.deliveryDate && (
+                    <p className="text-red-500 text-sm">Please enter the desired delivery date.</p>
+                    )}
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
                     <label  className = "text-xl mb-2" htmlFor="deliveryAddress">Delivery Address:</label>
@@ -177,6 +192,9 @@ function FuelForm() {
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
+                    {formErrors.deliveryAddress && (
+                    <p className="text-red-500 text-sm">Please sign in to get your address.</p>
+                    )}
 
                 </div>
                 <div className="container text-center relative flex flex-col items-center justify-center">
