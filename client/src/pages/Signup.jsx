@@ -19,6 +19,10 @@ function Signup() {
       setPasswordError('');
   };
 
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSignup = (e) => {
       e.preventDefault();
       if (!username) {
@@ -72,6 +76,16 @@ function Signup() {
                 className="form-control rounded-pill"
                 style={{ borderRadius: '20px', padding: '8px', height: '45px', color: 'black', width: '470px' }}
               />
+              {password && (
+                  <button
+                    type="button"
+                    className="btn btn-link text-black"
+                    onClick={handleTogglePassword}
+                    style={{ position: 'absolute', top: '65%', right: '10px', transform: 'translateY(-50%)' }}
+                  >
+                {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                )}
             {passwordError && <span className="text-danger">{passwordError}</span>}
           </div>
         </div>
