@@ -50,7 +50,7 @@ function Login(){
             </div>
           </div>
           <button type="submit" className="btn btn-success rounded-pill mb-3" style={{ height: '50px', width: '100%', borderRadius: '25px', backgroundColor: '#02363d', marginTop: '40px', fontFamily: 'Barlow, SemiBold', color: '#fff' }}>
-            Sign Up
+            Login
           </button>
             <div className="d-flex align-items-center mt-3" style={{ textAlign: 'center', marginTop: '20px' }}>
               <p className="text-white mb-0 mx-2" style={{ fontFamily: 'Barlow, SemiBold' }}>or continue with</p>

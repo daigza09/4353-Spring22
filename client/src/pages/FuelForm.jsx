@@ -1,178 +1,263 @@
 import React, { useState, useEffect } from "react";
 
+
 function FuelForm() {
-    const [gasLocation, setGasLocation] = useState('');
-    const [fuelType, setFuelType] = useState('');
-    const [numGallons, setNumGallons] = useState('');
-    const [purchaseDate, setPurchaseDate] = useState('');
-    const [pricePerGallon, setPricePerGallon] = useState('');
-    const [deliveryDate, setDeliveryDate] = useState('');
-    const [deliveryAddress, setDeliveryAddress] = useState('');
-    const [total, setTotal] = useState('');
+    const [formData, setFormData] = useState({
+        gasLocation: '',
+        fuelType: '',
+        numGallons: '',
+        purchaseDate: '',
+        pricePerGallon: '',
+        deliveryDate: '',
+        deliveryAddress: '',
+        total: '',
+    });
 
-    const handleGasLocationChange = (e) => {
-        setGasLocation(e.target.value);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
+
     const handleFuelTypeChange = (e) => {
-        setFuelType(e.target.value);
+        const selectedFuelType = e.target.value;
 
-        if(e.target.value ==='Diesel'){
-            setPricePerGallon('3.14');
-        } else if(e.target.value ==='Gasoline'){
-            setPricePerGallon('2.79');
-        } else{
-            setPricePerGallon('');
+        setFormData((prevData) => ({
+            ...prevData,
+            fuelType: selectedFuelType,
+            pricePerGallon: getInitialPricePerGallon(selectedFuelType),
+        }));
+    };
+
+    const getInitialPricePerGallon = (fuelType) => {
+        switch (fuelType) {
+            case 'Diesel':
+                return '3.14';
+            case 'Gasoline':
+                return '2.79';
+            default:
+                return '';
         }
     };
-    const handleNumGallonsChange = (e) => {
-        setNumGallons(e.target.value);
-    };
-    const handlePurchaseDateChange = (e) => {
-        setPurchaseDate(e.target.value);
-    };
-    const handleDeliveryDateChange = (e) => {
-        setDeliveryDate(e.target.value);
-    };
-    const handleDeliveryAddressChange = (e) => {
-        setDeliveryAddress(e.target.value);
-    };
+
     const handleTotalChange = () => {
-        if(isNaN(parseFloat(numGallons)) || isNaN(parseFloat(pricePerGallon))){
-            setTotal('0.00');
-        }else{
-            const calculatedTotal = parseFloat(numGallons) * parseFloat(pricePerGallon);
-            setTotal(calculatedTotal.toFixed(2));
+        const parsedNumGallons = parseFloat(formData.numGallons);
+        const parsedPricePerGallon = parseFloat(formData.pricePerGallon);
+
+        if (isNaN(parsedNumGallons) || isNaN(parsedPricePerGallon)) {
+            setFormData((prevData) => ({
+                ...prevData,
+                total: '0.00',
+            }));
+        } else {
+            const calculatedTotal = parsedNumGallons * parsedPricePerGallon;
+            setFormData((prevData) => ({
+                ...prevData,
+                total: calculatedTotal.toFixed(2),
+            }));
         }
     };
+
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
-    }, [numGallons, pricePerGallon]);
+    }, [formData.numGallons, formData.pricePerGallon]);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [formErrors, setFormErrors] = useState({
+        gasLocation: false,
+        fuelType: false,
+        numGallons: false,
+        purchaseDate: false,
+        pricePerGallon: false,
+        deliveryDate: false,
+        deliveryAddress: false,
+        total: false,
+    });
+    const handleOrder= (e) => {
+        e.preventDefault(); // Prevent the form from submitting (to avoid page reload)
     
-    const handleOrderClick = () => {
-        // Validate if any of the input fields are empty
-        if (
-            !gasLocation ||
-            !fuelType ||
-            !numGallons ||
-            !purchaseDate ||
-            !pricePerGallon ||
-            !deliveryDate ||
-            !deliveryAddress
-        ) {
-            alert('Please fill out all the fields before placing an order.');
-        } else {
-            // Perform the order action
-            alert('Order placed successfully!');
+        // Check for empty fields
+        const errors = {};
+        let hasError = false;
+        for (const key in formData) {
+          if (formData[key].trim() === "") {
+            errors[key] = true;
+            hasError = true;
+          }
         }
-    };
+    
+        if (hasError) {
+          setFormErrors(errors);
+        } else {    
+          // Display the success message
+            alert("Congratulations! You successfully created your order.");
+        // Optionally, you can reset the form data after successful submission
+            setFormData({
+                gasLocation: '',
+                fuelType: '',
+                numGallons: '',
+                purchaseDate: '',
+                pricePerGallon: '',
+                deliveryDate: '',
+                deliveryAddress: '',
+                total: '',
+            });
+        }
+      };
+
     return (
-    <main className="grid grid-cols-2 gap-4 items-center justify-center h-screen mx-auto">
-        <div className="flex flex-col items-center space-y-2">
-            <label htmlFor="gasLocation">Gas Location:</label>
-            <select
-                id="gasLocation"
-                value={gasLocation}
-                onChange={handleGasLocationChange}
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            >
-                <option value="01-TX">01-TX</option>
-                <option value="02-FL">02-FL</option>
-                <option value="03-NY">03-NY</option>
-                {/* Add more options as needed */}
-            </select>
-        </div>
-        <div className="flex flex-col items-left space-y-2">
-            <label htmlFor="fuelType">Fuel Type:</label>
-            <select
-                id="fuelType"
-                value={fuelType}
-                onChange={handleFuelTypeChange}
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            >
-                <option value="Diesel">Diesel</option>
-                <option value="Gasoline">Gasoline</option>
-                {/* Add more options as needed */}
-            </select>
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-            <label htmlFor="numGallons"> Number of Gallons</label>
-            <input
-                type="number"
-                id="numGallons"
-                value={numGallons}
-                onChange={handleNumGallonsChange}
-                step="0.1" // Allows increments of 0.1 (decimal)
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-left space-y-2">
-            <label htmlFor="pricePerGallon"> Price Per Gallon</label>
-            <input
-                type="text"
-                id="pricePerGallon"
-                value={pricePerGallon}
-                readOnly
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-            <label htmlFor="purchaseDate">Purchase Date:</label>
-            <input
-                type="date"
-                id="purchaseDate"
-                value={purchaseDate}
-                onChange={handlePurchaseDateChange}
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-left space-y-2">
-            <label htmlFor="deliveryDate">Delivery Date:</label>
-            <input
-                type="date"
-                id="deliveryDate"
-                value={deliveryDate}
-                onChange={handleDeliveryDateChange}
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-            <label htmlFor="deliveryAddress">Delivery Address:</label>
-            <input
-                type="text"
-                id="deliveryAddress"
-                value={deliveryAddress}
-                onChange={handleDeliveryAddressChange}
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-left space-y-2" style={{ marginBottom: '8px' }}>
-            <label htmlFor="total">Total:</label>
-            <input
-                type="text"
-                id="total"
-                value={total}
-                readOnly
-                style={{ borderRadius: '8px', padding: '8px', height: '40px', color: 'black', width: '200px' }}
-            />
-        </div>
-        <div className="flex flex-col items-center space-y-2 col-span-2">
+        <main className="relative h-screen bg-cover">
+            <div className="container mx-auto text-center relative flex items-center justify-center h-screen">
+            <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflow: 'hidden' }}>
+            {showSuccessMessage ? (
+            <div className="text-3xl font-semibold text-[#05204A] mb-4">
+              Congratulations! You successfully created your account.
+            </div>
+          ) : (
+            <>
+                <h1 className = "text-3xl md:text-3xl mb-4"> Fuel Quote Form</h1>
+                <h2 className = "text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
+                    <select
+                        id="gasLocation"
+                        name="gasLocation"
+                        value={formData.gasLocation}
+                        onChange={handleChange}
+                        className="rounded-md p-2 h-10 text-black w-48"
+                    >
+                        <option value="01-TX">01-TX</option>
+                        <option value="02-FL">02-FL</option>
+                        <option value="03-NY">03-NY</option>
+                    </select>
+                    {formErrors.gasLocation && (
+                    <p className="text-red-500 text-sm">Please select a order location</p>
+                    )}
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
+                    <select
+                        id="fuelType"
+                        name="fuelType"
+                        value={formData.fuelType}
+                        onChange={handleFuelTypeChange}
+                        className="rounded-md p-2 h-10 text-black w-48"
+                    >
+                   <option value="Diesel">Diesel</option>
+                   <option value="Gasoline">Gasoline</option>
+                   </select>
+                   {formErrors.fuelType && (
+                    <p className="text-red-500 text-sm">Please select a fuel type.</p>
+                   )}
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="numGallons"> Number of Gallons:</label>
+                        <input
+                            type="number"
+                            id="numGallons"
+                            name="numGallons"
+                            value={formData.numGallons}
+                            onChange={handleChange}
+                            step="0.1"
+                            placeholder="0.00"
+                            className="rounded-md p-2 h-10 text-black w-48"
+                    />
+                    {formErrors.numGallons && (
+                    <p className="text-red-500 text-sm">Please enter a fuel quantity.</p>
+                    )}
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="pricePerGallon"> Suggested Price/Gallon:</label>
+                        <input
+                            type="text"
+                            id="pricePerGallon"
+                            name="pricePerGallon"
+                            value={formData.pricePerGallon}
+                            placeholder="0.00"
+                            readOnly
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        />
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="purchaseDate">Purchase Date:</label>
+                        <input
+                            type="date"
+                            id="purchaseDate"
+                            name="purchaseDate"
+                            value={formData.purchaseDate}
+                            onChange={handleChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        />
+                    {formErrors.purchaseDate && (
+                    <p className="text-red-500 text-sm">Please enter the desired order date.</p>
+                    )}
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="deliveryDate">Delivery Date:</label>
+                        <input
+                            type="date"
+                            id="deliveryDate"
+                            name="deliveryDate"
+                            value={formData.deliveryDate}
+                            onChange={handleChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        />
+                    {formErrors.deliveryDate && (
+                    <p className="text-red-500 text-sm">Please enter the desired delivery date.</p>
+                    )}
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label  className = "text-xl mb-2" htmlFor="deliveryAddress">Delivery Address:</label>
+                        <input
+                            type="text"
+                            id="deliveryAddress"
+                            name="deliveryAddress"
+                            placeholder="Street, City, State, ZIP"
+                            value={formData.deliveryAddress}
+                            onChange={handleChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        />
+                    {formErrors.deliveryAddress && (
+                    <p className="text-red-500 text-sm">Please sign in to get your address.</p>
+                    )}
+
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
+                    <label className = "text-xl mb-2" htmlFor="total">Total:</label>
+                        <input
+                            type="text"
+                            id="total"
+                            value={formData.total}
+                            readOnly
+                            className="rounded-md p-2 h-10 text-black w-48"
+                    />
+                </div>
+                <div className="container text-center relative flex flex-col items-center justify-center">
                 <button
-                    onClick={() => handleOrderClick()}
                     style={{
                         borderRadius: '8px',
-                        padding: '12px', // Adjust the padding as needed
-                        height: '50px', // Adjust the height as needed
+                        padding: '12px',
+                        height: '50px',
                         color: 'white',
-                        backgroundColor: '#02353c', // Your desired color
-                        border: 'none', // Remove default button border
-                        cursor: 'pointer', // Change cursor on hover
+                        backgroundColor: '#02353c',
+                        border: 'none',
+                        cursor: 'pointer',
+                        width: '200px',
+                        marginTop: '20px',
                     }}
+                    type="submit"
+                    onClick={handleOrder}
                 >
                     Order
                 </button>
-        </div>
-    </main>
-  );
+                </div>
+                </>
+                )}
+                </div>
+            </div>
+        </main>
+    );
 }
 
 export default FuelForm;
