@@ -1,52 +1,67 @@
 import React, { useState, useEffect } from "react";
 
 function FuelForm() {
-    const [gasLocation, setGasLocation] = useState('');
-    const [fuelType, setFuelType] = useState('');
-    const [numGallons, setNumGallons] = useState('');
-    const [purchaseDate, setPurchaseDate] = useState('');
-    const [pricePerGallon, setPricePerGallon] = useState('');
-    const [deliveryDate, setDeliveryDate] = useState('');
-    const [deliveryAddress, setDeliveryAddress] = useState('');
-    const [total, setTotal] = useState('');
+    const [formData, setFormData] = useState({
+        gasLocation: '',
+        fuelType: '',
+        numGallons: '',
+        purchaseDate: '',
+        pricePerGallon: '',
+        deliveryDate: '',
+        deliveryAddress: '',
+        total: '',
+    });
 
-    const handleGasLocationChange = (e) => {
-        setGasLocation(e.target.value);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
+
     const handleFuelTypeChange = (e) => {
-        setFuelType(e.target.value);
+        const selectedFuelType = e.target.value;
 
-        if (e.target.value === 'Diesel') {
-            setPricePerGallon('3.14');
-        } else if (e.target.value === 'Gasoline') {
-            setPricePerGallon('2.79');
-        } else {
-            setPricePerGallon('');
+        setFormData((prevData) => ({
+            ...prevData,
+            fuelType: selectedFuelType,
+            pricePerGallon: getInitialPricePerGallon(selectedFuelType),
+        }));
+    };
+
+    const getInitialPricePerGallon = (fuelType) => {
+        switch (fuelType) {
+            case 'Diesel':
+                return '3.14';
+            case 'Gasoline':
+                return '2.79';
+            default:
+                return '';
         }
     };
-    const handleNumGallonsChange = (e) => {
-        setNumGallons(e.target.value);
-    };
-    const handlePurchaseDateChange = (e) => {
-        setPurchaseDate(e.target.value);
-    };
-    const handleDeliveryDateChange = (e) => {
-        setDeliveryDate(e.target.value);
-    };
-    const handleDeliveryAddressChange = (e) => {
-        setDeliveryAddress(e.target.value);
-    };
+
     const handleTotalChange = () => {
-        if (isNaN(parseFloat(numGallons)) || isNaN(parseFloat(pricePerGallon))) {
-            setTotal('0.00');
+        const parsedNumGallons = parseFloat(formData.numGallons);
+        const parsedPricePerGallon = parseFloat(formData.pricePerGallon);
+
+        if (isNaN(parsedNumGallons) || isNaN(parsedPricePerGallon)) {
+            setFormData((prevData) => ({
+                ...prevData,
+                total: '0.00',
+            }));
         } else {
-            const calculatedTotal = parseFloat(numGallons) * parseFloat(pricePerGallon);
-            setTotal(calculatedTotal.toFixed(2));
+            const calculatedTotal = parsedNumGallons * parsedPricePerGallon;
+            setFormData((prevData) => ({
+                ...prevData,
+                total: calculatedTotal.toFixed(2),
+            }));
         }
     };
+
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
-    }, [numGallons, pricePerGallon]);
+    }, [formData.numGallons, formData.pricePerGallon]);
 
     return (
         <main className="relative h-screen bg-cover">
@@ -58,8 +73,8 @@ function FuelForm() {
                     <label className = "text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
                     <select
                         id="gasLocation"
-                        value={gasLocation}
-                        onChange={handleGasLocationChange}
+                        value={formData.gasLocation}
+                        onChange={handleChange}
                         className="rounded-md p-2 h-10 text-black w-48"
                     >
                         <option value="01-TX">01-TX</option>
@@ -71,7 +86,7 @@ function FuelForm() {
                     <label className = "text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
                     <select
                         id="fuelType"
-                        value={fuelType}
+                        value={formData.fuelType}
                         onChange={handleFuelTypeChange}
                         className="rounded-md p-2 h-10 text-black w-48"
                     >
@@ -84,8 +99,8 @@ function FuelForm() {
                         <input
                             type="number"
                             id="numGallons"
-                            value={numGallons}
-                            onChange={handleNumGallonsChange}
+                            value={formData.numGallons}
+                            onChange={handleChange}
                             step="0.1"
                             placeholder="0.00"
                             className="rounded-md p-2 h-10 text-black w-48"
@@ -96,7 +111,7 @@ function FuelForm() {
                         <input
                             type="text"
                             id="pricePerGallon"
-                            value={pricePerGallon}
+                            value={formData.pricePerGallon}
                             placeholder="0.00"
                             readOnly
                             className="rounded-md p-2 h-10 text-black w-48"
@@ -107,8 +122,8 @@ function FuelForm() {
                         <input
                             type="date"
                             id="purchaseDate"
-                           value={purchaseDate}
-                           onChange={handlePurchaseDateChange}
+                           value={formData.purchaseDate}
+                           onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
@@ -117,8 +132,8 @@ function FuelForm() {
                         <input
                             type="date"
                             id="deliveryDate"
-                            value={deliveryDate}
-                            onChange={handleDeliveryDateChange}
+                            value={formData.deliveryDate}
+                            onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
@@ -128,8 +143,8 @@ function FuelForm() {
                             type="text"
                             id="deliveryAddress"
                             placeholder="Street, City, State, ZIP"
-                            value={deliveryAddress}
-                            onChange={handleDeliveryAddressChange}
+                            value={formData.deliveryAddress}
+                            onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
 
@@ -139,7 +154,7 @@ function FuelForm() {
                         <input
                             type="text"
                             id="total"
-                            value={total}
+                            value={formData.total}
                             readOnly
                             className="rounded-md p-2 h-10 text-black w-48"
                     />
