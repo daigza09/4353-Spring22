@@ -23,6 +23,9 @@ function Header() {
         <Link to="/ProfileManagement" className="flex items-center text-white">
           Profile Management
         </Link>
+        <Link to="/History" className="flex items-center text-white">
+          History
+        </Link>
       </div>
     </header>
   );
