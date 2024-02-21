@@ -4,6 +4,7 @@ import Data from "../assets/data.json";
 
 function History() {
   const [data, setData] = useState(Data);
+  console.log(Data);
   return (
     <main>
       <div className="flex items-center justify-center">
@@ -36,7 +37,7 @@ function History() {
                   {current.GallonsRequested}
                 </td>
                 <td
-                  className="py-4 px-5 text-lg text-black relative bg-green-500 rounded-full"
+                  className="py-4 px-5 text-lg text-black relative rounded-full"
                   style={{
                     backgroundColor:
                       current.Transaction === "Completed"
