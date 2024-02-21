@@ -87,6 +87,7 @@ function FuelForm() {
                             value={numGallons}
                             onChange={handleNumGallonsChange}
                             step="0.1"
+                            placeholder="0.00"
                             className="rounded-md p-2 h-10 text-black w-48"
                     />
                 </div>
@@ -96,6 +97,7 @@ function FuelForm() {
                             type="text"
                             id="pricePerGallon"
                             value={pricePerGallon}
+                            placeholder="0.00"
                             readOnly
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
@@ -125,6 +127,7 @@ function FuelForm() {
                         <input
                             type="text"
                             id="deliveryAddress"
+                            placeholder="Street, City, State, ZIP"
                             value={deliveryAddress}
                             onChange={handleDeliveryAddressChange}
                             className="rounded-md p-2 h-10 text-black w-48"
