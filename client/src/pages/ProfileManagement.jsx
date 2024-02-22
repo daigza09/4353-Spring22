@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
+
 function ProfileManagement() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -46,7 +47,6 @@ function ProfileManagement() {
     setCityError('');
   };
  
-  // new function for state 
   const handleUserLocationChange = (e) => {
     setUserLocation(e.target.value);
   };
@@ -56,7 +56,6 @@ function ProfileManagement() {
     setPasswordError('');
   };
 
-  // validating if any fields empty
   const handleUserClick = () => {
     if (
       !firstName || 
@@ -69,15 +68,15 @@ function ProfileManagement() {
       !userLocation ||
       !password
     ) {
-      alert('Please fill out all the fields before exiting the page.'); // missing a field 
+      alert('Please fill out all the fields before exiting the page.'); 
     } else {
-      alert('Successfully Saved!'); // saved all the user info 
+      alert('Successfully Saved!'); 
     }
   }
 
   return (
     <main className="min-h-screen flex items-start">
-      <div className="p-6 rounded w-full sm:max-w-xl">
+      <div className="p-6 rounded w-full sm:max-w-xl mx-auto">
         <h2 className="text-4xl font-semibold text-center mb-8" style={{ fontFamily: 'Barlow, SemiBold' }}>Edit Profile</h2>
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -124,11 +123,11 @@ function ProfileManagement() {
                 />
             </div>
             <div className="md:col-span-2">
-              <label htmlFor="address1" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Address 1</label>
+              <label htmlFor="address1" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Company Address 1</label>
               <input
                 type="text"
                 id="address1"
-                placeholder="Enter Address 1"
+                placeholder="Enter Company Address 1"
                 autoComplete="off"
                 name="address1"
                 value={address1}
@@ -138,11 +137,11 @@ function ProfileManagement() {
               />
             </div>
             <div className="md:col-span-2">
-              <label htmlFor="address2" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Address 2</label>
+              <label htmlFor="address2" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Company Address 2</label>
               <input
                 type="text"
                 id="address2"
-                placeholder="Enter Address 2"
+                placeholder="Enter Company Address 2"
                 autoComplete="off"
                 name="address2"
                 value={address2}
@@ -194,36 +193,22 @@ function ProfileManagement() {
                 </select>
            
             </div>
-            <div>
-              <label htmlFor="password" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter Password"
-                autoComplete="off"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
-              />
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="w-1/3 bg-teal-900 text-white rounded-lg py-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
-            >
-              Save Changes
-            </button>
-            <button
-              type="cancel"
-              className="w-1/3 bg-teal-900 text-white rounded-lg py-4 mr-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
-            >
-              Cancel
-            </button>
           </div>
         </form>
+        <div className="flex justify-between" style={{ marginTop: '2rem' }}> {/* Adjusted margin-top */}
+          <button
+            type="submit"
+            className="w-1/3 bg-teal-900 text-white rounded-lg py-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
+          >
+            Save Changes
+          </button>
+          <button
+            type="cancel"
+            className="w-1/3 bg-teal-900 text-white rounded-lg py-4 mr-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </main>
   );
