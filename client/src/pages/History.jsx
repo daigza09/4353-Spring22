@@ -4,10 +4,12 @@ import Data from "../assets/data.json";
 
 function History() {
   const [data, setData] = useState(Data);
-  console.log(Data);
   return (
     <main>
-      <div className="flex items-center justify-center">
+      <h1 className="text-3xl relative left-24 top-12">
+        History of past purchases
+      </h1>
+      <div className="flex items-center justify-center mt-20">
         <table className="w-11/12 border-collapse">
           <thead className="border-solid border-2 border-gray bg-white text-left">
             <tr>
@@ -24,7 +26,7 @@ function History() {
             {data.map((current, index) => (
               <tr
                 key={index}
-                className="border-solid border-2 border-gray bg-white text-left"
+                className="border-solid border-2 border-gray bg-white text-left hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <td className="py-4 px-5 text-lg text-black">
                   {current.DeliveryDate}
@@ -37,7 +39,7 @@ function History() {
                   {current.GallonsRequested}
                 </td>
                 <td
-                  className="py-4 px-5 text-lg text-black relative rounded-full"
+                  className="py-4 px-5 mt-3 text-lg text-black relative"
                   style={{
                     backgroundColor:
                       current.Transaction === "Completed"
@@ -51,6 +53,17 @@ function History() {
                         : current.Transaction === "Failed"
                         ? "#F31260"
                         : "inherit",
+                    border: `2px solid ${
+                      current.Transaction === "Completed"
+                        ? "#18C964"
+                        : "#f58493"
+                    }`,
+                    borderRadius: "9999px",
+                    width: "100px", // Adjust the width of the oval as needed
+                    height: "20px", // Adjust the height of the oval as needed
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   {current.Transaction}
