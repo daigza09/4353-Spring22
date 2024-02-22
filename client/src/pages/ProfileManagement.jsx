@@ -13,8 +13,13 @@ function ProfileManagement() {
 
 
   const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
-    setFullNameError('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 50) {
+      alert("Full Name should be less than 50 characters");
+    } else {
+      setFullName(inputValue);
+      setFullNameError('');
+    }
   };
 
   const handleEmailChange = (e) => {
