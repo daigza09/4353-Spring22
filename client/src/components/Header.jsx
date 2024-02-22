@@ -18,9 +18,9 @@ function Header() {
         <Link to="/Signup" className="linkUnderline">
           Sign Up
         </Link>
-        <Link to="/FuelForm" className="linkUnderline">
+        {/*<Link to="/FuelForm" className="linkUnderline">
           Fuel Quote Form
-        </Link>
+  </Link>*/}
         <Link to="/ProfileManagement" className="linkUnderline">
           Profile Management
         </Link>
