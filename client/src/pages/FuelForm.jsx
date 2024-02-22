@@ -109,7 +109,7 @@ function FuelForm() {
     return (
         <main className="relative h-screen bg-cover">
             <div className="container mx-auto text-center relative flex items-center justify-center h-screen">
-            <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflow: 'hidden' }}>
+            <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
             {showSuccessMessage ? (
             <div className="text-3xl font-semibold text-[#05204A] mb-4">
               Congratulations! You successfully created your account.
