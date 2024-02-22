@@ -33,32 +33,47 @@ function ProfileManagement() {
   };
 
   const handleAddress1Change = (e) => {
-    setAddress1(e.target.value);
-    setAddress1Error('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 100) {
+      alert("Address 1 should be less than 50 characters");
+    } else {
+      setAddress1(inputValue);
+      setAddress1Error('');
+    }
   };
 
   const handleAddress2Change = (e) => {
-    setAddress2(e.target.value);
-    setAddress2Error('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 100) {
+      alert("Address 2 should be less than 100 characters");
+    } else {
+      setAddress2(inputValue);
+      setAddress2Error('');
+    }
   };
 
   const handleZipcodeNumberChange = (e) => {
-    setZipcodeNumber(e.target.value);
-    setZipcodeNumberError('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 9) {
+      alert("Zipcode should be less than 9 characters");
+    } else {
+      setZipcodeNumber(inputValue);
+      setZipcodeNumberError('');
+    }
   };
 
   const handleCityChange = (e) => {
-    setCity(e.target.value);
-    setCityError('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 100) {
+      alert("City should be less than 100 characters");
+    } else {
+      setCity(inputValue);
+      setCityError('');
+    }
   };
  
   const handleUserLocationChange = (e) => {
     setUserLocation(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordError('');
   };
 
   const handleUserClick = () => {
