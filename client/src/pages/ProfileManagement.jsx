@@ -13,13 +13,23 @@ function ProfileManagement() {
 
 
   const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
-    setFullNameError('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 50) {
+      alert("Full Name should be less than 50 characters");
+    } else {
+      setFullName(inputValue);
+      setFullNameError('');
+    }
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setEmailError('');
+    const inputValue = e.target.value;
+    if (inputValue.length > 50) {
+      alert("Email should be less than 50 characters");
+    } else {
+      setEmail(inputValue);
+      setEmailError('');
+    }
   };
 
   const handleAddress1Change = (e) => {
@@ -178,6 +188,7 @@ function ProfileManagement() {
           <button
             type="submit"
             className="w-1/3 bg-teal-900 text-white rounded-lg py-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
+            onClick={handleUserClick}
           >
             Save Changes
           </button>
