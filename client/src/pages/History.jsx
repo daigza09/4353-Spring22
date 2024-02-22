@@ -6,7 +6,10 @@ function History() {
   const [data, setData] = useState(Data);
   return (
     <main>
-      <h1 className="text-3xl relative left-24 top-12">
+      <h1
+        className="text-3xl relative left-24 top-12 font-SemiBold"
+        style={{ fontFamily: "Barlow, SemiBold" }}
+      >
         History of past purchases
       </h1>
       <div className="flex items-center justify-center mt-20">
