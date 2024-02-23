@@ -9,8 +9,6 @@ function ProfileManagement() {
   const [zipcodeNumber, setZipcodeNumber] = useState('');
   const [city, setCity] = useState('');
   const [userLocation, setUserLocation] = useState('');
-  const [password, setPassword] = useState('');
-
 
   const handleFullNameChange = (e) => {
     const inputValue = e.target.value;
@@ -24,8 +22,8 @@ function ProfileManagement() {
 
   const handleEmailChange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.length > 50) {
-      alert("Email should be less than 50 characters");
+    if (inputValue.length > 150) {
+      alert("Email should be less than 150 characters");
     } else {
       setEmail(inputValue);
       setEmailError('');
@@ -35,7 +33,7 @@ function ProfileManagement() {
   const handleAddress1Change = (e) => {
     const inputValue = e.target.value;
     if (inputValue.length > 100) {
-      alert("Address 1 should be less than 50 characters");
+      alert("Address 1 should be less than 100 characters");
     } else {
       setAddress1(inputValue);
       setAddress1Error('');
@@ -54,8 +52,8 @@ function ProfileManagement() {
 
   const handleZipcodeNumberChange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.length > 9) {
-      alert("Zipcode should be less than 9 characters");
+    if (inputValue.length > 9 && inputValue.length < 5) {
+      alert("Zipcode should be less than 9 characters, minimum length of 5 characters");
     } else {
       setZipcodeNumber(inputValue);
       setZipcodeNumberError('');
