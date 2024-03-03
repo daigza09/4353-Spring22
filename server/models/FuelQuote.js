@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const fuelQuoteSchema = new mongoose.Schema({
+const Schema = mongoose.Schema
+
+const fuelQuoteSchema = new Schema({
   clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   gallonsRequested: { type: Number, required: true },
   deliveryAddress: { type: String, required: true },

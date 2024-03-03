@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const clientProfileSchema = new mongoose.Schema({
+const Schema = mongoose.Schema
+
+const clientProfileSchema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   fullName: { type: String, required: true, maxlength: 50 },
   address1: { type: String, required: true, maxlength: 100 },
