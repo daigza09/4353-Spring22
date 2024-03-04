@@ -5,3 +5,8 @@ Our project is utilizing the MERN stack framework, please make sure you have 'no
 After the repo is copied and all dependencies are installed, follow these steps to run the frontend:
 1. cd client
 2. npm run dev
+
+
+After the repo is copied and all dependencies are installed, follow these steps to run the frontend:
+1. cd server
+2. npm run dev
