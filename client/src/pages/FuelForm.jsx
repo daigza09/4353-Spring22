@@ -12,13 +12,14 @@ function FuelForm() {
         deliveryAddress: '',
         total: '',
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
+        // testing
+        //console.log(name, " ", value);
     };
 
     const handleFuelTypeChange = (e) => {
@@ -28,7 +29,11 @@ function FuelForm() {
             ...prevData,
             fuelType: selectedFuelType,
             pricePerGallon: getInitialPricePerGallon(selectedFuelType),
+    
         }));
+        // testing, send selectedFuelType to backend
+        //console.log(selectedFuelType);
+        //console.log(getInitialPricePerGallon(selectedFuelType));
     };
 
     const getInitialPricePerGallon = (fuelType) => {
@@ -57,9 +62,9 @@ function FuelForm() {
                 ...prevData,
                 total: calculatedTotal.toFixed(2),
             }));
+            console.log(calculatedTotal.toFixed(2));
         }
     };
-
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [formData.numGallons, formData.pricePerGallon]);
