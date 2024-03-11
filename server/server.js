@@ -6,6 +6,9 @@ PORT = 8080
 // express app 
 const app = express()
 
+let cors = require('cors');
+app.use(cors());
+
 app.get('/', (req,res) => {
     res.json({message:'Welcome to the app'})
 })

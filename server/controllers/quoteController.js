@@ -19,7 +19,8 @@ const getOrder = (req, res) => {
 // @route POST /order
 // @access Private after authentication
 const makeOrder = (req, res) => {
-  res.json({message: 'Make orders'})
+  console.log(req.body);
+  res.json({message: 'Make orders'});
 }
 
 // @desc Update fuel quote orders 

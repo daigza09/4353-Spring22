@@ -5,6 +5,7 @@ const {
     makeOrder, 
     updateOrder, 
     deleteOrder,
+    getAllOrders,
 } = require('../controllers/quoteController')
 //const quoteController = require('../controllers/quoteController');
 //const authMiddleware = require('../middlewares/authMiddleware');
@@ -19,7 +20,10 @@ router.get('/', getOrder);
 // create an order
 router.post('/', makeOrder);
 
-// update order or delete order
+// retreiving all customer orders
 
+router.get('/customer/:id', getAllOrders);
+
+// update order or delete order
 router.route('/:id').delete(deleteOrder).put(updateOrder);
 module.exports = router;
