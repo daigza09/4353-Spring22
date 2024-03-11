@@ -1,17 +1,19 @@
 const dotenv = require('dotenv').config();
 
-const express = require('express')
+const express = require('express');
 
-PORT = 8080
+PORT = 8080;
 // express app 
-const app = express()
+const app = express();
 
 let cors = require('cors');
 app.use(cors());
 
+//app.use(express.json());
+
 app.get('/', (req,res) => {
     res.json({message:'Welcome to the app'})
-})
+});
 
 app.use('/order', require('./routes/quoteRoutes'));
 
