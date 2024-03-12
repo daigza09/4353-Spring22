@@ -9,13 +9,22 @@ const app = express();
 let cors = require('cors');
 app.use(cors());
 
-//app.use(express.json());
+app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 
 app.get('/', (req,res) => {
     res.json({message:'Welcome to the app'})
 });
 
-app.use('/order', require('./routes/quoteRoutes'));
+// routes 
+const quoteRouter = require('./routes/quoteRoutes');
+app.use('/order', quoteRouter);
+
+const authoRouter = require('./routes/authRoutes');
+app.use('/autho', authoRouter);
+
+const profileRouter = require('./routes/profileRoutes');
+app.use('/profile', profileRouter);
 
 //middleware
 /*app.use((req, res, next) => {

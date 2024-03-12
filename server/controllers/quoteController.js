@@ -1,4 +1,4 @@
-const FuelQuote = require('../models/FuelQuote');
+//const FuelQuote = require('../models/FuelQuote');
 
 /*exports.getAllQuotes = (req, res) => {
   // get all client quotes
@@ -20,7 +20,7 @@ const getOrder = (req, res) => {
 // @access Private after authentication
 const makeOrder = (req, res) => {
   console.log(req.body);
-  
+
   res.json({message: 'Make orders'});
 }
 
