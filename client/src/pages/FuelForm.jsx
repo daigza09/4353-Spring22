@@ -19,7 +19,7 @@ function FuelForm() {
             [name]: value,
         }));
         // testing
-        //console.log(name, " ", value);
+        console.log(name, " ", value);
     };
 
     const handleFuelTypeChange = (e) => {
@@ -32,8 +32,8 @@ function FuelForm() {
     
         }));
         // testing, send selectedFuelType to backend
-        //console.log(selectedFuelType);
-        //console.log(getInitialPricePerGallon(selectedFuelType));
+        console.log(selectedFuelType);
+        console.log(getInitialPricePerGallon(selectedFuelType));
     };
 
     const getInitialPricePerGallon = (fuelType) => {
