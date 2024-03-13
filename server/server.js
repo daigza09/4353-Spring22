@@ -2,10 +2,14 @@ const dotenv = require('dotenv').config();
 
 const express = require('express');
 
+const {errorHandler} = require('./middlewares/errorMiddleware');
+
 PORT = 8080;
 // express app 
 const app = express();
 
+// works with cors and express
+// express works as our middleware
 let cors = require('cors');
 app.use(cors());
 
@@ -19,6 +23,8 @@ app.get('/', (req,res) => {
 // routes 
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/order', quoteRouter);
+
+app.use(errorHandler);
 
 /*const authoRouter = require('./routes/authRoutes');
 app.use('/autho', authoRouter);
