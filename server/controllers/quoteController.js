@@ -1,4 +1,7 @@
-//const FuelQuote = require('../models/FuelQuote');
+const asyncHandler = require('express-async-handler');
+const FuelQuote = require('../models/FuelQuote');
+// when you interact with the DB you are returned a promise
+// because of this promise we have to use async await
 
 /*exports.getAllQuotes = (req, res) => {
   // get all client quotes
@@ -11,14 +14,16 @@ exports.createQuote = (req, res) => {
 // @desc Get fuel quote orders 
 // @route GET /order
 // @access Private after authentication
-const getOrder = (req, res) => {
-  res.json({message: 'Get orders'})
+const getOrder = async (req, res) => {
+  // orders is the same as quotes
+  const orders = await FuelQuote.find()
+  res.json(orders)
 }
 
 // @desc Make fuel quote orders 
 // @route POST /order
 // @access Private after authentication
-const makeOrder = (req, res) => {
+const makeOrder = async (req, res) => {
   console.log(req.body);
 
   if(!req.body.text){
@@ -32,23 +37,23 @@ const makeOrder = (req, res) => {
 // @desc Update fuel quote orders 
 // @route PUT /order/:id
 // @access Private after authentication
-const updateOrder = (req, res) => {
+const updateOrder = asyncHandler(async (req, res) => {
   res.json({message:`Update order ${req.params.id}`})
-}
+})
 
 // @desc Delete fuel quote orders 
 // @route DELETE /order/:id
 // @access Private after authentication
-const deleteOrder = (req, res) => {
+const deleteOrder = asyncHandler(async (req, res) => {
   res.json({message:`Delete order ${req.params.id}`})
-}
+})
 
 // @desc Get all customer orders 
 // @route Get /order/:Customerid
 // @access Private after authentication
-const getAllOrders = (req, res) => {
+const getAllOrders = asyncHandler(async (req, res) => {
   res.json({message: `This should return all the orders of customer ${req.params.id}`})
-}
+})
 module.exports  = {
   getOrder,
   makeOrder, 
