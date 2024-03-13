@@ -1,4 +1,4 @@
-//const FuelQuote = require('../models/FuelQuote');
+const FuelQuote = require('../models/FuelQuote');
 
 /*exports.getAllQuotes = (req, res) => {
   // get all client quotes

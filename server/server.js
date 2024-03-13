@@ -20,11 +20,11 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/order', quoteRouter);
 
-const authoRouter = require('./routes/authRoutes');
+/*const authoRouter = require('./routes/authRoutes');
 app.use('/autho', authoRouter);
 
 const profileRouter = require('./routes/profileRoutes');
-app.use('/profile', profileRouter);
+app.use('/profile', profileRouter);*/
 
 //middleware
 /*app.use((req, res, next) => {
