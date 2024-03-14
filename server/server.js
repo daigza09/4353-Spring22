@@ -23,7 +23,7 @@ app.get('/', (req,res) => {
 
 // routes 
 const quoteRouter = require('./routes/quoteRoutes');
-app.use('/order', quoteRouter);
+app.use('/fuelForm', quoteRouter);
 
 //app.use(errorHandler);
 
