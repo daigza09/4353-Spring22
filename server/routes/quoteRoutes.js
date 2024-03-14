@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const quoteRouter = require('../controllers/quoteController')
+const {
+    getOrder, 
+    makeOrder, 
+    updateOrder, 
+    deleteOrder,
+    getAllOrders,
+} = require('../controllers/quoteController')
 //const quoteController = require('../controllers/quoteController');
 //const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -9,15 +15,16 @@ const quoteRouter = require('../controllers/quoteController')
 //router.post('/quotes', authMiddleware.verifyToken, quoteController.createQuote);
 //router.post('/order', quoteController.customerOrder);
 
-router.get('/', quoteRouter.getOrder);
+router.get('/', getOrder);
 
 // create an order
-router.post('/', quoteRouter.makeOrder);
+router.post('/', makeOrder);
+
 
 // retreiving all customer orders
 
-router.get('/customer/:id', quoteRouter.getAllOrders);
+router.get('/customer/:id', getAllOrders);
 
 // update order or delete order
-router.route('/:id').delete(quoteRouter.deleteOrder).put(quoteRouter.updateOrder);
+router.route('/:id').delete(deleteOrder).put(updateOrder);
 module.exports = router;
