@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-//import axios from "axios";
+import axios from "axios";
 function FuelForm() {
     const [formData, setFormData] = useState({
         gasLocation: '',
@@ -65,6 +65,21 @@ function FuelForm() {
             console.log(calculatedTotal.toFixed(2));
         }
     };
+    async function registerOrder() {
+        try{
+            const res = await axios.post('orders/makeOrder/', formData);
+            if(res.status !== 201) {
+                throw new Error("unable to complete order");
+            }
+            const data = await res.data;
+            console.log(data);
+            //return data;
+            return { success: true, data };
+        } catch (error){
+            console.error("Error registering order:", error);
+            return { success: false, error };
+        }
+    }
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [formData.numGallons, formData.pricePerGallon]);
