@@ -47,7 +47,7 @@ const makeOrder = asyncHandler(async (req, res) => {
 // @desc Update fuel quote orders 
 // @route PUT /order/:id
 // @access Private after authentication
-const updateOrder = asyncHandler(async (req, res) => {
+/*const updateOrder = asyncHandler(async (req, res) => {
   res.json({message:`Update order ${req.params.id}`})
 })
 
@@ -63,11 +63,11 @@ const deleteOrder = asyncHandler(async (req, res) => {
 // @access Private after authentication
 const getAllOrders = asyncHandler(async (req, res) => {
   res.json({message: `This should return all the orders of customer ${req.params.id}`})
-})
+})*/
 module.exports  = {
   getOrder,
   makeOrder, 
-  updateOrder,
+  /*updateOrder,
   deleteOrder,
-  getAllOrders
+  getAllOrders*/
 }
