@@ -1,49 +1,43 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
+
 function FuelForm() {
     const [formData, setFormData] = useState({
         gasLocation: '',
-        fuelType: '',
-        numGallons: '',
+        fuelType: '', // Only one option should be selected, so it remains as a string
+        numGallons: 0,
         purchaseDate: '',
-        pricePerGallon: '',
+        pricePerGallon: 0,
         deliveryDate: '',
         deliveryAddress: '',
-        total: '',
+        total: 0,
     });
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
-        // testing
-        console.log(name, " ", value);
     };
 
     const handleFuelTypeChange = (e) => {
         const selectedFuelType = e.target.value;
-
         setFormData((prevData) => ({
             ...prevData,
             fuelType: selectedFuelType,
             pricePerGallon: getInitialPricePerGallon(selectedFuelType),
-    
         }));
-        // testing, send selectedFuelType to backend
-        console.log(selectedFuelType);
-        console.log(getInitialPricePerGallon(selectedFuelType));
     };
 
     const getInitialPricePerGallon = (fuelType) => {
         switch (fuelType) {
             case 'Diesel':
-                return '3.14';
+                return 3.14;
             case 'Gasoline':
-                return '2.79';
+                return 2.79;
             default:
-                return '';
+                return 0;
         }
     };
 
@@ -51,128 +45,104 @@ function FuelForm() {
         const parsedNumGallons = parseFloat(formData.numGallons);
         const parsedPricePerGallon = parseFloat(formData.pricePerGallon);
 
-        if (isNaN(parsedNumGallons) || isNaN(parsedPricePerGallon)) {
-            setFormData((prevData) => ({
-                ...prevData,
-                total: '0.00',
-            }));
-        } else {
+        if (!isNaN(parsedNumGallons) && !isNaN(parsedPricePerGallon)) {
             const calculatedTotal = parsedNumGallons * parsedPricePerGallon;
             setFormData((prevData) => ({
                 ...prevData,
                 total: calculatedTotal.toFixed(2),
             }));
-            console.log(calculatedTotal.toFixed(2));
         }
     };
+
     async function registerOrder() {
-        try{
-            const res = await axios.post('orders/makeOrder/', formData);
-            if(res.status !== 201) {
-                throw new Error("unable to complete order");
+        try {
+            const res = await axios.post('http://localhost:8080/fuelForm/', formData);
+            if (res.status !== 201) {
+                throw new Error("Unable to complete order");
             }
             const data = await res.data;
             console.log(data);
-            //return data;
             return { success: true, data };
-        } catch (error){
+        } catch (error) {
             console.error("Error registering order:", error);
             return { success: false, error };
         }
     }
+
     useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
     }, [formData.numGallons, formData.pricePerGallon]);
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    const [formErrors, setFormErrors] = useState({
-        gasLocation: false,
-        fuelType: false,
-        numGallons: false,
-        purchaseDate: false,
-        pricePerGallon: false,
-        deliveryDate: false,
-        deliveryAddress: false,
-        total: false,
-    });
-    const handleOrder= (e) => {
+
+    const handleOrder = (e) => {
         e.preventDefault(); // Prevent the form from submitting (to avoid page reload)
-    
+
         // Check for empty fields
-        const errors = {};
-        let hasError = false;
-        for (const key in formData) {
-          if (formData[key].trim() === "") {
-            errors[key] = true;
-            hasError = true;
-          }
-        }
-    
+        const hasError = Object.values(formData).some(value => value === '');
         if (hasError) {
-          setFormErrors(errors);
-        } else {    
-          // Display the success message
-            alert("Congratulations! You successfully created your order.");
-        // Optionally, you can reset the form data after successful submission
-            setFormData({
-                gasLocation: '',
-                fuelType: '',
-                numGallons: '',
-                purchaseDate: '',
-                pricePerGallon: '',
-                deliveryDate: '',
-                deliveryAddress: '',
-                total: '',
-            });
+            alert("Please fill in all the fields.");
+            return;
         }
-      };
+
+        // Register the order
+        registerOrder()
+            .then(response => {
+                if (response.success) {
+                    alert("Congratulations! You successfully created your order.");
+                    setFormData({
+                        gasLocation: '',
+                        fuelType: '',
+                        numGallons: 0,
+                        purchaseDate: '',
+                        pricePerGallon: 0,
+                        deliveryDate: '',
+                        deliveryAddress: '',
+                        total: 0,
+                    });
+                } else {
+                    alert("Failed to create order. Please try again later.");
+                }
+            })
+            .catch(error => {
+                console.error("Error registering order:", error);
+                alert("An error occurred while processing your order. Please try again later.");
+            });
+    };
 
     return (
         <main className="relative h-screen bg-cover">
             <div className="container mx-auto text-center relative flex items-center justify-center h-screen">
-            <div className="py-14 px-40  max-h-full overflow-y-auto" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
-            {showSuccessMessage ? (
-            <div className="text-3xl font-semibold text-[#05204A] mb-4">
-              Congratulations! You successfully created your account.
-            </div>
-          ) : (
-            <>
-                <h1 className = "text-3xl md:text-3xl mb-4"> Fuel Quote Form</h1>
-                <h2 className = "text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
-                    <select
-                        id="gasLocation"
-                        name="gasLocation"
-                        value={formData.gasLocation}
-                        onChange={handleChange}
-                        className="rounded-md p-2 h-10 text-black w-48"
-                    >
-                        <option value="01-TX">01-TX</option>
-                        <option value="02-FL">02-FL</option>
-                        <option value="03-NY">03-NY</option>
-                    </select>
-                    {formErrors.gasLocation && (
-                    <p className="text-red-500 text-sm">Please select a order location</p>
-                    )}
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
-                    <select
-                        id="fuelType"
-                        name="fuelType"
-                        value={formData.fuelType}
-                        onChange={handleFuelTypeChange}
-                        className="rounded-md p-2 h-10 text-black w-48"
-                    >
-                   <option value="Diesel">Diesel</option>
-                   <option value="Gasoline">Gasoline</option>
-                   </select>
-                   {formErrors.fuelType && (
-                    <p className="text-red-500 text-sm">Please select a fuel type.</p>
-                   )}
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="numGallons"> Number of Gallons:</label>
+                <div className="py-14 px-40 max-h-full overflow-y-auto" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
+                    <h1 className="text-3xl md:text-3xl mb-4">Fuel Quote Form</h1>
+                    <h2 className="text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
+                        <select
+                            id="gasLocation"
+                            name="gasLocation"
+                            value={formData.gasLocation}
+                            onChange={handleChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        >
+                            <option value="01-TX">01-TX</option>
+                            <option value="02-FL">02-FL</option>
+                            <option value="03-NY">03-NY</option>
+                        </select>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="fuelType">Fuel Type:</label>
+                        <select
+                            id="fuelType"
+                            name="fuelType"
+                            value={formData.fuelType}
+                            onChange={handleFuelTypeChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        >
+                            <option value="Diesel">Diesel</option>
+                            <option value="Gasoline">Gasoline</option>
+                        </select>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="numGallons"> Number of Gallons:</label>
                         <input
                             type="number"
                             id="numGallons"
@@ -182,13 +152,10 @@ function FuelForm() {
                             step="0.1"
                             placeholder="0.00"
                             className="rounded-md p-2 h-10 text-black w-48"
-                    />
-                    {formErrors.numGallons && (
-                    <p className="text-red-500 text-sm">Please enter a fuel quantity.</p>
-                    )}
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="pricePerGallon"> Suggested Price/Gallon:</label>
+                        />
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="pricePerGallon"> Suggested Price/Gallon:</label>
                         <input
                             type="text"
                             id="pricePerGallon"
@@ -198,9 +165,9 @@ function FuelForm() {
                             readOnly
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="purchaseDate">Purchase Date:</label>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="purchaseDate">Purchase Date:</label>
                         <input
                             type="date"
                             id="purchaseDate"
@@ -209,12 +176,9 @@ function FuelForm() {
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
-                    {formErrors.purchaseDate && (
-                    <p className="text-red-500 text-sm">Please enter the desired order date.</p>
-                    )}
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="deliveryDate">Delivery Date:</label>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="deliveryDate">Delivery Date:</label>
                         <input
                             type="date"
                             id="deliveryDate"
@@ -223,12 +187,9 @@ function FuelForm() {
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
-                    {formErrors.deliveryDate && (
-                    <p className="text-red-500 text-sm">Please enter the desired delivery date.</p>
-                    )}
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label  className = "text-xl mb-2" htmlFor="deliveryAddress">Delivery Address:</label>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="deliveryAddress">Delivery Address:</label>
                         <input
                             type="text"
                             id="deliveryAddress"
@@ -238,42 +199,36 @@ function FuelForm() {
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
-                    {formErrors.deliveryAddress && (
-                    <p className="text-red-500 text-sm">Please sign in to get your address.</p>
-                    )}
-
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                    <label className = "text-xl mb-2" htmlFor="total">Total:</label>
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="total">Total:</label>
                         <input
                             type="text"
                             id="total"
                             value={formData.total}
                             readOnly
                             className="rounded-md p-2 h-10 text-black w-48"
-                    />
-                </div>
-                <div className="container text-center relative flex flex-col items-center justify-center">
-                <button
-                    style={{
-                        borderRadius: '8px',
-                        padding: '12px',
-                        height: '50px',
-                        color: 'white',
-                        backgroundColor: '#02353c',
-                        border: 'none',
-                        cursor: 'pointer',
-                        width: '200px',
-                        marginTop: '20px',
-                    }}
-                    type="submit"
-                    onClick={handleOrder}
-                >
-                    Order
-                </button>
-                </div>
-                </>
-                )}
+                        />
+                    </div>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <button
+                            style={{
+                                borderRadius: '8px',
+                                padding: '12px',
+                                height: '50px',
+                                color: 'white',
+                                backgroundColor: '#02353c',
+                                border: 'none',
+                                cursor: 'pointer',
+                                width: '200px',
+                                marginTop: '20px',
+                            }}
+                            type="submit"
+                            onClick={handleOrder}
+                        >
+                            Order
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
