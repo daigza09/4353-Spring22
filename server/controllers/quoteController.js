@@ -16,7 +16,8 @@ const getOrder = asyncHandler(async (req, res) => {
 // @route POST /order
 // @access Private after authentication
 const makeOrder = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  console.log(req.body); // Log the request body for debugging
+
   try {
     // Create a new FuelQuote instance using the request body
     const order = new FuelQuote({
@@ -36,13 +37,11 @@ const makeOrder = asyncHandler(async (req, res) => {
     // Respond with a success message
     res.status(201).json({ message: 'Order created successfully', order });
   } catch (error) {
-    // Handle any errors that occur during order creation
+    // Log and handle any errors that occur during order creation
     console.error('Error creating order:', error);
     res.status(500).json({ error: 'An error occurred while creating the order' });
   }
-  
-  
-})
+});
 
 
 // @desc Update fuel quote orders 
