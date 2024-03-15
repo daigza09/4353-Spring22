@@ -1,11 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const FuelQuote = require('../models/FuelQuote');
-// when you interact with the DB you are returned a promise
-// because of this promise we have to use async await
 
-// @desc Get fuel quote orders 
-// @route GET /order
-// @access Private after authentication
 const getOrder = asyncHandler(async (req, res) => {
   // orders is the same as quotes
   const orders = await FuelQuote.find()
@@ -16,7 +11,8 @@ const getOrder = asyncHandler(async (req, res) => {
 // @route POST /order
 // @access Private after authentication
 const makeOrder = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  console.log(req.body); // Log the request body for debugging
+
   try {
     // Create a new FuelQuote instance using the request body
     const order = new FuelQuote({
@@ -36,34 +32,26 @@ const makeOrder = asyncHandler(async (req, res) => {
     // Respond with a success message
     res.status(201).json({ message: 'Order created successfully', order });
   } catch (error) {
-    // Handle any errors that occur during order creation
+    // Log and handle any errors that occur during order creation
     console.error('Error creating order:', error);
     res.status(500).json({ error: 'An error occurred while creating the order' });
   }
-  
-  
-})
+});
 
-// @desc Update fuel quote orders 
-// @route PUT /order/:id
-// @access Private after authentication
 const updateOrder = asyncHandler(async (req, res) => {
+
   res.json({message:`Update order ${req.params.id}`})
+
 })
 
-// @desc Delete fuel quote orders 
-// @route DELETE /order/:id
-// @access Private after authentication
 const deleteOrder = asyncHandler(async (req, res) => {
   res.json({message:`Delete order ${req.params.id}`})
 })
 
-// @desc Get all customer orders 
-// @route Get /order/:Customerid
-// @access Private after authentication
 const getAllOrders = asyncHandler(async (req, res) => {
   res.json({message: `This should return all the orders of customer ${req.params.id}`})
 })
+
 module.exports  = {
   getOrder,
   makeOrder, 

@@ -1,10 +1,11 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
+const colors = require('colors');
 const {errorHandler} = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/db')
 PORT = 8080;
 
-connectDB()
+connectDB();
 // express app 
 const app = express();
 
@@ -22,9 +23,9 @@ app.get('/', (req,res) => {
 
 // routes 
 const quoteRouter = require('./routes/quoteRoutes');
-app.use('/order', quoteRouter);
+app.use('/fuelForm', quoteRouter);
 
-app.use(errorHandler);
+//app.use(errorHandler);
 
 /*const authoRouter = require('./routes/authRoutes');
 app.use('/autho', authoRouter);
