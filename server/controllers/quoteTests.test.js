@@ -39,6 +39,22 @@ describe('Filling out fuel form', () => {
     // Call the mocked makeOrder function with mockRequest and mockResponse
     await makeOrderMock(mockRequest, mockResponse);
 
+    expect(mockResponse.status).toHaveBeenCalledWith(201);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+    message: 'Order created successfully',
+    order: expect.any(Object), // Assuming order object is returned in the response
+    });
+
+// Mock an error during order creation to test error handling
+    const mockError = new Error('Sample error message'); // Create a mock error with a custom message
+    await makeOrderMock({ body: {} }, mockResponse); // Passing an empty body to trigger an error
+
+    // Assert that the response status and JSON methods were called with expected values for error handling
+    expect(mockResponse.status).toHaveBeenCalledWith(500);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+    error: 'An error occurred while creating the order',
+    });
+
     // Assert that the response status and JSON methods were called with expected values
     //expect(mockResponse.status).toHaveBeenCalledWith(201);
     /*expect(mockResponse.json).toHaveBeenCalledWith({
