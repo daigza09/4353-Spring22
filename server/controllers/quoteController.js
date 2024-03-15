@@ -1,11 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const FuelQuote = require('../models/FuelQuote');
 
-const getOrder = asyncHandler(async (req, res) => {
+/*const getOrder = asyncHandler(async (req, res) => {
   // orders is the same as quotes
   const orders = await FuelQuote.find()
   res.json(orders)
-})
+})*/
 
 // @desc Make fuel quote orders 
 // @route POST /order
