@@ -6,10 +6,10 @@ describe('POST /fuelForm', () => {
   test('should create a new order successfully', async () => {
     const orderData = {
       gasLocation: '02-FL',
-      fuelType: 'Gasoline',
+      fuelType: 'Diesel',
       numGallons: '1000',
       purchaseDate: '2024-03-13',
-      pricePerGallon: 2.79,
+      pricePerGallon: 3.14,
       deliveryDate: '2024-03-13',
       deliveryAddress: 'temp test',
       total: '2790.00',
@@ -25,7 +25,7 @@ describe('POST /fuelForm', () => {
 
     const savedOrder = await FuelQuote.findOne({ gasLocation: '02-FL' });
     expect(savedOrder).toBeTruthy();
-    expect(savedOrder.fuelType).toBe('Gasoline');
+    expect(savedOrder.fuelType).toBe('Diesel');
 
     await FuelQuote.deleteOne({ gasLocation: '02-FL' });
   });
