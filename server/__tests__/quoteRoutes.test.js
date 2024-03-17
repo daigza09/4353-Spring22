@@ -1,19 +1,6 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
 const app = require('../../server'); // Assuming your Express app instance is exported from 'server.js'
 const FuelQuote = require('../models/FuelQuote'); // Assuming the FuelQuote model is defined in 'models/FuelQuote.js'
-
-// Mock MongoDB connection
-beforeAll(async () => {
-  await mongoose.connect('mongodb://localhost:27017/testDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-});
-
-afterAll(async () => {
-  await mongoose.connection.close();
-});
 
 describe('POST /fuelForm', () => {
   test('should create a new order successfully', async () => {

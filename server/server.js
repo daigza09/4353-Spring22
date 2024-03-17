@@ -5,7 +5,7 @@ const {errorHandler} = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/db')
 PORT = 8080;
 
-connectDB();
+connectDB(process.env.MONGO_URI);
 // express app 
 const app = express();
 
@@ -48,6 +48,6 @@ app.use('/profile', profileRouter);*/
 //PORT = 8080
 app.listen(process.env.PORT, () =>{
     console.log('listening on port', process.env.PORT)
-})
-
-process.env
+});
+module.exports = app;
+process.env;
