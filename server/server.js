@@ -25,6 +25,10 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/fuelForm', quoteRouter);
 
+// profile manag.
+const profileRouter = require('./routes/profileRoutes');
+app.use('/profileManagement', profileRouter);
+
 //app.use(errorHandler);
 
 /*const authoRouter = require('./routes/authRoutes');
