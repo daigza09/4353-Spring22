@@ -1,6 +1,20 @@
 const User = require('../models/ClientProfile');
 const asyncHandler = require('express-async-handler');
 
+// update user profile , PUT
+const updateUserProfile = async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { email: req.params.email },
+      req.body,
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // get user profile by email , GET
 const getUserProfileByEmail = async (req, res) => {
   try {
@@ -30,7 +44,7 @@ const getUserProfileByEmail2 = async (req, res) => {
       if (!user) {
           return res.status(404).json({ message: 'User not found' });
       }
-      console.log(`User with email ${req.body.email} exists`);
+      console.log(`User with email ${req.body.email} exists!!`);
       res.json({
         fullName: user.fullName,
         email: user.email,
@@ -65,4 +79,4 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUserProfileByEmail, getUserProfileByEmail2 };
+module.exports = { createUser, getUserProfileByEmail, getUserProfileByEmail2, updateUserProfile };

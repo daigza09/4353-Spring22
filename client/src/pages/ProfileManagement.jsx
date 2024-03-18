@@ -48,7 +48,7 @@ function ProfileManagement() {
       return;
     }
 
-    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user);
+    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
     setIsEditable({ ...isEditable, [field]: false });
   };
 
