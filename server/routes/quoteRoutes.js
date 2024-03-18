@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const quoteController = require('../controllers/quoteController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const {
+    getOrder, 
+    makeOrder, 
+    getAllOrders,
+} = require('../controllers/quoteController')
 
-router.get('/quotes', authMiddleware.verifyToken, quoteController.getAllQuotes);
-router.post('/quotes', authMiddleware.verifyToken, quoteController.createQuote);
+router.get('/', getOrder);
+
+// create an order
+router.post('/', makeOrder);
+
+
+// retreiving all customer orders
+
+router.get('/customer/:id', getAllOrders);
 
 module.exports = router;
