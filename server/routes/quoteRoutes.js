@@ -4,6 +4,7 @@ const {
     getOrder, 
     makeOrder, 
     getAllOrders,
+    getAllOrdersByID,
 } = require('../controllers/quoteController')
 
 router.get('/', getOrder);
@@ -14,6 +15,7 @@ router.post('/', makeOrder);
 
 // retreiving all customer orders
 
-router.get('/customer/:id', getAllOrders);
+router.get('/customer', getAllOrders);
+router.get('/customer/:id', getAllOrdersByID);
 
 module.exports = router;
