@@ -7,6 +7,12 @@ After the repo is copied and all dependencies are installed, follow these steps 
 2. npm run dev
 
 
-After the repo is copied and all dependencies are installed, follow these steps to run the frontend:
+After the repo is copied and all dependencies are installed, follow these steps to run the backend:
 1. cd server
 2. npm run dev
+
+Before you run tests please make sure you have colors and mongoose installed :) 
+In order to run unit tests follow these steps:
+1. cd server
+2. npm run test
+   

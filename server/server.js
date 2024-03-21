@@ -5,7 +5,7 @@ const {errorHandler} = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/db')
 PORT = 8080;
 
-connectDB();
+connectDB(process.env.MONGO_URI);
 // express app 
 const app = express();
 
@@ -25,9 +25,21 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/fuelForm', quoteRouter);
 
+<<<<<<< HEAD
 // profile manag.
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profileManagement', profileRouter);
+=======
+
+const signupRouter = require('./routes/signupRoutes');
+app.use('/signup', signupRouter);
+
+
+
+const loginRouter = require('./routes/loginRoutes');
+app.use('/login', loginRouter);
+
+>>>>>>> 1dd1f6e2dd512525039d79ff9de81c215c19742a
 
 //app.use(errorHandler);
 
@@ -52,6 +64,6 @@ app.use('/profile', profileRouter);*/
 //PORT = 8080
 app.listen(process.env.PORT, () =>{
     console.log('listening on port', process.env.PORT)
-})
-
-process.env
+});
+module.exports = app;
+process.env;
