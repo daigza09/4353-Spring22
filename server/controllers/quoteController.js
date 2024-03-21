@@ -36,34 +36,7 @@ const makeOrder = asyncHandler(async (req, res) => {
   
 })
 
-const getAllOrdersByID = asyncHandler(async (req, res) => {
-  try {
-    const customerId = req.params.id;
-    const orders = await FuelQuote.find({ customerId });
-    res.json(orders);
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    res.status(500).json({ error: 'An error occurred while fetching orders' });
-  }
-})
-
-const getAllOrders = asyncHandler(async (req, res) => {
-  try {
-    // Retrieve all orders from the database
-    const orders = await FuelQuote.find();
-
-    // Send the orders data as a JSON response
-    res.json(orders);
-  } catch (error) {
-    // Handle any errors that occur during fetching orders
-    console.error('Error fetching orders:', error);
-    res.status(500).json({ error: 'An error occurred while fetching orders' });
-  }
-});
-
 module.exports  = {
   getOrder,
   makeOrder, 
-  getAllOrders,
-  getAllOrdersByID
 }

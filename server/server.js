@@ -25,6 +25,9 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/fuelForm', quoteRouter);
 
+const fuelQuoteRouter = require('./routes/fuelQuoteRoutes');
+app.use('/history', fuelQuoteRouter);
+
 
 const signupRouter = require('./routes/signupRoutes');
 app.use('/signup', signupRouter);
