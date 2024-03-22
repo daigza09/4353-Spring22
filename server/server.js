@@ -25,11 +25,6 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/fuelForm', quoteRouter);
 
-<<<<<<< HEAD
-// profile manag.
-const profileRouter = require('./routes/profileRoutes');
-app.use('/profileManagement', profileRouter);
-=======
 
 const signupRouter = require('./routes/signupRoutes');
 app.use('/signup', signupRouter);
@@ -39,7 +34,10 @@ app.use('/signup', signupRouter);
 const loginRouter = require('./routes/loginRoutes');
 app.use('/login', loginRouter);
 
->>>>>>> 1dd1f6e2dd512525039d79ff9de81c215c19742a
+// profile manag.
+const profileRouter = require('./routes/profileRoutes');
+app.use('/profileManagement', profileRouter);
+
 
 //app.use(errorHandler);
 
@@ -61,7 +59,7 @@ app.use('/profile', profileRouter);*/
 })*/
 
 // listen for requests
-//PORT = 8080
+// PORT = 8080
 app.listen(process.env.PORT, () =>{
     console.log('listening on port', process.env.PORT)
 });
