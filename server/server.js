@@ -59,9 +59,16 @@ app.use('/profile', profileRouter);*/
 })*/
 
 // listen for requests
+<<<<<<< HEAD
 // PORT = 8080
 app.listen(process.env.PORT, () =>{
     console.log('listening on port', process.env.PORT)
 });
+=======
+//PORT = 8080
+// app.listen(process.env.PORT, () =>{
+//     console.log('listening on port', process.env.PORT)
+// });
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
 module.exports = app;
 process.env;

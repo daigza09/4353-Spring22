@@ -23,16 +23,28 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>5/30</span>
+=======
+                <span class="strong">85.18% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>23/27</span>
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
             </div>
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/0</span>
+=======
+                <span class="strong">60% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>3/5</span>
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
             </div>
         
             
@@ -44,9 +56,15 @@
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>5/30</span>
+=======
+                <span class="strong">85.18% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>23/27</span>
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
             </div>
         
             
@@ -61,7 +79,11 @@
             </div>
         </template>
     </div>
+<<<<<<< HEAD
     <div class='status-line low'></div>
+=======
+    <div class='status-line high'></div>
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,6 +117,7 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
+<<<<<<< HEAD
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
@@ -127,6 +150,34 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+=======
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,6 +188,7 @@
 const Signup = require('../models/Signup'); 
 &nbsp;
 exports.login = asyncHandler(async (req, res) =&gt; {
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >    const { email, password } = req.body;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    // Check if email and password are provided</span>
@@ -162,6 +214,30 @@ exports.login = asyncHandler(async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >        console.error(error); // Log error for debugging</span>
 <span class="cstat-no" title="statement not covered" >        res.status(401).json({ error: error.message });</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
+=======
+    const { email, password } = req.body;
+&nbsp;
+    if (!email || !password) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'Please provide email and password' });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+&nbsp;
+    try {
+        const user = await Signup.findOne({ email });
+&nbsp;
+        if (!user) {
+            throw new Error('User not found');
+        }
+&nbsp;
+        if (user.password !== password) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('Invalid email or password');</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+&nbsp;
+        res.status(200).json({ message: 'Login successful', user });
+    } catch (error) {
+        console.error(error); 
+        res.status(401).json({ error: error.message });
+    }
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
 });
 &nbsp;
 &nbsp;
@@ -175,7 +251,11 @@ exports.login = asyncHandler(async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2024-03-22T00:56:58.689Z
+=======
+                at 2024-03-21T20:14:49.132Z
+>>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
             </div>
         <script src="../../prettify.js"></script>
         <script>

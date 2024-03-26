@@ -1,23 +1,23 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/Signup');
 
-// create a new user , POST
 const signup = async (req, res) => {
   const { email, password, fullName, addressLine1, addressLine2, city, state, zipcode } = req.body;
 
-  // Check if any required fields are missing
+  console.log('Received data:', req.body); 
+
   if (!email || !password || !fullName || !addressLine1 || !city || !state || !zipcode) {
+    console.log('Missing fields detected');
     return res.status(400).json({ error: 'Please provide all required fields (email, password, fullName, addressLine1, city, state, zipcode)' });
   }
 
   try {
-    // Check if the email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log('Email already exists');
       return res.status(400).json({ error: 'Email already exists' });
     }
 
-    // Create a new user instance
     const user = new User({
       email,
       password,
@@ -29,36 +29,30 @@ const signup = async (req, res) => {
       zipcode
     });
 
-    // Save the user to the database
     await user.save();
 
+    console.log('User saved successfully');
     res.status(201).json({ message: 'Signup successful', user });
-    // Respond with all of the user's details
+
   } catch (error) {
+    console.log('Error:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-
-
 
 const getUserById = async (req, res) => {
   const userId = req.params.id;
 
   try {
-    // Find user by ID
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findById(userId);
 
-    // Check if user exists
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Return user details
     res.status(200).json({
       fullName: user.fullName,
       email: user.email,
-      password: user.password,
       addressLine1: user.addressLine1,
       addressLine2: user.addressLine2,
       city: user.city,
@@ -82,6 +76,8 @@ const checkEmailExists = async (req, res) => {
 };
 
 module.exports = { signup, getUserById, checkEmailExists };
+
+
 
 
 
