@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const profileController = require('../controllers/profileController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const { 
+    createUser, 
+    getUserProfileByEmail2, 
+    updateUserProfile
+} = require('../controllers/profileController');
 
-router.get('/profile', authMiddleware.verifyToken, profileController.getProfile);
-router.put('/profile', authMiddleware.verifyToken, profileController.updateProfile);
+// create a new user
+router.post('/api/users', createUser); // STEP 1 * MODIFIABLE *
+
+// get user profile by email , to create
+router.post('/api/users/getByEmail', getUserProfileByEmail2); // STEP 2
+
+// updates user profile, to update
+router.put('/api/users/:email', updateUserProfile); // STEP 3
 
 module.exports = router;
