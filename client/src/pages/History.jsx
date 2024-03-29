@@ -1,9 +1,32 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Data from "../assets/data.json";
+import axios from "axios";
 
 function History() {
-  const [data, setData] = useState(Data);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/history/");
+        if (Array.isArray(response.data)) {
+          setData(response.data); // Setting data to response data from the backend
+          console.log(response.data);
+          console.log("Data fetched successfully");
+        } else {
+          console.error("Data received from backend is not an array:");
+          console.log(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching history:", error);
+        console.log("Full response from backend:", error.response); // Log full response
+      }
+    };
+
+    fetchHistory(); // Call fetchHistory when the component mounts
+  }, []);
+
   return (
     <main>
       <h1
@@ -32,14 +55,16 @@ function History() {
                 className="border-solid border-2 border-gray bg-white text-left hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <td className="py-4 px-5 text-lg text-black">
-                  {current.DeliveryDate}
+                  {current.deliveryDate}
                 </td>
                 <td className="py-4 px-5 text-lg text-black">
-                  ${current.Amount}
+                  ${current.total}
                 </td>
-                <td className="py-4 px-5 text-lg text-black">{current.Item}</td>
                 <td className="py-4 px-5 text-lg text-black">
-                  {current.GallonsRequested}
+                  {current.fuelType}
+                </td>
+                <td className="py-4 px-5 text-lg text-black">
+                  {current.numGallons}
                 </td>
                 <td
                   className="py-4 px-5 mt-3 text-lg text-black relative"
@@ -69,7 +94,7 @@ function History() {
                     alignItems: "center",
                   }}
                 >
-                  {current.Transaction}
+                  {current.transaction}
                 </td>
               </tr>
             ))}

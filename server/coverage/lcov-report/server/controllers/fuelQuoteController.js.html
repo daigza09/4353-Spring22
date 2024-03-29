@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for server/controllers/quoteController.js</title>
+    <title>Code coverage report for server/controllers/fuelQuoteController.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">server/controllers</a> quoteController.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">server/controllers</a> fuelQuoteController.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">93.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/42</span>
+                <span class='fraction'>41/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">93.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/42</span>
+                <span class='fraction'>41/44</span>
             </div>
         
             
@@ -104,16 +104,9 @@
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -137,7 +130,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -146,47 +150,49 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const asyncHandler = require('express-async-handler');
-const FuelQuote = require('../models/FuelQuote');
+const HistoryData = require('../models/History');
 &nbsp;
-const getOrder = asyncHandler(async (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  const orders = await FuelQuote.find()</span>
-<span class="cstat-no" title="statement not covered" >  res.json(orders)</span>
-<span class="cstat-no" title="statement not covered" >})</span>
-&nbsp;
-&nbsp;
-const makeOrder = asyncHandler(async (req, res) =&gt; {
-  console.log(req.body);
-  try {
-    // Create a new FuelQuote instance using the request body
-    const order = new FuelQuote({
-      gasLocation: req.body.gasLocation,
+  const createFuelForm = asyncHandler(async (req, res) =&gt; {
+    try{
+    const order = new HistoryData({
       fuelType: req.body.fuelType,
       numGallons: req.body.numGallons,
       purchaseDate: req.body.purchaseDate,
-      pricePerGallon: req.body.pricePerGallon,
       deliveryDate: req.body.deliveryDate,
-      deliveryAddress: req.body.deliveryAddress,
       total: req.body.total,
+      
     });
-&nbsp;
-    // Save the new order instance to the database
-    await order.save();
-&nbsp;
-    // Respond with a success message
-    res.status(201).json({ message: 'Order created successfully', order });
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >    // Handle any errors that occur during order creation</span>
-<span class="cstat-no" title="statement not covered" >    console.error('Error creating order:', error);</span>
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ error: 'An error occurred while creating the order' });</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
+    
+      // Save the new order instance to the database
+      await order.save();
   
-})
+      // Respond with a success message
+      res.status(201).json({ message: 'Order created successfully-REEM', order });
+    } 
+<span class="branch-0 cbranch-no" title="branch not covered" >    catch (error){</span>
+<span class="cstat-no" title="statement not covered" >      console.error('Error creating order:', error);</span>
+<span class="cstat-no" title="statement not covered" >      res.status(500).json({ error: 'An error occurred while creating the order' });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+  })
+  
+  const getAllOrders = asyncHandler(async (req, res) =&gt; {
+    try {
+      const orders = await HistoryData.find();
+  
+      console.log(orders);
+      res.json(orders);
+  
+    } catch (error) {
+      // Handle any errors that occur during fetching orders
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'An error occurred while fetching orders' });
+    }
+  });
 &nbsp;
-module.exports  = {
-  getOrder,
-  makeOrder, 
-}</pre></td></tr></table></pre>
+  module.exports  = {
+    getAllOrders,
+    createFuelForm,
+  }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

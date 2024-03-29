@@ -36,12 +36,7 @@ const makeOrder = asyncHandler(async (req, res) => {
   
 })
 
-const getAllOrders = asyncHandler(async (req, res) => {
-  res.json({message: `This should return all the orders of customer ${req.params.id}`})
-})
-
 module.exports  = {
   getOrder,
   makeOrder, 
-  getAllOrders
 }

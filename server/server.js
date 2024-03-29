@@ -25,6 +25,9 @@ app.get('/', (req,res) => {
 const quoteRouter = require('./routes/quoteRoutes');
 app.use('/fuelForm', quoteRouter);
 
+const fuelQuoteRouter = require('./routes/fuelQuoteRoutes');
+app.use('/history', fuelQuoteRouter);
+
 
 const signupRouter = require('./routes/signupRoutes');
 app.use('/signup', signupRouter);
@@ -56,8 +59,8 @@ app.use('/profile', profileRouter);*/
 
 // listen for requests
 //PORT = 8080
-// app.listen(process.env.PORT, () =>{
-//     console.log('listening on port', process.env.PORT)
+//  app.listen(process.env.PORT, () =>{
+//      console.log('listening on port', process.env.PORT)
 // });
 module.exports = app;
 process.env;
