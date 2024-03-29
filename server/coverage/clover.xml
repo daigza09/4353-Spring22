@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711052089154" clover="3.2.0">
-  <project timestamp="1711052089154" name="All files">
-    <metrics statements="330" coveredstatements="294" conditionals="21" coveredconditionals="15" methods="5" coveredmethods="3" elements="356" coveredelements="312" complexity="0" loc="330" ncloc="330" packages="6" files="11" classes="11"/>
+<coverage generated="1711683886749" clover="3.2.0">
+  <project timestamp="1711683886749" name="All files">
+    <metrics statements="394" coveredstatements="357" conditionals="26" coveredconditionals="19" methods="5" coveredmethods="3" elements="425" coveredelements="379" complexity="0" loc="394" ncloc="394" packages="6" files="14" classes="14"/>
     <package name="server">
-      <metrics statements="63" coveredstatements="62" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="server.js" path="/Users/merondessie/4353-Spring22/server/server.js">
-        <metrics statements="63" coveredstatements="62" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="66" coveredstatements="65" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="server.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\server.js">
+        <metrics statements="66" coveredstatements="65" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -69,30 +69,80 @@
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
         <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
       </file>
     </package>
     <package name="server.config">
-      <metrics statements="13" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <file name="db.js" path="/Users/merondessie/4353-Spring22/server/config/db.js">
-        <metrics statements="13" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="db.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\config\db.js">
+        <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="7" count="3" type="stmt"/>
         <line num="8" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="152" coveredstatements="126" conditionals="19" coveredconditionals="14" methods="3" coveredmethods="2"/>
-      <file name="loginController.js" path="/Users/merondessie/4353-Spring22/server/controllers/loginController.js">
+      <metrics statements="191" coveredstatements="164" conditionals="23" coveredconditionals="17" methods="3" coveredmethods="2"/>
+      <file name="fuelQuoteController.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\controllers\fuelQuoteController.js">
+        <metrics statements="44" coveredstatements="41" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+      </file>
+      <file name="loginController.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\controllers\loginController.js">
         <metrics statements="27" coveredstatements="23" conditionals="5" coveredconditionals="3" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -122,8 +172,8 @@
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
       </file>
-      <file name="quoteController.js" path="/Users/merondessie/4353-Spring22/server/controllers/quoteController.js">
-        <metrics statements="47" coveredstatements="38" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+      <file name="quoteController.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\controllers\quoteController.js">
+        <metrics statements="42" coveredstatements="35" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -163,16 +213,11 @@
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
       </file>
-      <file name="signUpController.js" path="/Users/merondessie/4353-Spring22/server/controllers/signUpController.js">
+      <file name="signUpController.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\controllers\signUpController.js">
         <metrics statements="78" coveredstatements="65" conditionals="12" coveredconditionals="10" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -256,7 +301,7 @@
     </package>
     <package name="server.middlewares">
       <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="errorMiddleware.js" path="/Users/merondessie/4353-Spring22/server/middlewares/errorMiddleware.js">
+      <file name="errorMiddleware.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\middlewares\errorMiddleware.js">
         <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -275,8 +320,8 @@
       </file>
     </package>
     <package name="server.models">
-      <metrics statements="32" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="FuelQuote.js" path="/Users/merondessie/4353-Spring22/server/models/FuelQuote.js">
+      <metrics statements="45" coveredstatements="45" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="FuelQuote.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\models\FuelQuote.js">
         <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -295,7 +340,23 @@
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
-      <file name="Signup.js" path="/Users/merondessie/4353-Spring22/server/models/Signup.js">
+      <file name="History.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\models\History.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+      <file name="Signup.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\models\Signup.js">
         <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -316,24 +377,9 @@
       </file>
     </package>
     <package name="server.routes">
-      <metrics statements="56" coveredstatements="56" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="loginRoutes.js" path="/Users/merondessie/4353-Spring22/server/routes/loginRoutes.js">
-        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-      </file>
-      <file name="quoteRoutes.js" path="/Users/merondessie/4353-Spring22/server/routes/quoteRoutes.js">
-        <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="65" coveredstatements="65" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="fuelQuoteRoutes.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\routes\fuelQuoteRoutes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -348,13 +394,40 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
       </file>
-      <file name="signUpRoutes.js" path="/Users/merondessie/4353-Spring22/server/routes/signUpRoutes.js">
+      <file name="loginRoutes.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\routes\loginRoutes.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="quoteRoutes.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\routes\quoteRoutes.js">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+      <file name="signUpRoutes.js" path="C:\Users\realk\OneDrive\Desktop\College\COSC 4353\4353-Spring22\server\routes\signUpRoutes.js">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
