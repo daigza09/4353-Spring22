@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.85% </span>
+                <span class="strong">31.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/47</span>
+                <span class='fraction'>15/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.85% </span>
+                <span class="strong">31.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/47</span>
+                <span class='fraction'>15/47</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,33 +119,33 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -165,33 +165,33 @@ const getOrder = asyncHandler(async (req, res) =&gt; {
 &nbsp;
 &nbsp;
 const makeOrder = asyncHandler(async (req, res) =&gt; {
-  console.log(req.body);
-  try {
-    // Create a new FuelQuote instance using the request body
-    const order = new FuelQuote({
-      gasLocation: req.body.gasLocation,
-      fuelType: req.body.fuelType,
-      numGallons: req.body.numGallons,
-      purchaseDate: req.body.purchaseDate,
-      pricePerGallon: req.body.pricePerGallon,
-      deliveryDate: req.body.deliveryDate,
-      deliveryAddress: req.body.deliveryAddress,
-      total: req.body.total,
-    });
-&nbsp;
-    // Save the new order instance to the database
-    await order.save();
-&nbsp;
-    // Respond with a success message
-    res.status(201).json({ message: 'Order created successfully', order });
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >  console.log(req.body);</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    // Create a new FuelQuote instance using the request body</span>
+<span class="cstat-no" title="statement not covered" >    const order = new FuelQuote({</span>
+<span class="cstat-no" title="statement not covered" >      gasLocation: req.body.gasLocation,</span>
+<span class="cstat-no" title="statement not covered" >      fuelType: req.body.fuelType,</span>
+<span class="cstat-no" title="statement not covered" >      numGallons: req.body.numGallons,</span>
+<span class="cstat-no" title="statement not covered" >      purchaseDate: req.body.purchaseDate,</span>
+<span class="cstat-no" title="statement not covered" >      pricePerGallon: req.body.pricePerGallon,</span>
+<span class="cstat-no" title="statement not covered" >      deliveryDate: req.body.deliveryDate,</span>
+<span class="cstat-no" title="statement not covered" >      deliveryAddress: req.body.deliveryAddress,</span>
+<span class="cstat-no" title="statement not covered" >      total: req.body.total,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    // Save the new order instance to the database</span>
+<span class="cstat-no" title="statement not covered" >    await order.save();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    // Respond with a success message</span>
+<span class="cstat-no" title="statement not covered" >    res.status(201).json({ message: 'Order created successfully', order });</span>
+<span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >    // Handle any errors that occur during order creation</span>
 <span class="cstat-no" title="statement not covered" >    console.error('Error creating order:', error);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(500).json({ error: 'An error occurred while creating the order' });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
-  
-})
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cstat-no" title="statement not covered" >})</span>
 &nbsp;
 const getAllOrders = asyncHandler(async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >  res.json({message: `This should return all the orders of customer ${req.params.id}`})</span>
@@ -208,11 +208,7 @@ module.exports  = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-03-22T00:56:58.689Z
-=======
-                at 2024-03-21T20:14:49.132Z
->>>>>>> 9a4a402ee00f04ead6170d380833ea4299327753
+                at 2024-03-28T22:17:04.208Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
