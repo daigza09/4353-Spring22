@@ -3,11 +3,18 @@ const express = require('express');
 const colors = require('colors');
 const {errorHandler} = require('./middlewares/errorMiddleware');
 const connectDB = require('./config/db')
-PORT = 8080;
+//PORT = 8080;
 
+const PORT = process.env.NODE_ENV === 'test' ? process.env.PORT_TEST : process.env.PORT || 8080;
 connectDB(process.env.MONGO_URI);
-// express app 
 const app = express();
+// Start the server
+app.listen(PORT, () => {
+    console.log('Server is running on port', PORT);
+});
+
+// express app 
+//const app = express();
 
 // works with cors and express
 // express works as our middleware
