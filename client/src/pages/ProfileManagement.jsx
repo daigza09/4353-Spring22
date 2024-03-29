@@ -1,220 +1,133 @@
-import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function ProfileManagement() {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [zipcodeNumber, setZipcodeNumber] = useState('');
-  const [city, setCity] = useState('');
-  const [userLocation, setUserLocation] = useState('');
+  const [user, setUser] = useState({
+    fullName: '',
+    email: 'johndoe@example.com',
+    address1: '',
+    address2: '',
+    city: '',
+    userLocation: '',
+    zipcodeNumber: '',
+  });
+  const [isEditable, setIsEditable] = useState({
+    fullName: false,
+    address1: false,
+    address2: false,
+    city: false,
+    userLocation: false,
+    zipcodeNumber: false,
+  });
 
-  const handleFullNameChange = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 50) {
-      alert("Full Name should be less than 50 characters");
-    } else {
-      setFullName(inputValue);
-      setFullNameError('');
-    }
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.post('http://localhost:8080/profileManagement/api/users/getByEmail', { email: user.email });
+      setUser(response.data);
+    };
+    fetchUser();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
 
-  const handleEmailChange = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 150) {
-      alert("Email should be less than 150 characters");
-    } else {
-      setEmail(inputValue);
-      setEmailError('');
+  const handleSaveChanges = async (field) => {
+    if (user.fullName.length > 50 ||
+        user.address1.length > 100 ||
+        user.address2.length > 100 ||
+        user.city.length > 100 ||
+        user.zipcodeNumber.length > 9 ||
+        user.zipcodeNumber.length < 5 ||
+        user.fullName === '' ||
+        user.address1 === '' ||
+        user.city === '' ||
+        user.userLocation === '') {
+      alert("Please make sure all required fields are filled out correctly.");
+      return;
     }
+
+    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
+    setIsEditable({ ...isEditable, [field]: false });
   };
 
-  const handleAddress1Change = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 100) {
-      alert("Address 1 should be less than 100 characters");
-    } else {
-      setAddress1(inputValue);
-      setAddress1Error('');
-    }
+  const handleEditClick = (field) => {
+    setIsEditable({ ...isEditable, [field]: true });
   };
 
-  const handleAddress2Change = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 100) {
-      alert("Address 2 should be less than 100 characters");
-    } else {
-      setAddress2(inputValue);
-      setAddress2Error('');
-    }
+  const handleCancel = (field) => {
+    setIsEditable({ ...isEditable, [field]: false });
   };
 
-  const handleZipcodeNumberChange = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 9 && inputValue.length < 5) {
-      alert("Zipcode should be less than 9 characters, minimum length of 5 characters");
-    } else {
-      setZipcodeNumber(inputValue);
-      setZipcodeNumberError('');
-    }
+  const renderField = (label, name, type = 'text', isSelect = false, options = []) => {
+    return (
+      <div>
+        <label htmlFor={name} className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>{label}</label>
+        <div className="flex">
+          {isSelect ? (
+            <select
+              id={name}
+              name={name}
+              value={user[name]}
+              onChange={handleInputChange}
+              disabled={!isEditable[name]}
+              className={`form-select rounded-lg block w-full h-14 text-lg ${isEditable[name] ? 'bg-white' : 'bg-gray-200'}`}
+              style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black' }}
+            >
+              {options.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type={type}
+              id={name}
+              name={name}
+              value={user[name]}
+              onChange={handleInputChange}
+              readOnly={!isEditable[name]}
+              className={`form-input rounded-lg block w-full h-14 text-lg ${isEditable[name] ? 'bg-white' : 'bg-gray-200'}`}
+              style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black' }}
+            />
+          )}
+          {isEditable[name] ? (
+            <>
+              <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleSaveChanges(name)}>Save</button>
+              <button className="ml-2 bg-gray-600 text-white rounded-lg px-4" onClick={() => handleCancel(name)}>Cancel</button>
+            </>
+          ) : (
+            <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleEditClick(name)}>Edit</button>
+          )}
+        </div>
+      </div>
+    );
   };
-
-  const handleCityChange = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 100) {
-      alert("City should be less than 100 characters");
-    } else {
-      setCity(inputValue);
-      setCityError('');
-    }
-  };
- 
-  const handleUserLocationChange = (e) => {
-    setUserLocation(e.target.value);
-  };
-
-  const handleUserClick = () => {
-    if (
-      !fullName || 
-      !email ||
-      !address1 ||
-      !address2 ||
-      !zipcodeNumber ||
-      !city ||
-      !userLocation 
-    ) {
-      alert('Please fill out all the fields before exiting the page.'); 
-    } else {
-      alert('Successfully Saved!'); 
-    }
-  }
 
   return (
     <main className="min-h-screen flex items-start">
       <div className="p-6 rounded w-full sm:max-w-xl mx-auto">
         <h2 className="text-4xl font-semibold text-center mb-8" style={{ fontFamily: 'Barlow, SemiBold' }}>Edit Profile</h2>
         <form className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="fullName" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                placeholder="Enter Full Name"
-                autoComplete="off"
-                name="fullName"
-                value={fullName}
-                onChange={handleFullNameChange}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
-              />
-            </div>
-            <div className="md:col-span-2">
-                <label htmlFor="email" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Email</label>
-                <input
-                    type="text"
-                    id="email"
-                    placeholder="Enter Email"
-                    autoComplete="off"
-                    name="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    className="form-input rounded-lg block w-full h-14 text-lg"
-                    style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
-                />
-            </div>
-            <div className="md:col-span-2">
-              <label htmlFor="address1" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Address 1</label>
-              <input
-                type="text"
-                id="address1"
-                placeholder="Enter Address 1"
-                autoComplete="off"
-                name="address1"
-                value={address1}
-                onChange={handleAddress1Change}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label htmlFor="address2" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Address 2</label>
-              <input
-                type="text"
-                id="address2"
-                placeholder="Enter Address 2"
-                autoComplete="off"
-                name="address2"
-                value={address2}
-                onChange={handleAddress2Change}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '528px' }}
-              />
-            </div>
-            <div>
-              <label htmlFor="city" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>City</label>
-              <input
-                type="text"
-                id="city"
-                placeholder="Enter City"
-                autoComplete="off"
-                name="city"
-                value={city}
-                onChange={handleCityChange}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
-              />
-            </div>
-            <div>
-            <label htmlFor="zipcodeNumber" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>Zipcode</label>
-              <input
-                type="tel"
-                id="zipcodeNumber"
-                placeholder="Enter Zipcode"
-                autoComplete="off"
-                name="zipcodeNumber"
-                value={zipcodeNumber}
-                onChange={handleZipcodeNumberChange}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
-              />
-            </div>
-            <div>
-              <label htmlFor="userLocation" className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>State</label>
-              <select
-                id="userLocation"
-                value={userLocation}
-                onChange={handleUserLocationChange}
-                className="form-input rounded-lg block w-full h-14 text-lg"
-                style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black', width: '250px' }}
-                >
-                  <option value="01-TX">01-TX</option>
-                  <option value="02-FL">02-FL</option>
-                  <option value="03-NY">03-NY</option>
-                </select>
-           
-            </div>
+          <div className="flex flex-col gap-6">
+            {renderField('Full Name', 'fullName')}
+            {renderField('Email', 'email')}
+            {renderField('Address 1', 'address1')}
+            {renderField('Address 2', 'address2')}
+            {renderField('City', 'city')}
+            {renderField('State', 'userLocation', 'select', true, [
+              { value: '', label: 'Select a state' },
+              { value: 'TX-1', label: 'TX' },
+              { value: 'FL-1', label: 'FL' },
+              { value: 'NY-1', label: 'NY' },
+            ])}
+            {renderField('Zipcode', 'zipcodeNumber', 'text')}
           </div>
         </form>
-        <div className="flex justify-between" style={{ marginTop: '2rem' }}> {/* Adjusted margin-top */}
-          <button
-            type="submit"
-            className="w-1/3 bg-teal-900 text-white rounded-lg py-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
-            onClick={handleUserClick}
-          >
-            Save Changes
-          </button>
-          <button
-            type="cancel"
-            className="w-1/3 bg-teal-900 text-white rounded-lg py-4 mr-4 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}
-          >
-            Cancel
-          </button>
-        </div>
       </div>
     </main>
   );
 }
 
 export default ProfileManagement;
+

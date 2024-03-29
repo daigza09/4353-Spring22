@@ -9,7 +9,7 @@ function FuelForm() {
         purchaseDate: '',
         pricePerGallon: 0,
         deliveryDate: '',
-        deliveryAddress: '',
+        deliveryAddress: 'temp, test',
         total: 0,
     });
 
@@ -95,7 +95,7 @@ function FuelForm() {
                         purchaseDate: '',
                         pricePerGallon: 0,
                         deliveryDate: '',
-                        deliveryAddress: '',
+                        deliveryAddress: 'temp, test',
                         total: 0,
                     });
                 } else {
@@ -194,7 +194,7 @@ function FuelForm() {
                             type="text"
                             id="deliveryAddress"
                             name="deliveryAddress"
-                            placeholder="Street, City, State, ZIP"
+                            placeholder="temp, test"
                             value={formData.deliveryAddress}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"

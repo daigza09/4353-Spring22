@@ -44,6 +44,10 @@ app.use('/signup', signupRouter);
 const loginRouter = require('./routes/loginRoutes');
 app.use('/login', loginRouter);
 
+// profile manag.
+const profileRouter = require('./routes/profileRoutes');
+app.use('/profileManagement', profileRouter);
+
 
 //app.use(errorHandler);
 
