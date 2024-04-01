@@ -10,7 +10,7 @@ function Signup() {
     const [addressLine2, setAddressLine2] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('01 - TX'); 
-    const [zipCode, setZipCode] = useState('');
+    const [zipcode, setZipcode] = useState(''); 
     const [showPassword, setShowPassword] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -45,8 +45,8 @@ function Signup() {
         setState(e.target.value);
     };
 
-    const handleZipCodeChange = (e) => {
-        setZipCode(e.target.value);
+    const handleZipcodeChange = (e) => { 
+        setZipcode(e.target.value);
     };
 
     const handleTogglePassword = () => {
@@ -56,7 +56,7 @@ function Signup() {
 
     const handleSignIn = async (e) => {
         e.preventDefault();
-        if (!email || !password || !fullName || !addressLine1 || !addressLine2 || !city || !state || !zipCode) {
+        if (!email || !password || !fullName || !addressLine1 || !city || !state || !zipcode) { 
             alert('Please fill out all the fields before proceeding.');
             return;
         }
@@ -76,7 +76,7 @@ function Signup() {
                 addressLine2,
                 city,
                 state,
-                zipCode,
+                zipcode, 
             });
     
             console.log(response.data);
@@ -86,9 +86,6 @@ function Signup() {
             alert('Error signing up. Please try again later.');
         }
     };
-    
-
-    
 
     return (
         <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px' }}>
@@ -225,8 +222,8 @@ function Signup() {
                             type="text"
                             placeholder="Enter Zip Code"
                             name="zipCode"
-                            value={zipCode}
-                            onChange={handleZipCodeChange}
+                            value={zipcode} 
+                            onChange={handleZipcodeChange} 
                             className="form-control rounded-pill"
                             style={{ borderRadius: '20px', padding: '8px', height: '45px', color: 'black', width: '470px' }}
                         />
