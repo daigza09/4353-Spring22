@@ -9,7 +9,7 @@ function FuelForm() {
         purchaseDate: '',
         pricePerGallon: 0,
         deliveryDate: '',
-        deliveryAddress: 'temp, test',
+        deliveryAddress: 'City, State',
         total: 0,
     });
 
@@ -95,7 +95,7 @@ function FuelForm() {
                         purchaseDate: '',
                         pricePerGallon: 0,
                         deliveryDate: '',
-                        deliveryAddress: 'temp, test',
+                        deliveryAddress: 'City, State',
                         total: 0,
                     });
                 } else {
