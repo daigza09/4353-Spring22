@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function FuelForm() {
+    // this is where user authentication needs to happen
+    //const [loginState, setLoginState] = useState({});
+    //const [userEmail, setUserEmail] = useState({});
+
     const [formData, setFormData] = useState({
+        email: '',
         gasLocation: '',
         fuelType: '', // Only one option should be selected, so it remains as a string
         numGallons: 0,
@@ -89,6 +94,7 @@ function FuelForm() {
                 if (response.success) {
                     alert("Congratulations! You successfully created your order.");
                     setFormData({
+                        email: '',
                         gasLocation: '',
                         fuelType: '',
                         numGallons: 0,
@@ -124,6 +130,18 @@ function FuelForm() {
                 <div className="py-14 px-40 max-h-full overflow-y-auto" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin', scrollbarColor: 'transparent transparent' }}>
                     <h1 className="text-3xl md:text-3xl mb-4">Fuel Quote Form</h1>
                     <h2 className="text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
+                    <div className="container text-center relative flex flex-col items-center justify-center">
+                        <label className="text-xl mb-2" htmlFor="email">Email:</label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            placeholder="user email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="rounded-md p-2 h-10 text-black w-48"
+                        />
+                    </div>
                     <div className="container text-center relative flex flex-col items-center justify-center">
                         <label className="text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
                         <select
