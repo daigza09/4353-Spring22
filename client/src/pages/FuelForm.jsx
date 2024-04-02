@@ -107,6 +107,16 @@ function FuelForm() {
                 alert("An error occurred while processing your order. Please try again later.");
             });
     };
+    const handleQuote = (e) => {
+        e.preventDefault(); // Prevent the form from submitting (to avoid page reload)
+
+        // Check for empty fields
+        const hasError = Object.values(formData).some(value => value === '');
+        if (hasError) {
+            alert("Please fill in all the fields.");
+            return;
+        }
+    };
 
     return (
         <main className="relative h-screen bg-cover">
@@ -210,7 +220,7 @@ function FuelForm() {
                             className="rounded-md p-2 h-10 text-black w-48"
                         />
                     </div>
-                    <div className="container text-center relative flex flex-col items-center justify-center">
+                    <div className="container text-center relative flex flex-row items-center justify-center">
                         <button
                             style={{
                                 borderRadius: '8px',
@@ -222,11 +232,30 @@ function FuelForm() {
                                 cursor: 'pointer',
                                 width: '200px',
                                 marginTop: '20px',
+                                marginRight: '10px',
                             }}
                             type="submit"
                             onClick={handleOrder}
                         >
                             Order
+                        </button>
+                        <button
+                            style={{
+                                borderRadius: '8px',
+                                padding: '12px',
+                                height: '50px',
+                                color: 'white',
+                                backgroundColor: '#02353c',
+                                border: 'none',
+                                cursor: 'pointer',
+                                width: '200px',
+                                marginTop: '20px',
+                                marginLeft: '10px',
+                            }}
+                            type="submit"
+                            onClick={handleQuote}
+                        >
+                            Quote
                         </button>
                     </div>
                 </div>
