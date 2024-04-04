@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712082877740" clover="3.2.0">
-  <project timestamp="1712082877740" name="All files">
-    <metrics statements="523" coveredstatements="477" conditionals="35" coveredconditionals="23" methods="8" coveredmethods="6" elements="566" coveredelements="506" complexity="0" loc="523" ncloc="523" packages="6" files="17" classes="17"/>
+<coverage generated="1712257917102" clover="3.2.0">
+  <project timestamp="1712257917103" name="All files">
+    <metrics statements="525" coveredstatements="479" conditionals="35" coveredconditionals="23" methods="8" coveredmethods="6" elements="568" coveredelements="508" complexity="0" loc="525" ncloc="525" packages="6" files="17" classes="17"/>
     <package name="server">
       <metrics statements="77" coveredstatements="76" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
       <file name="server.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\server.js">
@@ -105,7 +105,7 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="253" coveredstatements="217" conditionals="30" coveredconditionals="20" methods="6" coveredmethods="5"/>
+      <metrics statements="254" coveredstatements="218" conditionals="30" coveredconditionals="20" methods="6" coveredmethods="5"/>
       <file name="fuelQuoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\fuelQuoteController.js">
         <metrics statements="44" coveredstatements="41" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -249,7 +249,7 @@
         <line num="62" count="1" type="stmt"/>
       </file>
       <file name="quoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\quoteController.js">
-        <metrics statements="42" coveredstatements="35" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <metrics statements="43" coveredstatements="36" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -279,12 +279,12 @@
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="31" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
@@ -292,6 +292,7 @@
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
       </file>
       <file name="signUpController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\signUpController.js">
         <metrics statements="78" coveredstatements="65" conditionals="12" coveredconditionals="10" methods="3" coveredmethods="2"/>
@@ -396,7 +397,7 @@
       </file>
     </package>
     <package name="server.models">
-      <metrics statements="83" coveredstatements="83" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="84" coveredstatements="84" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="ClientProfile.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\ClientProfile.js">
         <metrics statements="38" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -439,7 +440,7 @@
         <line num="38" count="1" type="stmt"/>
       </file>
       <file name="FuelQuote.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\FuelQuote.js">
-        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -456,6 +457,7 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
       </file>
       <file name="History.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\History.js">
         <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

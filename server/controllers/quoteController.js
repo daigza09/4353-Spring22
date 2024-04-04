@@ -12,6 +12,7 @@ const makeOrder = asyncHandler(async (req, res) => {
   try {
     // Create a new FuelQuote instance using the request body
     const order = new FuelQuote({
+      email: req.body.email,
       gasLocation: req.body.gasLocation,
       fuelType: req.body.fuelType,
       numGallons: req.body.numGallons,
