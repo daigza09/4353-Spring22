@@ -10,6 +10,7 @@ beforeEach(async () => {
 describe('POST /fuelForm', () => {
   test('should create a new order successfully', async () => {
     const orderData = {
+      email: 'temp@gmail.com',
       gasLocation: '02-FL',
       fuelType: 'Diesel',
       numGallons: '1000',
