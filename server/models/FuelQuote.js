@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const fuelQuoteSchema = new Schema({
+  email: {type: String, default: ''},
   gasLocation: { type: String, enum: ['01-TX', '02-FL', '03-NY'], default: '' },
   fuelType: { type: String, enum: ['Diesel', 'Gasoline'], default: '' },
   numGallons: { type: Number, default: 0 }, // Change data type to Number
