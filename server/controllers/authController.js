@@ -1,9 +1,24 @@
-const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
-exports.login = (req, res) => {
-  // handle login
+exports.verifyAccessToken = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({ error: 'Authorization header is missing' });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ error: 'Invalid token' });
+        }
+        req.user = decoded; 
+        next();
+    });
 };
 
-exports.register = (req, res) => {
-  // handle registration
-};
+
+
+
+
