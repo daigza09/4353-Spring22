@@ -1,44 +1,48 @@
 const asyncHandler = require('express-async-handler');
-const User = require('../models/Signup');
+const bcrypt = require('bcrypt');
+const User = require('../models/User'); 
 
-const signup = async (req, res) => {
+const signup = asyncHandler(async (req, res) => {
   const { email, password, fullName, addressLine1, addressLine2, city, state, zipcode } = req.body;
 
-  console.log('Received data:', req.body); 
+  console.log('Received data:', req.body);
 
   if (!email || !password || !fullName || !addressLine1 || !city || !state || !zipcode) {
-    console.log('Missing fields detected');
-    return res.status(400).json({ error: 'Please provide all required fields (email, password, fullName, addressLine1, city, state, zipcode)' });
+      console.log('Missing fields detected');
+      return res.status(400).json({ error: 'Please provide all required fields (email, password, fullName, addressLine1, city, state, zipcode)' });
   }
 
   try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      console.log('Email already exists');
-      return res.status(400).json({ error: 'Email already exists' });
-    }
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+          console.log('Email already exists');
+          return res.status(400).json({ error: 'Email already exists' });
+      }
 
-    const user = new User({
-      email,
-      password,
-      fullName,
-      addressLine1,
-      addressLine2,
-      city,
-      state,
-      zipcode
-    });
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    await user.save();
+      const user = new User({
+          email,
+          password: hashedPassword, 
+          fullName,
+          addressLine1,
+          addressLine2,
+          city,
+          state,
+          zipcode
+      });
 
-    console.log('User saved successfully');
-    res.status(201).json({ message: 'Signup successful', user });
+      await user.save();
+
+      console.log('User saved successfully:', user); 
+      res.status(201).json({ message: 'Signup successful', user });
 
   } catch (error) {
-    console.log('Error:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.log('Error:', error.message);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+});
+
 
 const getUserById = async (req, res) => {
   const userId = req.params.id;
@@ -76,14 +80,5 @@ const checkEmailExists = async (req, res) => {
 };
 
 module.exports = { signup, getUserById, checkEmailExists };
-
-
-
-
-
-
-
-
-
 
 

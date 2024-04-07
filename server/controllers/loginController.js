@@ -1,5 +1,8 @@
 const asyncHandler = require('express-async-handler');
-const Signup = require('../models/Signup'); 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const Signup = require('../models/Signup');
+const User = require('../models/User');
 
 exports.login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -9,24 +12,24 @@ exports.login = asyncHandler(async (req, res) => {
     }
 
     try {
-        const user = await Signup.findOne({ email });
+        const user = await User.findOne({ email });
 
         if (!user) {
             throw new Error('User not found');
         }
-
-        if (user.password !== password) {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
             throw new Error('Invalid email or password');
         }
 
-        res.status(200).json({ message: 'Login successful', user });
+        const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+        const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET);
+
+        res.status(200).json({ message: 'Login successful', accessToken, refreshToken });
     } catch (error) {
-        console.error(error); 
+        console.error(error);
         res.status(401).json({ error: error.message });
     }
 });
-
-
-
 
 
