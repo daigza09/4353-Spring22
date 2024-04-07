@@ -1,6 +1,7 @@
 Hello! This is the repository for Group 6!
 
 Our project is utilizing the MERN stack framework, please make sure you have 'nodemon','vite', 'bcrypt', 'validator', and 'jsonwebtoken' installed before you run this. You can do the following commands to install them: 
+
    **- npm i nodemon**
    
    **- npm i vite**
