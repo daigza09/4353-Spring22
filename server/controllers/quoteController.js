@@ -1,10 +1,11 @@
 const asyncHandler = require('express-async-handler');
+const User = require('../models/User'); 
 const FuelQuote = require('../models/FuelQuote');
 
-const getOrder = asyncHandler(async (req, res) => {
+/*const getOrder = asyncHandler(async (req, res) => {
   const orders = await FuelQuote.find()
   res.json(orders)
-})
+})*/
 
 
 const makeOrder = asyncHandler(async (req, res) => {
@@ -37,7 +38,24 @@ const makeOrder = asyncHandler(async (req, res) => {
   
 })
 
+const getUserAddress = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    console.log(`User with email that email exists!!`);
+    res.json({
+      addressLine1: user.addressLine1
+    });
+  } catch (error){
+    console.error('Error retrieving user address:', error);
+    res.status(500).json({ error: 'An error occurred while retreiving user address' });
+  }
+})
+
 module.exports  = {
-  getOrder,
-  makeOrder, 
+  //getOrder,
+  makeOrder,
+  getUserAddress, 
 }
