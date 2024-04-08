@@ -40,19 +40,22 @@ const makeOrder = asyncHandler(async (req, res) => {
 
 const getUserAddress = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const { email } = req.body;
+    const user = await  User.find({ email });
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
-    console.log(`User with email that email exists!!`);
+    console.log(`User with email  ${email} exists!!`);
     res.json({
-      addressLine1: user.addressLine1
+      uAddress: user.addressLine1,
     });
   } catch (error){
     console.error('Error retrieving user address:', error);
     res.status(500).json({ error: 'An error occurred while retreiving user address' });
   }
 })
+
+
 
 module.exports  = {
   //getOrder,
