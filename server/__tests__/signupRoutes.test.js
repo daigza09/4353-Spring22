@@ -1,17 +1,15 @@
 const request = require('supertest');
-const app = require('../../server'); 
-const Signup = require('../models/Signup'); 
-
+const app = require('../../server');
+const User = require('../models/User');
 
 beforeEach(async () => {
-
-  await Signup.deleteMany({ email: 'test@example.com' });
+  await User.deleteMany({ email: 'test@example.com' });
 });
 
 describe('POST /signup', () => {
   test('should create a new user successfully', async () => {
     const userData = {
-      email: 'test@example.com', 
+      email: 'test@example.com',
       password: 'password123',
       fullName: 'John Doe',
       addressLine1: '123 Main St',
@@ -29,10 +27,10 @@ describe('POST /signup', () => {
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Signup successful');
 
-    const savedUser = await Signup.findOne({ email: 'test@example.com' });
+    const savedUser = await User.findOne({ email: 'test@example.com' });
     expect(savedUser).toBeTruthy();
 
-    await Signup.deleteOne({ email: 'test@example.com' });
+    await User.deleteOne({ email: 'test@example.com' });
   });
 
   test('should return 400 if required fields are missing', async () => {
@@ -47,12 +45,13 @@ describe('POST /signup', () => {
       .set('Accept', 'application/json');
 
     expect(response.status).toBe(400);
-    expect(response.body.error).toBe('Please provide all required fields (email, password, fullName, addressLine1, city, state, zipcode)');
+    expect(response.body.error).toBe(
+      'Please provide all required fields (email, password, fullName, addressLine1, city, state, zipcode)'
+    );
   });
 
-  
   test('should return 400 if email already exists', async () => {
-    await Signup.create({
+    await User.create({
       email: 'test@example.com',
       password: 'password123',
       fullName: 'Jane Doe',
@@ -80,17 +79,13 @@ describe('POST /signup', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBe('Email already exists');
 
-    await Signup.deleteOne({ email: 'test@example.com' });
+    await User.deleteOne({ email: 'test@example.com' });
   });
-
 });
-
-
 
 describe('GET /signup/:id', () => {
   test('should retrieve user details by ID', async () => {
-
-    const newUser = await Signup.create({
+    const newUser = await User.create({
       email: 'test@example.com',
       password: 'password123',
       fullName: 'John Doe',
@@ -103,7 +98,7 @@ describe('GET /signup/:id', () => {
     const userId = newUser._id;
 
     const response = await request(app)
-      .get(`/signup/${userId}`) 
+      .get(`/signup/${userId}`)
       .set('Accept', 'application/json');
 
     expect(response.status).toBe(200);
@@ -112,11 +107,11 @@ describe('GET /signup/:id', () => {
     expect(response.body.email).toBe('test@example.com');
     expect(response.body.addressLine1).toBe('123 Main St');
 
-    await Signup.deleteOne({ _id: userId });
+    await User.deleteOne({ _id: userId });
   });
 
   test('should return 404 if user ID is not found', async () => {
-    const nonExistentUserId = '605ff7fd3b0b3442a46e788c'; 
+    const nonExistentUserId = '605ff7fd3b0b3442a46e788c';
 
     const response = await request(app)
       .get(`/signup/${nonExistentUserId}`)
@@ -126,6 +121,5 @@ describe('GET /signup/:id', () => {
     expect(response.body.error).toBe('User not found');
   });
 });
-
 
 
