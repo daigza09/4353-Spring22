@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const { verifyToken } = require('../middlewares/authMiddleware');
 const { verifyRefreshToken } = require('../middlewares/authMiddleware');
 
-
 router.get('/', verifyToken, (req, res) => {
     const userId = req.user._id; 
 

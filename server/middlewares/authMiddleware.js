@@ -61,5 +61,3 @@ exports.verifyRefreshToken = async (req, res, next) => {
         res.status(403).json({ error: 'Invalid refresh token' });
     }
 };
-
-
