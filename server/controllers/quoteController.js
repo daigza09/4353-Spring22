@@ -42,13 +42,21 @@ const getUserAddress = asyncHandler(async (req, res) => {
   try {
     const { email } = req.body;
     const user = await  User.find({ email });
+    console.log(user);
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
-    console.log(`User with email  ${email} exists!!`);
+    const addressLine1 = user[0].addressLine1;
+
+    console.log(`User with email ${email} exists!!`);
+
     res.json({
-      uAddress: user.addressLine1,
+      addressLine1,
     });
+    /*console.log(`User with email  ${email} exists!!`);
+    res.json({
+      addressLine1: user.addressLine1,
+    });*/
   } catch (error){
     console.error('Error retrieving user address:', error);
     res.status(500).json({ error: 'An error occurred while retreiving user address' });
