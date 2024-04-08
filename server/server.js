@@ -1,3 +1,4 @@
+//server.js
 const dotenv = require('dotenv').config();
 const express = require('express');
 const colors = require('colors');
@@ -47,6 +48,15 @@ app.use('/login', loginRouter);
 // profile manag.
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profileManagement', profileRouter);
+
+
+
+const authRoutes = require('./routes/authRoutes');
+app.use('/auth', authRoutes);
+
+const refreshRoutes = require('./routes/authRoutes');
+app.use('/refresh', refreshRoutes);
+
 
 
 //app.use(errorHandler);

@@ -7,6 +7,12 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  fullName: { type: String, required: true, maxLength: 150 },
+  addressLine1: { type: String, required: true, maxLength: 100 },
+  addressLine2: { type: String, maxLength: 100 },
+  city: { type: String, required: true, maxLength: 100 },
+  state: { type: String, required: true, maxLength: 9 },
+  zipcode: { type: String, required: true, maxLength: 9 }
 });
 
 // register
@@ -32,7 +38,8 @@ userSchema.statics.signup = async function(email, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ email, password: hash })
+  const user = await this.create({ email, password: hash });
+  console.log("User created:", user);
 
   return user
 }
