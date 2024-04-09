@@ -13,11 +13,6 @@ app.listen(PORT, () => {
     console.log('Server is running on port', PORT);
 });
 
-// express app 
-//const app = express();
-
-// works with cors and express
-// express works as our middleware
 let cors = require('cors');
 app.use(cors());
 
@@ -56,31 +51,5 @@ app.use('/auth', authRoutes);
 const refreshRoutes = require('./routes/authRoutes');
 app.use('/refresh', refreshRoutes);
 
-
-
-//app.use(errorHandler);
-
-/*const authoRouter = require('./routes/authRoutes');
-app.use('/autho', authoRouter);
-
-const profileRouter = require('./routes/profileRoutes');
-app.use('/profile', profileRouter);*/
-
-//middleware
-/*app.use((req, res, next) => {
-    console.log(req.path, req.method)
-})*/
-
-// setting up route handeler 
-// this can be uncommented when the middleware is fully set up
-/*app.get('/', (req, res) =>{
-    res.json({message: 'Welcome to the app'})
-})*/
-
-// listen for requests
-//PORT = 8080
-//  app.listen(process.env.PORT, () =>{
-//      console.log('listening on port', process.env.PORT)
-// });
 module.exports = app;
 process.env;
