@@ -19,7 +19,6 @@ function Login() {
         if (storedAccessToken && storedRefreshToken) {
             setAccessToken(storedAccessToken);
             setRefreshToken(storedRefreshToken);
-            navigate('/home'); 
         }
     }, []);
 
