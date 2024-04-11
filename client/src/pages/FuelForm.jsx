@@ -3,9 +3,19 @@ import axios from "axios";
 
 function FuelForm() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState({}); 
-
+    const [formData, setFormData] = useState({
+        email: '',
+        gasLocation: '',
+        fuelType: '', // Only one option should be selected, so it remains as a string
+        numGallons: 0,
+        purchaseDate: '',
+        pricePerGallon: 0,
+        deliveryDate: '',
+        deliveryAddress: 'City, State',
+        total: 0,
+    });
     const checkLoggedIn = async () => {
         try {
             const accessToken = localStorage.getItem("accessToken");
@@ -20,11 +30,23 @@ function FuelForm() {
                     setUserData(res.data); 
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
-                    console.log("User Email:", res.data.email); 
+                    console.log("User Email:", res.data.email);
+                    console.log("User Address:", res.data.addressLine1); 
+                    // Set user email to res.data.email
+                    // setFormData(email = res.data.email)
+                    setFormData(prevState => ({
+                        ...prevState,
+                        email: res.data.email,
+                    }));
                 }
             }
+            // else setformdata 
         } catch (error) {
             console.error("Error checking login status:", error);
+            setFormData(prevState => ({
+                ...prevState,
+                email: ''
+            }));
         }
     };
 
@@ -33,7 +55,7 @@ function FuelForm() {
     }, []);
 
 
-    const [formData, setFormData] = useState({
+    /*const [formData, setFormData] = useState({
         email: '',
         gasLocation: '',
         fuelType: '', // Only one option should be selected, so it remains as a string
@@ -43,7 +65,7 @@ function FuelForm() {
         deliveryDate: '',
         deliveryAddress: 'City, State',
         total: 0,
-    });
+    });*/
 
     const handleChange = (e) => {
         const { name, value } = e.target;
