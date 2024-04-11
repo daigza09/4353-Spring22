@@ -36,14 +36,15 @@ describe('POST /fuelForm', () => {
   });
 });
 
-describe('GET /fuelForm/getAddress', ()=>{
+describe('GET /fuelForm/getAddress', () => {
   test('should retrieve user address given email', async () => {
-    const userEmail = {email: 'janedoe@example.com'};
+    const userEmail = 'joydoe@example.com'; // Just the email string, not an object
     const response = await request(app)
       .get('/fuelForm/getAddress')
-      .send(userEmail)
+      .query({ email: userEmail }) // Send the email as a query parameter
       .set('Accept', 'application/json');
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Address retrieved successfully');
+    expect(response.body.dataAdd).toBeDefined(); // Assuming dataAdd is returned in the response
   });
 });
