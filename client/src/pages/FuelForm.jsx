@@ -36,7 +36,10 @@ function FuelForm() {
                         email: res.data.email,
                     }));
                     console.log("USER EMAIL: ", formData.email);
-                    handleAddressChange();
+                    if (res.data.email) {
+                        handleAddressChange();
+                    }
+
                 }
             } else {
                 setIsLoggedIn(false);
@@ -53,6 +56,11 @@ function FuelForm() {
     useEffect(() => {
         checkLoggedIn();
     }, []);
+    useEffect(() => {
+        if (formData.email) {
+            handleAddressChange();
+        }
+    }, [formData.email]);
     const handleAddressChange = async () => {
         const { success, data } = await setAddressLine1();
         if (success) {
@@ -85,7 +93,6 @@ function FuelForm() {
             return { success: false, err };
         }
     }
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
