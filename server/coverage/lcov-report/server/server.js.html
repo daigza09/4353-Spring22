@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.63% </span>
+                <span class="strong">98.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>72/73</span>
+                <span class='fraction'>54/55</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.63% </span>
+                <span class="strong">98.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>72/73</span>
+                <span class='fraction'>54/55</span>
             </div>
         
             
@@ -118,25 +118,7 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -148,12 +130,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -164,19 +141,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -224,11 +188,6 @@ app.listen(PORT, () =&gt; {
     console.log('Server is running on port', PORT);
 });
 &nbsp;
-// express app 
-//const app = express();
-&nbsp;
-// works with cors and express
-// express works as our middleware
 let cors = require('cors');
 app.use(cors());
 &nbsp;
@@ -255,31 +214,18 @@ app.use('/signup', signupRouter);
 const loginRouter = require('./routes/loginRoutes');
 app.use('/login', loginRouter);
 &nbsp;
-&nbsp;
-//app.use(errorHandler);
-&nbsp;
-/*const authoRouter = require('./routes/authRoutes');
-app.use('/autho', authoRouter);
-&nbsp;
+// profile manag.
 const profileRouter = require('./routes/profileRoutes');
-app.use('/profile', profileRouter);*/
+app.use('/profileManagement', profileRouter);
 &nbsp;
-//middleware
-/*app.use((req, res, next) =&gt; {
-    console.log(req.path, req.method)
-})*/
 &nbsp;
-// setting up route handeler 
-// this can be uncommented when the middleware is fully set up
-/*app.get('/', (req, res) =&gt;{
-    res.json({message: 'Welcome to the app'})
-})*/
 &nbsp;
-// listen for requests
-//PORT = 8080
-//  app.listen(process.env.PORT, () =&gt;{
-//      console.log('listening on port', process.env.PORT)
-// });
+const authRoutes = require('./routes/authRoutes');
+app.use('/auth', authRoutes);
+&nbsp;
+const refreshRoutes = require('./routes/authRoutes');
+app.use('/refresh', refreshRoutes);
+&nbsp;
 module.exports = app;
 process.env;
 &nbsp;</pre></td></tr></table></pre>
@@ -289,7 +235,7 @@ process.env;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-29T04:27:03.509Z
+                at 2024-04-09T20:47:45.186Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -10,6 +10,7 @@ beforeEach(async () => {
 describe('POST /fuelForm', () => {
   test('should create a new order successfully', async () => {
     const orderData = {
+      email: 'temp@gmail.com',
       gasLocation: '02-FL',
       fuelType: 'Diesel',
       numGallons: '1000',
@@ -32,5 +33,17 @@ describe('POST /fuelForm', () => {
     expect(savedOrder).toBeTruthy();
 
     await FuelQuote.deleteOne({ gasLocation: '02-FL' });
+  });
+});
+
+describe('GET /fuelForm/getAddress', ()=>{
+  test('should retrieve user address given email', async () => {
+    const userEmail = {email: 'janedoe@example.com'};
+    const response = await request(app)
+      .get('/fuelForm/getAddress')
+      .send(userEmail)
+      .set('Accept', 'application/json');
+    expect(response.status).toBe(201);
+    expect(response.body.message).toBe('Address retrieved successfully');
   });
 });
