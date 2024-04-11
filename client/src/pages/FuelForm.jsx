@@ -2,9 +2,36 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function FuelForm() {
-    // this is where user authentication needs to happen
-    //const [loginState, setLoginState] = useState({});
-    //const [userEmail, setUserEmail] = useState({});
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [userData, setUserData] = useState({}); 
+
+    const checkLoggedIn = async () => {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            if (accessToken) {
+                const res = await axios.get("http://localhost:8080/auth/", {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+                if (res.status === 200) {
+                    setIsLoggedIn(true);
+                    setUserData(res.data); 
+                    console.log("User is logged in");
+                    console.log("User ID:", res.data.userId); 
+                    console.log("User Email:", res.data.email); 
+                }
+            }
+        } catch (error) {
+            console.error("Error checking login status:", error);
+        }
+    };
+
+    useEffect(() => {
+        checkLoggedIn();
+    }, []);
+
 
     const [formData, setFormData] = useState({
         email: '',

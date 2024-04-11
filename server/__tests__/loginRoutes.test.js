@@ -1,3 +1,4 @@
+//loginRoutes.test.js
 const request = require('supertest');
 const app = require('../../server');
 const bcrypt = require('bcrypt');
@@ -90,14 +91,14 @@ describe('/auth', () => {
     });
 
     test('auth should return 200 and user ID when a valid token is provided', async () => {
-        const response = await request(app)
-            .get('/auth')
-            .set('Authorization', `Bearer ${accessToken}`)
-            .set('Accept', 'application/json');
-
-        expect(response.status).toBe(200);
-        expect(response.body.message).toMatch(/^User with ID .* accessed the protected route$/);
-    });
+      const response = await request(app)
+          .get('/auth')
+          .set('Authorization', `Bearer ${accessToken}`)
+          .set('Accept', 'application/json');
+  
+      expect(response.status).toBe(200);
+      expect(response.body.userId).toBeDefined();
+  });
 
     test('refresh should return 401 when no refresh token is provided', async () => {
         const response = await request(app)

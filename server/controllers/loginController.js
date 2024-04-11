@@ -30,9 +30,12 @@ exports.login = asyncHandler(async (req, res) => {
       const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
       const refreshToken = jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET);
   
+
+      res.cookie('accessToken', accessToken, { httpOnly: true, maxAge: 3600000 }); 
+      res.cookie('refreshToken', refreshToken, { httpOnly: true }); 
+  
       res.status(200).json({ message: 'Login successful', accessToken, refreshToken });
     } catch (error) {
       res.status(401).json({ error: error.message });
     }
-  });
-
+});
