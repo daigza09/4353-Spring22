@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function FuelForm() {
-    // this is where user authentication needs to happen
-    //const [loginState, setLoginState] = useState({});
-    //const [userEmail, setUserEmail] = useState({});
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userData, setUserData] = useState({}); 
     const [formData, setFormData] = useState({
         email: '',
         gasLocation: '',
@@ -17,6 +16,43 @@ function FuelForm() {
         deliveryAddress: 'City, State',
         total: 0,
     });
+    const checkLoggedIn = async () => {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            if (accessToken) {
+                const res = await axios.get("http://localhost:8080/auth/", {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+                if (res.status === 200) {
+                    setIsLoggedIn(true);
+                    setUserData(res.data); 
+                    console.log("User is logged in");
+                    console.log("User ID:", res.data.userId); 
+                    console.log("User Email:", res.data.email);
+                    setFormData(prevState => ({
+                        ...prevState,
+                        email: res.data.email,
+                    }));
+                    console.log("USER EMAIL: ", formData.email);
+                    handleAddressChange();
+                }
+            } else {
+                setIsLoggedIn(false);
+            }
+        } catch (error) {
+            console.error("Error checking login status:", error);
+            setFormData(prevState => ({
+                ...prevState,
+                email: ''
+            }));
+        }
+    };
+
+    useEffect(() => {
+        checkLoggedIn();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -58,6 +94,39 @@ function FuelForm() {
             }));
         }
     };
+    async function setAddressLine1(){
+        console.log(formData.email);
+        try{
+            const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
+                params: {
+                    email: formData.email
+                }
+            });
+            if(res.status !== 201){
+                throw new Error("Unable to retrieve user email");
+            }
+            const data = await res.data;
+            console.log(data.dataAdd);
+            return { success: true, data };
+        }catch(err){
+            console.error("Error fetching email", err);
+            return { success: false, err };
+        }
+    }
+
+    const handleAddressChange = async () => {
+        const { success, data } = await setAddressLine1();
+        if (success) {
+            //console.log("test");
+            //console.log(data.dataAdd);
+            setFormData(prevState => ({
+                ...prevState,
+                deliveryAddress: data.dataAdd// Assuming data.address contains the address string
+            }));
+            //console.log(data.add);
+            //console.log(formData.deliveryAddress);
+        }
+    };
 
     async function registerOrder() {
         try {
@@ -94,7 +163,7 @@ function FuelForm() {
                 if (response.success) {
                     alert("Congratulations! You successfully created your order.");
                     setFormData({
-                        email: '',
+                        //email: null,
                         gasLocation: '',
                         fuelType: '',
                         numGallons: 0,
