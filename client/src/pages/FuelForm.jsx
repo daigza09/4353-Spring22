@@ -101,13 +101,13 @@ function FuelForm() {
                 params: {
                     email: formData.email
                 }
-        });
-        if(res.status !== 201){
-            throw new Error("Unable to retrieve user email");
-        }
-        const data = await res.data;
-        console.log(data.dataAdd);
-        return { success: true, data };
+            });
+            if(res.status !== 201){
+                throw new Error("Unable to retrieve user email");
+            }
+            const data = await res.data;
+            console.log(data.dataAdd);
+            return { success: true, data };
         }catch(err){
             console.error("Error fetching email", err);
             return { success: false, err };
@@ -117,10 +117,14 @@ function FuelForm() {
     const handleAddressChange = async () => {
         const { success, data } = await setAddressLine1();
         if (success) {
+            //console.log("test");
+            //console.log(data.dataAdd);
             setFormData(prevState => ({
                 ...prevState,
                 deliveryAddress: data.dataAdd// Assuming data.address contains the address string
             }));
+            //console.log(data.add);
+            //console.log(formData.deliveryAddress);
         }
     };
 
@@ -159,7 +163,7 @@ function FuelForm() {
                 if (response.success) {
                     alert("Congratulations! You successfully created your order.");
                     setFormData({
-                        email: '',
+                        //email: null,
                         gasLocation: '',
                         fuelType: '',
                         numGallons: 0,
