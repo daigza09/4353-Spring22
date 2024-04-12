@@ -37,7 +37,7 @@ const getUserAddress = asyncHandler(async (req, res) => {
     const { email } = req.query;
     const user = await  User.find({ email });
     console.log(user);
-    if (!user) {
+    if (!user || user.length === 0) {
         return res.status(404).json({ message: 'User not found' });
     }
     const dataAdd = user[0].addressLine1;
