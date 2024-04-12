@@ -38,27 +38,6 @@ const getUserProfileByEmail2 = asyncHandler(async (req, res) => {
   }
 });
 
-const createUser = asyncHandler(async (req, res) => {
-  try {
-    const { fullName, email, address1, address2, zipcodeNumber, city, userLocation } = req.body;
-    const newUser = new User({
-      fullName,
-      email,
-      address1,
-      address2,
-      zipcodeNumber,
-      city,
-      userLocation
-    });
-    await newUser.save();
-    console.log(`New user created with email: ${email}`);
-    res.status(201).json({ message: 'New user created', newUser });
-  } catch (error) {
-    console.error(`Error creating new user: ${error.message}`);
-    res.status(500).json({ message: error.message });
-  }
-});
-
 const getUserInfo = asyncHandler(async (req, res) => {
   try {
     const { email } = req.query;
@@ -80,4 +59,4 @@ const getUserInfo = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { createUser, getUserProfileByEmail2, updateUserProfile, getUserInfo };
+module.exports = { getUserProfileByEmail2, updateUserProfile, getUserInfo };

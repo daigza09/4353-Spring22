@@ -34,22 +34,6 @@ const User = require('../models/ClientProfile');
     expect(response.body.message).toBe('User updated');
   });
 
-  // createUser 
-  it('should create a new user', async () => {
-    const response = await supertest(app).post('/profileManagement/api/users').send({
-      fullName: 'New Test User',
-      email: 'newtest@example.com',
-      address1: '456 Test St',
-      address2: 'Apt 2',
-      zipcodeNumber: '67890',
-      city: 'New Test City',
-      userLocation: 'NY-2',
-    });
-    expect(response.status).toBe(201);
-    expect(response.body.message).toBe('New user created');
-    expect(response.body.newUser.email).toBe('newtest@example.com');
-  });
-
   // Clean up the database after tests
   afterAll(async () => {
     await User.deleteMany({});
