@@ -11,7 +11,7 @@ function ProfileManagement() {
     userLocation: '',
     zipcodeNumber: '',
   });
-  
+
   const [isEditable, setIsEditable] = useState({
     fullName: false,
     address1: false,
@@ -75,6 +75,7 @@ function ProfileManagement() {
           userLocation: useData.state,
           zipcodeNumber: useData.zipcode,
         }));
+        // console.log(useData.fullName)
       }
     } catch (error) {
       console.error('Error fetching user  info:', error);
