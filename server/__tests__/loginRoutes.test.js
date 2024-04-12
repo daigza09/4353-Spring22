@@ -9,7 +9,7 @@ describe('POST /login', () => {
   test('should login with hardcoded credentials', async () => {
     const userData = {
       email: 'daisy_tester@example.com',
-      password: 'password1234',
+      password: '1234password',
     };
 
     const user = await User.findOne({ email: userData.email });
