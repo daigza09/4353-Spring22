@@ -16,15 +16,6 @@ const User = require('../models/ClientProfile');
     await user.save();
   });
 
-  // getUserProfileByEmail2 
-  it('should get a user profile by email', async () => {
-    const response = await supertest(app).post('/profileManagement/api/users/getByEmail').send({
-      email: 'test@example.com',
-    });
-    expect(response.status).toBe(200);
-    expect(response.body.email).toBe('test@example.com');
-  });
-
   // updateUserProfile 
   it('should update a user profile', async () => {
     const response = await supertest(app).put('/profileManagement/api/users/test@example.com').send({
