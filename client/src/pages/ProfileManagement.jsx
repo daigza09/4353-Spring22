@@ -25,17 +25,21 @@ function ProfileManagement() {
     const fetchUser = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
+        console.log('Access Token:', accessToken); // Log the access token
+        console.log('anything !!')
         if (!accessToken) {
           // redirect to login if user is not authenticated
           window.location.href = '/login';
           return;
         }
-        const response = await axios.get('http://localhost:8080/auth/', {
+        const response = await axios.get("http://localhost:8080/auth/", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
         const userData = response.data;
+        console.log('anything lowkey!!')
+       // console.log('User Email:', userData.email); 
         setUser({
           fullName: userData.fullName || '',
           email: userData.email || '',
@@ -46,7 +50,9 @@ function ProfileManagement() {
           zipcodeNumber: userData.zipcodeNumber || '',
         });
       } catch (error) {
+        console.log('checking for mo!!')
         console.error('Error fetching user:', error);
+        console.log('Error Response:', error.response);
       }
     };
     fetchUser();
