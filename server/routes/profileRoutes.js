@@ -7,7 +7,7 @@ const {
 } = require('../controllers/profileController');
 
 // updates user profile, to update
-router.put('/api/users/:email', updateUserProfile); // STEP 3
+router.put('/api/users/:email', updateUserProfile); 
 
 // returns user info
 router.get('/info', getUserInfo);

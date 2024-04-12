@@ -25,7 +25,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const userData = user[0]; // sssuming there's only one user with the given email
+    const userData = user[0]; // assuming there's only one user with the given email
 
     console.log(`User with email ${email} exists!!`);
     console.log(userData);
