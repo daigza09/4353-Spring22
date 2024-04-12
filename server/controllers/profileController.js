@@ -16,28 +16,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-const getUserProfileByEmail2 = asyncHandler(async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    console.log(`User with email ${req.body.email} exists`);
-    res.json({
-      fullName: user.fullName,
-      email: user.email,
-      address1: user.address1,
-      address2: user.address2,
-      zipcodeNumber: user.zipcodeNumber,
-      city: user.city,
-      userLocation: user.userLocation
-    });
-  } catch (error) {
-    console.error(`Error finding user with email ${req.body.email}`);
-    res.status(500).json({ message: error.message });
-  }
-});
-
 const getUserInfo = asyncHandler(async (req, res) => {
   try {
     const { email } = req.query;
@@ -59,4 +37,4 @@ const getUserInfo = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { getUserProfileByEmail2, updateUserProfile, getUserInfo };
+module.exports = { updateUserProfile, getUserInfo };
