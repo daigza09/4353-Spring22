@@ -21,6 +21,7 @@ function ProfileManagement() {
   });
 
   useEffect(() => {
+    console.log('Initial User State:', user);
     const fetchUser = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
@@ -34,7 +35,16 @@ function ProfileManagement() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        setUser(response.data);
+        const userData = response.data;
+        setUser({
+          fullName: userData.fullName || '',
+          email: userData.email || '',
+          address1: userData.address1 || '',
+          address2: userData.address2 || '',
+          city: userData.city || '',
+          userLocation: userData.userLocation || '',
+          zipcodeNumber: userData.zipcodeNumber || '',
+        });
       } catch (error) {
         console.error('Error fetching user:', error);
       }
@@ -44,6 +54,7 @@ function ProfileManagement() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log('Input Changed:', name, value);
     setUser({ ...user, [name]: value });
   };
 
@@ -82,6 +93,7 @@ function ProfileManagement() {
   };
 
   const renderField = (label, name, type = 'text', isSelect = false, options = []) => {
+    console.log('Rendering Field:', name, user[name]);
     return (
       <div>
         <label htmlFor={name} className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>{label}</label>
