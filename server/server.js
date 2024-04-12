@@ -43,6 +43,7 @@ app.use('/login', loginRouter);
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profileManagement', profileRouter);
 
+// profile management pt 2
 const userRoutes = require('./routes/profileRoutes');
 app.use('/api/user', userRoutes);
 
