@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 describe('POST /login', () => {
   test('should login with hardcoded credentials', async () => {
     const userData = {
-      email: 'joydoe@example.com',
+      email: 'daisy_tester@example.com',
       password: 'password1234',
     };
 
