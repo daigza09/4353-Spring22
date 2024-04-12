@@ -36,7 +36,10 @@ function FuelForm() {
                         email: res.data.email,
                     }));
                     console.log("USER EMAIL: ", formData.email);
-                    handleAddressChange();
+                    if (res.data.email) {
+                        handleAddressChange();
+                    }
+
                 }
             } else {
                 setIsLoggedIn(false);
@@ -53,6 +56,43 @@ function FuelForm() {
     useEffect(() => {
         checkLoggedIn();
     }, []);
+    useEffect(() => {
+        if (formData.email) {
+            handleAddressChange();
+        }
+    }, [formData.email]);
+    const handleAddressChange = async () => {
+        const { success, data } = await setAddressLine1();
+        if (success) {
+            //console.log("test");
+            //console.log(data.dataAdd);
+            setFormData(prevState => ({
+                ...prevState,
+                deliveryAddress: data.dataAdd// Assuming data.address contains the address string
+            }));
+            //console.log(data.add);
+            //console.log(formData.deliveryAddress);
+        }
+    };
+    async function setAddressLine1(){
+        console.log(formData.email);
+        try{
+            const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
+                params: {
+                    email: formData.email
+                }
+            });
+            if(res.status !== 201){
+                throw new Error("Unable to retrieve user email");
+            }
+            const data = await res.data;
+            console.log(data.dataAdd);
+            return { success: true, data };
+        }catch(err){
+            console.error("Error fetching email", err);
+            return { success: false, err };
+        }
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -94,7 +134,7 @@ function FuelForm() {
             }));
         }
     };
-    async function setAddressLine1(){
+    /*async function setAddressLine1(){
         console.log(formData.email);
         try{
             const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
@@ -112,21 +152,7 @@ function FuelForm() {
             console.error("Error fetching email", err);
             return { success: false, err };
         }
-    }
-
-    const handleAddressChange = async () => {
-        const { success, data } = await setAddressLine1();
-        if (success) {
-            //console.log("test");
-            //console.log(data.dataAdd);
-            setFormData(prevState => ({
-                ...prevState,
-                deliveryAddress: data.dataAdd// Assuming data.address contains the address string
-            }));
-            //console.log(data.add);
-            //console.log(formData.deliveryAddress);
-        }
-    };
+    }*/
 
     async function registerOrder() {
         try {

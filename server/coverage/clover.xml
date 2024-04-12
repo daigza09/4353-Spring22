@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1712939677493" clover="3.2.0">
   <project timestamp="1712939677494" name="All files">
     <metrics statements="593" coveredstatements="461" conditionals="39" coveredconditionals="28" methods="6" coveredmethods="4" elements="638" coveredelements="493" complexity="0" loc="593" ncloc="593" packages="6" files="19" classes="19"/>
+=======
+<coverage generated="1712939922514" clover="3.2.0">
+  <project timestamp="1712939922514" name="All files">
+    <metrics statements="655" coveredstatements="590" conditionals="60" coveredconditionals="39" methods="9" coveredmethods="7" elements="724" coveredelements="636" complexity="0" loc="655" ncloc="655" packages="6" files="20" classes="20"/>
+>>>>>>> 2c852f8392181b0b23966d15486906de960e738e
     <package name="server">
       <metrics statements="57" coveredstatements="56" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
       <file name="server.js" path="/Users/lisa/4353-Spring22/server/server.js">
