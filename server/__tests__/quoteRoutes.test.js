@@ -38,7 +38,7 @@ describe('POST /fuelForm', () => {
 
 describe('GET /fuelForm/getAddress', () => {
   test('should retrieve user address given email', async () => {
-    const userEmail = 'joydoe@example.com'; // Just the email string, not an object
+    const userEmail = 'daisy_tester@example.com'; // Just the email string, not an object
     const response = await request(app)
       .get('/fuelForm/getAddress')
       .query({ email: userEmail }) // Send the email as a query parameter
