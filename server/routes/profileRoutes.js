@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const { 
     createUser, 
     getUserProfileByEmail2, 
@@ -14,5 +15,6 @@ router.post('/api/users/getByEmail', getUserProfileByEmail2); // STEP 2
 
 // updates user profile, to update
 router.put('/api/users/:email', updateUserProfile); // STEP 3
+
 
 module.exports = router;

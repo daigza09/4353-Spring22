@@ -1,6 +1,7 @@
 const User = require('../models/ClientProfile');
 const asyncHandler = require('express-async-handler');
 
+
 // is passed in the frontend and we use 'email' to fill in the rest of the
 // PUT ,, users info to populate the boxes in our frontend
 const updateUserProfile = async (req, res) => {
@@ -10,8 +11,10 @@ const updateUserProfile = async (req, res) => {
       req.body,
       { new: true }
     );
+    console.log(`User updated with email: ${req.params.email}`);
     res.status(201).json({ message: 'User updated', updatedUser });
   } catch (error) {
+    console.error(`Error updating user with email: ${req.params.email}`);
     res.status(500).json({ message: error.message });
   }
 };
@@ -23,7 +26,7 @@ const getUserProfileByEmail2 = async (req, res) => {
       if (!user) {
           return res.status(404).json({ message: 'User not found' });
       }
-      console.log(`User with email that email exists!!`);
+      console.log(`User with email ${req.body.email} exists`);
       res.json({
         fullName: user.fullName,
         email: user.email,
@@ -34,6 +37,7 @@ const getUserProfileByEmail2 = async (req, res) => {
         userLocation: user.userLocation
       });
   } catch (error) {
+      console.error(`Error finding user with email ${req.body.email}`);
       res.status(500).json({ message: error.message });
   }
 };
@@ -52,11 +56,14 @@ const createUser = async (req, res) => {
       userLocation
     });
     await newUser.save();
+    console.log(`New user created with email: ${email}`);
     res.status(201).json({ message: 'New user created', newUser});
   } catch (error) {
-    console.log(error); 
+    console.error(`Error creating new user: ${error.message}`);
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 module.exports = { createUser, getUserProfileByEmail2, updateUserProfile };

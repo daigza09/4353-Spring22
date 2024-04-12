@@ -4,7 +4,7 @@ import axios from 'axios';
 function ProfileManagement() {
   const [user, setUser] = useState({
     fullName: '',
-    email: 'johndoe@example.com',
+    email: '',
     address1: '',
     address2: '',
     city: '',
@@ -22,8 +22,22 @@ function ProfileManagement() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.post('http://localhost:8080/profileManagement/api/users/getByEmail', { email: user.email });
-      setUser(response.data);
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          // redirect to login if user is not authenticated
+          window.location.href = '/login';
+          return;
+        }
+        const response = await axios.get('http://localhost:8080/auth/', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
     };
     fetchUser();
   }, []);
@@ -34,22 +48,29 @@ function ProfileManagement() {
   };
 
   const handleSaveChanges = async (field) => {
-    if (user.fullName.length > 50 ||
-        user.address1.length > 100 ||
-        user.address2.length > 100 ||
-        user.city.length > 100 ||
-        user.zipcodeNumber.length > 9 ||
-        user.zipcodeNumber.length < 5 ||
-        user.fullName === '' ||
-        user.address1 === '' ||
-        user.city === '' ||
-        user.userLocation === '') {
-      alert("Please make sure all required fields are filled out correctly.");
-      return;
-    }
+  // validating user input
+  if (
+    user.fullName.length > 50 ||
+    user.address1.length > 100 ||
+    user.address2.length > 100 ||
+    user.city.length > 100 ||
+    user.zipcodeNumber.length > 9 ||
+    user.zipcodeNumber.length < 5 ||
+    user.fullName === '' ||
+    user.address1 === '' ||
+    user.city === '' ||
+    user.userLocation === ''
+  ) {
+    alert('Please make sure all required fields are filled out correctly.');
+    return;
+  }
 
-    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
-    setIsEditable({ ...isEditable, [field]: false });
+    try {
+      await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
+      setIsEditable({ ...isEditable, [field]: false });
+    } catch (error) {
+      console.error('Error saving changes:', error);
+    }
   };
 
   const handleEditClick = (field) => {
