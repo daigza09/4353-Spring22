@@ -62,8 +62,8 @@ describe('/auth', () => {
         const loginResponse = await request(app)
             .post('/login')
             .send({
-                email: 'joydoe@example.com',
-                password: 'password1234'
+                email: 'daisy_tester@example.com',
+                password: '1234password'
             })
             .set('Accept', 'application/json');
 
