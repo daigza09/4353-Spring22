@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 describe('POST /login', () => {
   test('should login with hardcoded credentials', async () => {
     const userData = {
-      email: 'joydoe@example.com',
-      password: 'password1234',
+      email: 'daisy_tester@example.com',
+      password: '1234password',
     };
 
     const user = await User.findOne({ email: userData.email });
