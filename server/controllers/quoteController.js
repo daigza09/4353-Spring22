@@ -29,24 +29,21 @@ const makeOrder = asyncHandler(async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the order' });
   }
 
-  
 })
 
 const getUserAddress = asyncHandler(async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.query;
     const user = await  User.find({ email });
     console.log(user);
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }
-    const addressLine1 = user[0].addressLine1;
+    const dataAdd = user[0].addressLine1;
 
     console.log(`User with email ${email} exists!!`);
-    res.status(201).json({ message: 'Address retrieved successfully', addressLine1});
-    /*res.json({
-      addressLine1,
-    });*/
+    console.log(dataAdd);
+    res.status(201).json({ message: 'Address retrieved successfully', dataAdd});
   } catch (error){
     console.error('Error retrieving user address:', error);
     res.status(500).json({ error: 'An error occurred while retreiving user address' });
