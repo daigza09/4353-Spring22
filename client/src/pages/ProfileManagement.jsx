@@ -11,6 +11,7 @@ function ProfileManagement() {
     userLocation: '',
     zipcodeNumber: '',
   });
+  
   const [isEditable, setIsEditable] = useState({
     fullName: false,
     address1: false,
@@ -20,44 +21,66 @@ function ProfileManagement() {
     zipcodeNumber: false,
   });
 
-  useEffect(() => {
-    console.log('Initial User State:', user);
-    const fetchUser = async () => {
-      try {
-        const accessToken = localStorage.getItem('accessToken');
-        console.log('Access Token:', accessToken); // Log the access token
-        console.log('anything !!')
-        if (!accessToken) {
-          // redirect to login if user is not authenticated
-          window.location.href = '/login';
-          return;
-        }
+  const checkLoggedIn = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
         const response = await axios.get("http://localhost:8080/auth/", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        const userData = response.data;
-        console.log('anything lowkey!!')
-       // console.log('User Email:', userData.email); 
-        setUser({
-          fullName: userData.fullName || '',
-          email: userData.email || '',
-          address1: userData.address1 || '',
-          address2: userData.address2 || '',
-          city: userData.city || '',
-          userLocation: userData.userLocation || '',
-          zipcodeNumber: userData.zipcodeNumber || '',
-        });
-      } catch (error) {
-        console.log('checking for mo!!')
-        console.error('Error fetching user:', error);
-        console.log('Error Response:', error.response);
+        if (response.status === 200) {
+          const userData = response.data;
+          setUser({
+            fullName: userData.fullName || '',
+            email: userData.email || '',
+            address1: userData.address1 || '',
+            address2: userData.address2 || '',
+            city: userData.city || '',
+            userLocation: userData.userLocation || '',
+            zipcodeNumber: userData.zipcodeNumber || '',
+          });
+          handleUserChange(userData.email);
+        }
+      } else {
+        // if no access token, consider the user not logged in
+        console.log('user not logged in!');
+        window.location.href = '/login';
+
       }
-    };
-    fetchUser();
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      console.log('Error Response:', error.response);
+    }
+  };
+  
+  useEffect(() => {
+    checkLoggedIn();
   }, []);
 
+  const handleUserChange = async (email) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/user/info`, {
+        params: { email: email }
+      });
+      if (response.status === 201) {
+        const useData = response.data.user;
+        setUser(prevState => ({
+          ...prevState,
+          fullName: useData.fullName,
+          address1: useData.addressLine1,
+          address2: useData.addressLine2,
+          city: useData.city,
+          userLocation: useData.state,
+          zipcodeNumber: useData.zipcode,
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching user  info:', error);
+    }
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log('Input Changed:', name, value);
