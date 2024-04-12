@@ -43,10 +43,11 @@ app.use('/login', loginRouter);
 const profileRouter = require('./routes/profileRoutes');
 app.use('/profileManagement', profileRouter);
 
+const userRoutes = require('./routes/profileRoutes');
+app.use('/api/user', userRoutes);
 
-
-const authRoutes = require('./routes/authRoutes');
-app.use('/auth', authRoutes);
+const profileRoutes = require('./routes/profileRoutes');
+app.use('/auth', profileRoutes);
 
 const refreshRoutes = require('./routes/authRoutes');
 app.use('/refresh', refreshRoutes);
