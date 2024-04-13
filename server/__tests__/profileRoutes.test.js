@@ -3,7 +3,7 @@ const app = require('../server');
 const User = require('../models/User');
 
 const userData = {
-  email: '1234@emailcom',
+  email: '1234@email.com',
   password: '123456789!',
   fullName: '1234 company',
   address1: '123 address1',
@@ -24,7 +24,7 @@ describe('Profile Management Controller', () => {
     token = loginResponse.body.accessToken;
   });
 
-  describe('PUT/profileManagement/api/users/:email', () => {
+  describe('PUT /profileManagement/api/users/:email', () => {
     test('should update user profile', async () => {
       const updatedUserData = {
         fullName: 'Updated Name',
@@ -41,15 +41,20 @@ describe('Profile Management Controller', () => {
         .send(updatedUserData)
         .set('Accept', 'application/json');
 
-      if (res.status === 404) {
-        console.log('User not found');
-        expect(res.body.message).toBe('User not found');
-      } else {
-        console.log(`User updated with email: ${userData.email}`);
-        expect(res.status).toBe(201); 
-        expect(res.body.message).toBe('User updated');
-        expect(res.body.updatedUser.fullName).toBe('Updated Name');
-      }
+      expect(res.status).toBe(201); 
+      expect(res.body.message).toBe('User updated');
+      expect(res.body.updatedUser.fullName).toBe('Updated Name');
+    });
+
+    test('should handle error when updating user profile', async () => {
+      const res = await request(app)
+        .put(`/profileManagement/api/users/nonexistentemail@example.com`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ fullName: 'Nonexistent User' })
+        .set('Accept', 'application/json');
+
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('User not found');
     });
   });
 
@@ -61,19 +66,20 @@ describe('Profile Management Controller', () => {
         .set('Authorization', `Bearer ${token}`)
         .set('Accept', 'application/json');
 
-      if (res.status === 404) {
-        console.log('User not found');
-        expect(res.body.message).toBe('User not found');
-      } else {
-        console.log(`User with email ${userData.email} exists!!`);
-        console.log(res.body.user);
-        expect(res.status).toBe(201); 
-        expect(res.body.message).toBe('User information retrieved successfully');
-        expect(res.body.user.fullName).toBe('Updated Name');
-      }
+      expect(res.status).toBe(201);
+      expect(res.body.message).toBe('User information retrieved successfully');
+      expect(res.body.user.fullName).toBe('Updated Name');
+    });
+
+    test('should handle error when retrieving user information', async () => {
+      const res = await request(app)
+        .get('/profileManagement/info')
+        .query({ email: 'nonexistentemail@example.com' })
+        .set('Authorization', `Bearer ${token}`)
+        .set('Accept', 'application/json');
+
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('User not found');
     });
   });
 });
-
-
-
