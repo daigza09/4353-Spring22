@@ -8,6 +8,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       req.body,
       { new: true }
     );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
     console.log(`User updated with email: ${req.params.email}`);
     res.status(201).json({ message: 'User updated', updatedUser });
   } catch (error) {
@@ -25,7 +30,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const userData = user[0]; // assuming there's only one user with the given email
+    const userData = user[0]; 
 
     console.log(`User with email ${email} exists!!`);
     console.log(userData);
