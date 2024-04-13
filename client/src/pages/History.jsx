@@ -39,13 +39,11 @@ function History() {
         <table className="w-11/12 border-collapse">
           <thead className="border-solid border-2 border-gray bg-white text-left">
             <tr>
-              <th className="py-2 px-5 text-lg text-black">Delivery Date</th>
+              <th className="py-2 px-5 text-lg text-black">Purchase Date</th>
+              <th className="py-2 px-5 text-lg text-black">Email</th>
               <th className="py-2 px-5 text-lg text-black">Amount</th>
               <th className="py-2 px-5 text-lg text-black">Item</th>
-              <th className="py-2 px-5 text-lg text-black">
-                Gallons Requested
-              </th>
-              <th className="py-2 px-5 text-lg text-black">Transaction</th>
+              <th className="py-2 px-5 text-lg text-black">Total Cost</th>
             </tr>
           </thead>
           <tbody>
@@ -55,46 +53,19 @@ function History() {
                 className="border-solid border-2 border-gray bg-white text-left hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <td className="py-4 px-5 text-lg text-black">
-                  {current.deliveryDate}
+                  {current.purchaseDate}
                 </td>
                 <td className="py-4 px-5 text-lg text-black">
-                  ${current.total}
+                  {current.email}
+                </td>
+                <td className="py-4 px-5 text-lg text-black">
+                  {current.numGallons} gallons
                 </td>
                 <td className="py-4 px-5 text-lg text-black">
                   {current.fuelType}
                 </td>
                 <td className="py-4 px-5 text-lg text-black">
-                  {current.numGallons}
-                </td>
-                <td
-                  className="py-4 px-5 mt-3 text-lg text-black relative"
-                  style={{
-                    backgroundColor:
-                      current.Transaction === "Completed"
-                        ? "#18C964"
-                        : current.Transaction === "Failed"
-                        ? "#f58493"
-                        : "transparent",
-                    color:
-                      current.Transaction === "Completed"
-                        ? "#12A150"
-                        : current.Transaction === "Failed"
-                        ? "#F31260"
-                        : "inherit",
-                    border: `2px solid ${
-                      current.Transaction === "Completed"
-                        ? "#18C964"
-                        : "#f58493"
-                    }`,
-                    borderRadius: "9999px",
-                    width: "100px", // Adjust the width of the oval as needed
-                    height: "20px", // Adjust the height of the oval as needed
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {current.transaction}
+                  ${current.total}
                 </td>
               </tr>
             ))}
