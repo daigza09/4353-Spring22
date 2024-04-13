@@ -4,13 +4,14 @@ import axios from 'axios';
 function ProfileManagement() {
   const [user, setUser] = useState({
     fullName: '',
-    email: 'johndoe@example.com',
+    email: '',
     address1: '',
     address2: '',
     city: '',
     userLocation: '',
     zipcodeNumber: '',
   });
+
   const [isEditable, setIsEditable] = useState({
     fullName: false,
     address1: false,
@@ -20,36 +21,97 @@ function ProfileManagement() {
     zipcodeNumber: false,
   });
 
+  const checkLoggedIn = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        const response = await axios.get("http://localhost:8080/auth/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        if (response.status === 200) {
+          const userData = response.data;
+          setUser({
+            fullName: userData.fullName || '',
+            email: userData.email || '',
+            address1: userData.address1 || '',
+            address2: userData.address2 || '',
+            city: userData.city || '',
+            userLocation: userData.userLocation || '',
+            zipcodeNumber: userData.zipcodeNumber || '',
+          });
+          handleUserChange(userData.email);
+        }
+      } else {
+        // if no access token, consider the user not logged in
+        console.log('user not logged in!');
+        window.location.href = '/login';
+
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      console.log('Error Response:', error.response);
+    }
+  };
+  
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await axios.post('http://localhost:8080/profileManagement/api/users/getByEmail', { email: user.email });
-      setUser(response.data);
-    };
-    fetchUser();
+    checkLoggedIn();
   }, []);
 
+  const handleUserChange = async (email) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/user/info`, {
+        params: { email: email }
+      });
+      if (response.status === 201) {
+        const useData = response.data.user;
+        setUser(prevState => ({
+          ...prevState,
+          fullName: useData.fullName,
+          address1: useData.addressLine1,
+          address2: useData.addressLine2,
+          city: useData.city,
+          userLocation: useData.state,
+          zipcodeNumber: useData.zipcode,
+        }));
+        // console.log(useData.fullName)
+      }
+    } catch (error) {
+      console.error('Error fetching user  info:', error);
+    }
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log('Input Changed:', name, value);
     setUser({ ...user, [name]: value });
   };
 
   const handleSaveChanges = async (field) => {
-    if (user.fullName.length > 50 ||
-        user.address1.length > 100 ||
-        user.address2.length > 100 ||
-        user.city.length > 100 ||
-        user.zipcodeNumber.length > 9 ||
-        user.zipcodeNumber.length < 5 ||
-        user.fullName === '' ||
-        user.address1 === '' ||
-        user.city === '' ||
-        user.userLocation === '') {
-      alert("Please make sure all required fields are filled out correctly.");
-      return;
-    }
+  // validating user input
+  if (
+    user.fullName.length > 50 ||
+    user.address1.length > 100 ||
+    user.address2.length > 100 ||
+    user.city.length > 100 ||
+    user.zipcodeNumber.length > 9 ||
+    user.zipcodeNumber.length < 5 ||
+    user.fullName === '' ||
+    user.address1 === '' ||
+    user.city === '' ||
+    user.userLocation === ''
+  ) {
+    alert('Please make sure all required fields are filled out correctly.');
+    return;
+  }
 
-    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
-    setIsEditable({ ...isEditable, [field]: false });
+    try {
+      await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
+      setIsEditable({ ...isEditable, [field]: false });
+    } catch (error) {
+      console.error('Error saving changes:', error);
+    }
   };
 
   const handleEditClick = (field) => {
@@ -61,6 +123,7 @@ function ProfileManagement() {
   };
 
   const renderField = (label, name, type = 'text', isSelect = false, options = []) => {
+    console.log('Rendering Field:', name, user[name]);
     return (
       <div>
         <label htmlFor={name} className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>{label}</label>
