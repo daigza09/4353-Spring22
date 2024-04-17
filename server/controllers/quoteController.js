@@ -58,7 +58,7 @@ const getPastOrders = asyncHandler(async(req,res)=>{
 
     const hasOrdered = user.length > 0 ? true : false;
 
-    res.status(200).json({ hasOrdered });
+    res.status(200).json({ message: 'Past orders have been retrieved', hasOrdered });
 
   } catch(err){
     console.error('Error retreiving users previous orders:', error);
