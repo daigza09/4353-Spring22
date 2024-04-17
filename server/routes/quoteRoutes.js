@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const {
     makeOrder, 
-    getUserAddress
+    getUserAddress, 
+    getPastOrders
 } = require('../controllers/quoteController')
 
 router.get('/getAddress', getUserAddress);
 
-// create an order
 router.post('/', makeOrder);
 
-
+router.get('/prevOrders', getPastOrders);
 module.exports = router;

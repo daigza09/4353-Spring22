@@ -50,9 +50,24 @@ const getUserAddress = asyncHandler(async (req, res) => {
   }
 })
 
+const getPastOrders = asyncHandler(async(req,res)=>{
+  try{
+    const { email } = req.query;
+    const user = await FuelQuote.find({ email });
+    console.log(user);
 
+    const hasOrdered = user.length > 0 ? true : false;
+
+    res.status(200).json({ hasOrdered });
+
+  } catch(err){
+    console.error('Error retreiving users previous orders:', error);
+    res.status(500).json({error: 'An error occured while retreiving users orders'});
+  }
+})
 
 module.exports  = {
   makeOrder,
   getUserAddress, 
+  getPastOrders,
 }
