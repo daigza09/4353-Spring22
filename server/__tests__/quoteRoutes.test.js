@@ -62,3 +62,18 @@ describe('GET /fuelForm/prevOrders', () => {
     expect(response.body.hasOrdered).toBeDefined(); //
   });
 });
+
+
+describe('GET /fuelForm/userState', () => {
+  test('should retrieve the users state', async () =>{
+    const userEmail = 'daisy_tester@example.com';
+    const response = await request(app)
+      .get('/fuelForm/userState') // Updated URL with leading slash
+      .query({ email: userEmail })
+      .set('Accept', 'application/json');
+      
+    expect(response.status).toBe(201); // Assuming successful retrieval returns 200
+    expect(response.body.message).toBe('State retrieved successfully');
+    expect(response.body.userState).toBeDefined(); //
+  });
+});

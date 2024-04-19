@@ -3,7 +3,8 @@ const router = express.Router();
 const {
     makeOrder, 
     getUserAddress, 
-    getPastOrders
+    getPastOrders,
+    getUserState,
 } = require('../controllers/quoteController')
 
 router.get('/getAddress', getUserAddress);
@@ -11,4 +12,7 @@ router.get('/getAddress', getUserAddress);
 router.post('/', makeOrder);
 
 router.get('/prevOrders', getPastOrders);
+
+router.get('/userState', getUserState);
+
 module.exports = router;
