@@ -4,6 +4,8 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userState, setUserState] = useState({});
+    const [prevOrder, setUserPrevOrder] = useState(false);
     const [userData, setUserData] = useState({}); 
     const [formData, setFormData] = useState({
         email: '',
@@ -31,7 +33,7 @@ function FuelForm() {
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
                     console.log("User Email:", res.data.email);
-                    console.log("User State:", res.data);
+                    //console.log("User State:", res.data);
                     setFormData(prevState => ({
                         ...prevState,
                         email: res.data.email,
@@ -39,6 +41,7 @@ function FuelForm() {
                     console.log("USER EMAIL: ", formData.email);
                     if (res.data.email) {
                         handleAddressChange();
+                        handleStateChange();
                     }
 
                 }
@@ -60,19 +63,25 @@ function FuelForm() {
     useEffect(() => {
         if (formData.email) {
             handleAddressChange();
+            handleStateChange();
         }
     }, [formData.email]);
     const handleAddressChange = async () => {
         const { success, data } = await setAddressLine1();
         if (success) {
-            //console.log("test");
-            //console.log(data.dataAdd);
             setFormData(prevState => ({
                 ...prevState,
                 deliveryAddress: data.dataAdd// Assuming data.address contains the address string
             }));
-            //console.log(data.add);
-            //console.log(formData.deliveryAddress);
+        }
+    };
+    const handleStateChange = async () => {
+        const { success, data } = await setState();
+        if(success){
+            setUserState(prevState => ({
+                ...prevState, 
+                userState:data.userState
+            }));
         }
     };
     async function setAddressLine1(){
@@ -95,6 +104,48 @@ function FuelForm() {
         }
     }
 
+    async function setUserState(){
+        console.log(formData.email);
+        try{
+            const res = await axios.get("http://localhost:8080/fuelForm/userState", {
+                params: {
+                    email: formData.email
+                }
+            });
+            if(res.status !== 201){
+                throw new Error("Unable to retrieve user state");
+            } 
+            const data = await res.data;
+            console.log(data);
+            return { success: true, data };
+        } catch (err){
+            console.error("Error fetching user state", err);
+            return {success: false, err};
+        }
+    }
+    /*useEffect(() => {
+        async function fetchUserState() {
+            console.log(formData.email);
+            try {
+                const res = await axios.get("http://localhost:8080/fuelForm/userState", {
+                    params: {
+                        email: formData.email
+                    }
+                });
+                if (res.status !== 201) { // Checking for 200 status, assuming it's a successful response
+                    throw new Error("Unable to retrieve user state");
+                }
+                const data = res.data.userState;
+                console.log(data);
+                setUserState(data); // Update userState with the fetched data
+            } catch (err) {
+                console.error("Error fetching user state", err);
+                setUserState({}); // Reset userState in case of error
+            }
+        }
+
+        fetchUserState(); // Call the async function to fetch user state
+    }, [formData.email]);*/
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
