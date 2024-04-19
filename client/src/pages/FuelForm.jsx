@@ -61,10 +61,10 @@ function FuelForm() {
     const handleAddressChange = async () => {
         const { success, data } = await setAddressLine1();
         if (success) {
-            setFormData(prevState => ({
-                ...prevState,
-                deliveryAddress: data.dataAdd
-            }));
+            setFormData({
+                ...formData,
+                deliveryAddress: data.dataAdd,
+            });
         }
     };
     const handleStateChange = async () => {
@@ -80,10 +80,10 @@ function FuelForm() {
             }
             const data = await res.data.userState;
             console.log(data);
-            setPriceData((prevState) => ({
-                ...prevState,
+            setPriceData({
+                ...priceData,
                 state: data,
-            }));
+            });
         } catch (err) {
             console.error("Error fetching user state", err);
         }
@@ -96,19 +96,21 @@ function FuelForm() {
                     email: formData.email,
                 },
             });
-            if (res.status !== 201) {
+            if (res.status === 200) { // Check for a successful response status
+                const data = await res.data.hasOrdered;
+                console.log(data);
+                setPriceData({
+                    ...priceData,
+                    prevOrder: data,
+                });
+            } else {
                 throw new Error("Unable to retrieve users previous orders");
             }
-            const data = await res.data.hasOrdered;
-            console.log(data);
-            setPriceData((prevState) => ({
-                ...prevState,
-                prevOrder: data,
-            }));
         } catch (err) {
             console.error("Error fetching users previous orders", err);
         }
     };
+    console.log("Previous Order Status:", priceData.prevOrder);
     async function setAddressLine1(){
         console.log(formData.email);
         try{
@@ -253,7 +255,7 @@ function FuelForm() {
                     <h2 className="text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
                     <div className="container text-center relative flex flex-col items-center justify-center">
                         <label className="text-xl mb-2" htmlFor="email">Email:</label>
-                        <input
+                        {/*<input
                             type="text"
                             id="email"
                             name="email"
@@ -261,7 +263,29 @@ function FuelForm() {
                             value={formData.email}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
-                        />
+    />*/}
+                         {isLoggedIn ? (
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="user email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                disabled 
+                                className="rounded-md p-2 h-10 text-black w-48"
+                            />
+                        ) : (
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="user email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="rounded-md p-2 h-10 text-black w-48"
+                            />
+                        )}
                     </div>
                     <div className="container text-center relative flex flex-col items-center justify-center">
                         <label className="text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>
