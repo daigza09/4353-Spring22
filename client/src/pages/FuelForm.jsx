@@ -196,7 +196,7 @@ function FuelForm() {
                         purchaseDate: '',
                         pricePerGallon: 0,
                         deliveryDate: '',
-                        deliveryAddress: 'City, State',
+                        //deliveryAddress: 'City, State',
                         total: 0,
                     });
                 } else {
