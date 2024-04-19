@@ -4,7 +4,6 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userState, setUserState] = useState({});
     const [prevOrder, setUserPrevOrder] = useState(false);
     const [priceData, setPriceData] = useState({
         state:'', 
@@ -45,8 +44,8 @@ function FuelForm() {
                     if (res.data.email) {
                         handleAddressChange();
                         handleStateChange();
+                        handlePrevOrderChange();
                     }
-                    //console.log("USER STATE: ", userState);
                 }
             } else {
                 setIsLoggedIn(false);
@@ -89,6 +88,27 @@ function FuelForm() {
             console.error("Error fetching user state", err);
         }
     };
+    const handlePrevOrderChange = async () => {
+        console.log(formData.email);
+        try {
+            const res = await axios.get("http://localhost:8080/fuelForm/prevOrders", {
+                params: {
+                    email: formData.email,
+                },
+            });
+            if (res.status !== 201) {
+                throw new Error("Unable to retrieve users previous orders");
+            }
+            const data = await res.data.hasOrdered;
+            console.log(data);
+            setPriceData((prevState) => ({
+                ...prevState,
+                prevOrder: data,
+            }));
+        } catch (err) {
+            console.error("Error fetching users previous orders", err);
+        }
+    };
     async function setAddressLine1(){
         console.log(formData.email);
         try{
@@ -116,6 +136,7 @@ function FuelForm() {
         if (formData.email) {
             handleAddressChange();
             handleStateChange();
+            handlePrevOrderChange();
         }
     }, [formData.email]);
     
