@@ -31,6 +31,7 @@ function FuelForm() {
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
                     console.log("User Email:", res.data.email);
+                    console.log("User State:", res.data);
                     setFormData(prevState => ({
                         ...prevState,
                         email: res.data.email,
@@ -134,26 +135,6 @@ function FuelForm() {
             }));
         }
     };
-    /*async function setAddressLine1(){
-        console.log(formData.email);
-        try{
-            const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
-                params: {
-                    email: formData.email
-                }
-            });
-            if(res.status !== 201){
-                throw new Error("Unable to retrieve user email");
-            }
-            const data = await res.data;
-            console.log(data.dataAdd);
-            return { success: true, data };
-        }catch(err){
-            console.error("Error fetching email", err);
-            return { success: false, err };
-        }
-    }*/
-
     async function registerOrder() {
         try {
             const res = await axios.post('http://localhost:8080/fuelForm/', formData);
