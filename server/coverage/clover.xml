@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1713546804885" clover="3.2.0">
-  <project timestamp="1713546804885" name="All files">
-    <metrics statements="637" coveredstatements="569" conditionals="64" coveredconditionals="42" methods="6" coveredmethods="4" elements="707" coveredelements="615" complexity="0" loc="637" ncloc="637" packages="6" files="19" classes="19"/>
+<coverage generated="1713552558249" clover="3.2.0">
+  <project timestamp="1713552558249" name="All files">
+    <metrics statements="639" coveredstatements="571" conditionals="64" coveredconditionals="42" methods="6" coveredmethods="4" elements="709" coveredelements="617" complexity="0" loc="639" ncloc="639" packages="6" files="19" classes="19"/>
     <package name="server">
       <metrics statements="57" coveredstatements="56" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
       <file name="server.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\server.js">
@@ -85,7 +85,7 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="304" coveredstatements="263" conditionals="39" coveredconditionals="26" methods="2" coveredmethods="1"/>
+      <metrics statements="306" coveredstatements="265" conditionals="39" coveredconditionals="26" methods="2" coveredmethods="1"/>
       <file name="fuelQuoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\fuelQuoteController.js">
         <metrics statements="45" coveredstatements="42" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -227,7 +227,7 @@
         <line num="45" count="1" type="stmt"/>
       </file>
       <file name="quoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\quoteController.js">
-        <metrics statements="91" coveredstatements="76" conditionals="10" coveredconditionals="4" methods="0" coveredmethods="0"/>
+        <metrics statements="93" coveredstatements="78" conditionals="10" coveredconditionals="4" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -290,15 +290,15 @@
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="69" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="72" count="1" type="stmt"/>
         <line num="73" count="1" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
@@ -307,18 +307,20 @@
         <line num="77" count="1" type="stmt"/>
         <line num="78" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
-        <line num="80" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="83" count="0" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="86" count="1" type="stmt"/>
         <line num="87" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
       </file>
       <file name="signUpController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\signUpController.js">
         <metrics statements="82" coveredstatements="69" conditionals="12" coveredconditionals="10" methods="2" coveredmethods="1"/>
