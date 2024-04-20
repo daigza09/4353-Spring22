@@ -32,20 +32,14 @@ function FuelForm() {
                 if (res.status === 200) {
                     setIsLoggedIn(true);
                     setUserData(res.data); 
-                    //console.log(res.data);
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
                     console.log("User Email:", res.data.email);
-                    setFormData(prevState => ({
+                    setFormData({
                         ...formData,
                         email: res.data.email,
-                    }));
+                    });
                     console.log("USER EMAIL: ", res.data.email);
-                    if (res.data.email) {
-                        handleAddressChange();
-                        handleStateChange();
-                        handlePrevOrderChange();
-                    }
                 }
             } else {
                 setIsLoggedIn(false);
@@ -106,8 +100,6 @@ function FuelForm() {
             console.error("Error fetching users previous orders", err);
         }
     };
-    console.log("Previous Order Status:", priceData.prevOrder);
-    console.log("looking at form data email!!! ", formData.email);
     async function setAddressLine1(){
         const userEmail = formData.email;
         console.log('TESTING USER EMAIL:', userEmail);
@@ -118,7 +110,7 @@ function FuelForm() {
                     email: formData.email
                 }
             });
-            console.log("Checkign RES STATUS:", res.status);
+            console.log("Checking RES STATUS:", res.status);
             if(res.status !== 201){
                 throw new Error("Unable to retrieve user email");
             }
@@ -141,7 +133,8 @@ function FuelForm() {
     
         fetchData(); // Trigger fetchData() when component mounts or when formData.email changes
     }, [formData.email, isLoggedIn]);
-    
+    console.log("Previous Order Status:", priceData.prevOrder);
+    console.log("looking at form data email!!! ", formData.email);
     
     const handleChange = (e) => {
         const { name, value } = e.target;
