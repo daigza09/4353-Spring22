@@ -4,7 +4,6 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [prevOrder, setUserPrevOrder] = useState(false);
     const [priceData, setPriceData] = useState({
         state:'', 
         prevOrder: false
@@ -33,11 +32,12 @@ function FuelForm() {
                 if (res.status === 200) {
                     setIsLoggedIn(true);
                     setUserData(res.data); 
+                    //console.log(res.data);
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
                     console.log("User Email:", res.data.email);
                     setFormData(prevState => ({
-                        ...prevState,
+                        ...formData,
                         email: res.data.email,
                     }));
                     console.log("USER EMAIL: ", res.data.email);
@@ -52,10 +52,6 @@ function FuelForm() {
             }
         } catch (error) {
             console.error("Error checking login status:", error);
-            setFormData(prevState => ({
-                ...prevState,
-                email: ''
-            }));
         }
     };
     const handleAddressChange = async () => {
@@ -111,14 +107,18 @@ function FuelForm() {
         }
     };
     console.log("Previous Order Status:", priceData.prevOrder);
+    console.log("looking at form data email!!! ", formData.email);
     async function setAddressLine1(){
-        console.log(formData.email);
+        const userEmail = formData.email;
+        console.log('TESTING USER EMAIL:', userEmail);
+        console.log("TESTING:   ", formData.email);
         try{
             const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
                 params: {
                     email: formData.email
                 }
             });
+            console.log("Checkign RES STATUS:", res.status);
             if(res.status !== 201){
                 throw new Error("Unable to retrieve user email");
             }
@@ -130,17 +130,18 @@ function FuelForm() {
             return { success: false, err };
         }
     }
-
     useEffect(() => {
-        checkLoggedIn();
-    }, []);
-    useEffect(() => {
-        if (formData.email) {
+        const fetchData = async () => {
+            await checkLoggedIn(); // Wait for checkLoggedIn() to complete
+            // Once logged in, update address, state, and previous order based on email
             handleAddressChange();
             handleStateChange();
             handlePrevOrderChange();
-        }
-    }, [formData.email]);
+        };
+    
+        fetchData(); // Trigger fetchData() when component mounts or when formData.email changes
+    }, [formData.email, isLoggedIn]);
+    
     
     const handleChange = (e) => {
         const { name, value } = e.target;
