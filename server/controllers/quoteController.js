@@ -68,11 +68,10 @@ const getPastOrders = asyncHandler(async(req,res)=>{
   }
 })
 
-const getUserState = asyncHandler(async(req, res) => {
+const getUserState = async(req, res) => {
   try{
     const { email } = req.query;
     const user = await User.find({ email });
-    //console.log(user);
 
     const userState = user[0].state;
     console.log(`User with email ${email} exists!!`);
@@ -83,7 +82,7 @@ const getUserState = asyncHandler(async(req, res) => {
     console.error('Error retrieving user state:', err);
     res.status(500).json({ error: 'An error occurred while retreiving user state' });
   }
-})
+}
 
 module.exports  = {
   makeOrder,
