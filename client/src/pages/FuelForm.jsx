@@ -65,7 +65,7 @@ function FuelForm() {
                     email: formData.email,
                 },
             });
-            if (res.status !== 201) {
+            if (res.status != 201) {
                 throw new Error("Unable to retrieve user state");
             }
             const data = await res.data.userState;
@@ -111,7 +111,7 @@ function FuelForm() {
                 }
             });
             console.log("Checking RES STATUS:", res.status);
-            if(res.status !== 201){
+            if(res.status != 201){
                 throw new Error("Unable to retrieve user email");
             }
             const data = await res.data;
