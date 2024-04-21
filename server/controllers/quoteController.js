@@ -29,7 +29,6 @@ const makeOrder = asyncHandler(async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the order' });
   }
 
-  
 })
 
 const getUserAddress = asyncHandler(async (req, res) => {
