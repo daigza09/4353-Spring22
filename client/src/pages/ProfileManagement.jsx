@@ -166,27 +166,28 @@ function ProfileManagement() {
               style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black' }}
             />
           )}
-          {isEditable[name] ? (
+          {name !== 'email' && isEditable[name] ? (
             <>
               <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleSaveChanges(name)}>Save</button>
               <button className="ml-2 bg-gray-600 text-white rounded-lg px-4" onClick={() => handleCancel(name)}>Cancel</button>
             </>
-          ) : (
+          ) : name !== 'email' ? (
             <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleEditClick(name)}>Edit</button>
-          )}
+          ) : null}
         </div>
       </div>
     );
   };
+  
 
   return (
     <main className="min-h-screen flex items-start">
       <div className="p-6 rounded w-full sm:max-w-xl mx-auto">
         <h2 className="text-4xl font-semibold text-center mb-8" style={{ fontFamily: 'Barlow, SemiBold' }}>Edit Profile</h2>
         <form className="space-y-6">
+        {renderField('Email', 'email')}
           <div className="flex flex-col gap-6">
             {renderField('Full Name', 'fullName')}
-            {renderField('Email', 'email')}
             {renderField('Address 1', 'addressLine1')}
             {renderField('Address 2', 'addressLine2')}
             {renderField('City', 'city')}
