@@ -5,6 +5,7 @@ const HistoryData = require('../models/History');
     try{
     const order = new HistoryData({
       fuelType: req.body.fuelType,
+      email: req.body.email,
       numGallons: req.body.numGallons,
       purchaseDate: req.body.purchaseDate,
       deliveryDate: req.body.deliveryDate,
@@ -18,7 +19,7 @@ const HistoryData = require('../models/History');
       // Respond with a success message
       res.status(201).json({ message: 'Order created successfully-REEM', order });
     } 
-    catch (error){
+    catch (error){  
       console.error('Error creating order:', error);
       res.status(500).json({ error: 'An error occurred while creating the order' });
     }
