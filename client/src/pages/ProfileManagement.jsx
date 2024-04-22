@@ -8,7 +8,7 @@ function ProfileManagement() {
     addressLine1: '',
     addressLine2: '',
     city: '',
-    userLocation: '',
+    state: '',
     zipcode: '',
   });
 
@@ -17,7 +17,7 @@ function ProfileManagement() {
     addressLine1: false,
     addressLine2: false,
     city: false,
-    userLocation: false,
+    state: false,
     zipcode: false,
   });
 
@@ -38,7 +38,7 @@ function ProfileManagement() {
             addressLine1: userData.addressLine1 || '',
             addressLine2: userData.addressLine2 || '',
             city: userData.city || '',
-            userLocation: userData.userLocation || '',
+            state: userData.state || '',
             zipcode: userData.zipcode || '',
           });
           handleUserChange(userData.email); // this is where fetch user would be 
@@ -72,7 +72,7 @@ function ProfileManagement() {
           addressLine1: useData.addressLine1,
           addressLine2: useData.addressLine2,
           city: useData.city,
-          userLocation: useData.state,
+          state: useData.state,
           zipcode: useData.zipcode,
         }));
         console.log(useData.fullName)
@@ -95,7 +95,7 @@ function ProfileManagement() {
       addressLine1: fieldValue.length > 100 || fieldValue === '',
       addressLine2: fieldValue.length > 100,
       city: fieldValue.length > 100 || fieldValue === '',
-      userLocation: fieldValue === '',
+      state: fieldValue === '',
       zipcode: fieldValue.length > 9 || fieldValue.length < 5,
     };
   
@@ -116,12 +116,12 @@ function ProfileManagement() {
         }));
       } else {
         console.error('Failed to update user:', response.status);
-        console.log('Response:', response.data); // Log the server's response data
+        console.log('Response:', response.data); // log the server's response data
       }
     } catch ( error ) {
       console.error('Error saving changes:', error);
       if (error.response) {
-        console.log('Error Response:', error.response.data); // More detailed error information
+        console.log('Error Response:', error.response.data); // detailed error information
       }
     }
   };
@@ -190,11 +190,11 @@ function ProfileManagement() {
             {renderField('Address 1', 'addressLine1')}
             {renderField('Address 2', 'addressLine2')}
             {renderField('City', 'city')}
-            {renderField('State', 'userLocation', 'select', true, [
+            {renderField('State', 'state', 'select', true, [
               { value: '', label: 'Select a state' },
-              { value: 'TX-1', label: 'TX' },
-              { value: 'FL-1', label: 'FL' },
-              { value: 'NY-1', label: 'NY' },
+              { value: 'TX-1', label: '01- TX' },
+              { value: 'FL-1', label: '02 - FL' },
+              { value: 'NY-1', label: '03 - NY' },
             ])}
             {renderField('Zipcode', 'zipcode', 'text')}
           </div>
