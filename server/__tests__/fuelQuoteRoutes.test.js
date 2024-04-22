@@ -5,6 +5,7 @@ const HistoryData = require('../models/History'); // Assuming the HistoryData mo
 describe('POST /history', () => {
   test('should create a new fuel form', async () => {
     const mockReqBody = {
+      email: 'ginaplatt@gmail.com',
       fuelType: 'Gasoline',
       numGallons: 10,
       purchaseDate: '2024-03-28',
@@ -33,6 +34,7 @@ describe('GET /history', () => {
     const mockOrders = [
       {
         _id: 'mockId1',
+        email: 'johndoe@example.com',
         fuelType: 'Gasoline',
         numGallons: 10,
         purchaseDate: '2024-03-28',
@@ -41,6 +43,7 @@ describe('GET /history', () => {
       },
       {
         _id: 'mockId2',
+        email: 'janedoe@example.com',
         fuelType: 'Diesel',
         numGallons: 15,
         purchaseDate: '2024-03-25',

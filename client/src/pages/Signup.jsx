@@ -88,13 +88,13 @@ function Signup() {
     };
 
     return (
-        <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px' }}>
-            <div className="p-4 rounded" style={{ width: '50%', minWidth: '100px', maxWidth: '500px', position: 'absolute', top: '55%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                <h2 className="text-white mb-3" style={{ marginTop: '-80px', fontSize: '24px' }}><strong>REGISTRATION</strong></h2>
-                <p className="text-white mb-5">
-                    Have an account, <a href="/login" className="text-white">Sign In</a>
-                </p>
-                <form onSubmit={handleSignIn}>
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
+        <div className="p-4 rounded" style={{ width: '90%', maxWidth: '500px' }}>
+            <h2 className="text-white mb-3" style={{ fontSize: '28px' }}><strong>REGISTRATION</strong></h2>
+            <p className="text-white mb-5">
+                Have an account, <Link to="/login" className="text-white">Sign In</Link>
+            </p>
+            <form onSubmit={handleSignIn}>
                     <div className="mb-4" style={{ position: 'relative' }}>
                         <label htmlFor="email" className="text-white mb-2">
                             <strong>Email</strong>
@@ -250,12 +250,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-
-
-
-
-
-
-
