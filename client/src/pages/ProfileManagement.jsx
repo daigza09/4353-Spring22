@@ -39,7 +39,7 @@ function ProfileManagement() {
             addressLine2: userData.addressLine2 || '',
             city: userData.city || '',
             userLocation: userData.userLocation || '',
-            zipcodeNumber: userData.zipcodeNumber || '',
+            zipcode: userData.zipcode || '',
           });
           handleUserChange(userData.email); // this is where fetch user would be 
         }
