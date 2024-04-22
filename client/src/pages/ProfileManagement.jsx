@@ -166,18 +166,19 @@ function ProfileManagement() {
               style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black' }}
             />
           )}
-          {isEditable[name] ? (
+          {name !== 'email' && isEditable[name] ? (
             <>
               <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleSaveChanges(name)}>Save</button>
               <button className="ml-2 bg-gray-600 text-white rounded-lg px-4" onClick={() => handleCancel(name)}>Cancel</button>
             </>
-          ) : (
+          ) : name !== 'email' ? (
             <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleEditClick(name)}>Edit</button>
-          )}
+          ) : null}
         </div>
       </div>
     );
   };
+  
 
   return (
     <main className="min-h-screen flex items-start">
