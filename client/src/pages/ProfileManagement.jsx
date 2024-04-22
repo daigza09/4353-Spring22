@@ -185,9 +185,9 @@ function ProfileManagement() {
       <div className="p-6 rounded w-full sm:max-w-xl mx-auto">
         <h2 className="text-4xl font-semibold text-center mb-8" style={{ fontFamily: 'Barlow, SemiBold' }}>Edit Profile</h2>
         <form className="space-y-6">
+        {renderField('Email', 'email')}
           <div className="flex flex-col gap-6">
             {renderField('Full Name', 'fullName')}
-            {renderField('Email', 'email')}
             {renderField('Address 1', 'addressLine1')}
             {renderField('Address 2', 'addressLine2')}
             {renderField('City', 'city')}
