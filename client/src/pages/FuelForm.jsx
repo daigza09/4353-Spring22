@@ -4,6 +4,10 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [priceData, setPriceData] = useState({
+        state:'', 
+        prevOrder: false
+    });
     const [userData, setUserData] = useState({}); 
     const [formData, setFormData] = useState({
         email: '',
@@ -31,58 +35,83 @@ function FuelForm() {
                     console.log("User is logged in");
                     console.log("User ID:", res.data.userId); 
                     console.log("User Email:", res.data.email);
-                    setFormData(prevState => ({
-                        ...prevState,
+                    setFormData({
+                        ...formData,
                         email: res.data.email,
-                    }));
-                    console.log("USER EMAIL: ", formData.email);
-                    if (res.data.email) {
-                        handleAddressChange();
-                    }
-
+                    });
+                    console.log("USER EMAIL: ", res.data.email);
                 }
             } else {
                 setIsLoggedIn(false);
             }
         } catch (error) {
             console.error("Error checking login status:", error);
-            setFormData(prevState => ({
-                ...prevState,
-                email: ''
-            }));
         }
     };
-
-    useEffect(() => {
-        checkLoggedIn();
-    }, []);
-    useEffect(() => {
-        if (formData.email) {
-            handleAddressChange();
-        }
-    }, [formData.email]);
     const handleAddressChange = async () => {
         const { success, data } = await setAddressLine1();
         if (success) {
-            //console.log("test");
-            //console.log(data.dataAdd);
-            setFormData(prevState => ({
-                ...prevState,
-                deliveryAddress: data.dataAdd// Assuming data.address contains the address string
-            }));
-            //console.log(data.add);
-            //console.log(formData.deliveryAddress);
+            setFormData({
+                ...formData,
+                deliveryAddress: data.dataAdd,
+            });
+        }
+    };
+    const handleStateChange = async () => {
+        console.log(formData.email);
+        try {
+            const res = await axios.get("http://localhost:8080/fuelForm/userState", {
+                params: {
+                    email: formData.email,
+                },
+            });
+            if (res.status != 201) {
+                throw new Error("Unable to retrieve user state");
+            }
+            const data = await res.data.userState;
+            console.log(data);
+            setPriceData({
+                ...priceData,
+                state: data,
+            });
+        } catch (err) {
+            console.error("Error fetching user state", err);
+        }
+    };
+    const handlePrevOrderChange = async () => {
+        console.log(formData.email);
+        try {
+            const res = await axios.get("http://localhost:8080/fuelForm/prevOrders", {
+                params: {
+                    email: formData.email,
+                },
+            });
+            if (res.status === 200) { // Check for a successful response status
+                const data = await res.data.hasOrdered;
+                console.log(data);
+                setPriceData({
+                    ...priceData,
+                    prevOrder: data,
+                });
+            } else {
+                throw new Error("Unable to retrieve users previous orders");
+            }
+        } catch (err) {
+            console.error("Error fetching users previous orders", err);
         }
     };
     async function setAddressLine1(){
-        console.log(formData.email);
+        const userEmail = formData.email;
+        console.log('TESTING USER EMAIL:', userEmail);
+        console.log("TESTING:   ", formData.email);
         try{
             const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
                 params: {
                     email: formData.email
                 }
             });
-            if(res.status !== 201){
+            console.log("Checking RES STATUS:", res.status);
+            if(res.status != 201){
                 throw new Error("Unable to retrieve user email");
             }
             const data = await res.data;
@@ -93,7 +122,20 @@ function FuelForm() {
             return { success: false, err };
         }
     }
-
+    useEffect(() => {
+        const fetchData = async () => {
+            await checkLoggedIn(); // Wait for checkLoggedIn() to complete
+            // Once logged in, update address, state, and previous order based on email
+            handleAddressChange();
+            handleStateChange();
+            handlePrevOrderChange();
+        };
+    
+        fetchData(); // Trigger fetchData() when component mounts or when formData.email changes
+    }, [formData.email, isLoggedIn]);
+    console.log("Previous Order Status:", priceData.prevOrder);
+    console.log("looking at form data email!!! ", formData.email);
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -134,26 +176,6 @@ function FuelForm() {
             }));
         }
     };
-    /*async function setAddressLine1(){
-        console.log(formData.email);
-        try{
-            const res = await axios.get("http://localhost:8080/fuelForm/getAddress", {
-                params: {
-                    email: formData.email
-                }
-            });
-            if(res.status !== 201){
-                throw new Error("Unable to retrieve user email");
-            }
-            const data = await res.data;
-            console.log(data.dataAdd);
-            return { success: true, data };
-        }catch(err){
-            console.error("Error fetching email", err);
-            return { success: false, err };
-        }
-    }*/
-
     async function registerOrder() {
         try {
             const res = await axios.post('http://localhost:8080/fuelForm/', formData);
@@ -196,7 +218,7 @@ function FuelForm() {
                         purchaseDate: '',
                         pricePerGallon: 0,
                         deliveryDate: '',
-                        deliveryAddress: 'City, State',
+                        //deliveryAddress: 'City, State',
                         total: 0,
                     });
                 } else {
@@ -227,7 +249,7 @@ function FuelForm() {
                     <h2 className="text-xl md:text-1xl mb-4">You can use this form to get an estimate of a fuel order & to order some fuel!</h2>
                     <div className="container text-center relative flex flex-col items-center justify-center">
                         <label className="text-xl mb-2" htmlFor="email">Email:</label>
-                        <input
+                        {/*<input
                             type="text"
                             id="email"
                             name="email"
@@ -235,7 +257,29 @@ function FuelForm() {
                             value={formData.email}
                             onChange={handleChange}
                             className="rounded-md p-2 h-10 text-black w-48"
-                        />
+    />*/}
+                         {isLoggedIn ? (
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="user email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                disabled 
+                                className="rounded-md p-2 h-10 text-black w-48"
+                            />
+                        ) : (
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="user email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="rounded-md p-2 h-10 text-black w-48"
+                            />
+                        )}
                     </div>
                     <div className="container text-center relative flex flex-col items-center justify-center">
                         <label className="text-xl mb-2" htmlFor="gasLocation">Gas Location:</label>

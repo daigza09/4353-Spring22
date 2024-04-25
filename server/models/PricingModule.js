@@ -7,17 +7,19 @@ class Pricing {
         '03-NY': 0.10,
     };
 
-    constructor(gasLocation, fuelType, numGallons) {
+    constructor(gasLocation, fuelType, numGallons, previousOrders) {
         this.gasLocation = gasLocation;
         this.fuelType = fuelType;
         this.numGallons = numGallons;
+        this.orderHistory = previousOrders;
     }
 
     calculatePrice() {
-        const locationFactor = this.#location_factors[this.gasLocation] || 0.05; 
+        const locationFactor = this.#location_factors[this.gasLocation] || 0.04; 
         const gallonsFactor = this.numGallons > 1000 ? 0.02 : 0.03;
+        const historyFactor = this.orderHistory ? 0.01 : 0.00;
 
-        const margin = this.#current_ppg * (locationFactor + gallonsFactor + this.#company_profit);
+        const margin = this.#current_ppg * (locationFactor - historyFactor + gallonsFactor + this.#company_profit);
         const suggestedPPG = this.#current_ppg + margin;
 
         return {
