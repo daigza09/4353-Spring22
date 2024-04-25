@@ -270,8 +270,10 @@ BRH:4
 end_of_record
 TN:
 SF:controllers\quoteController.js
-FNF:0
-FNH:0
+FN:71,getUserState
+FNF:1
+FNH:1
+FNDA:1,getUserState
 DA:1,1
 DA:2,1
 DA:3,1
@@ -353,10 +355,10 @@ DA:78,1
 DA:79,1
 DA:80,1
 DA:81,1
-DA:82,1
+DA:82,0
 DA:83,0
 DA:84,0
-DA:85,0
+DA:85,1
 DA:86,1
 DA:87,1
 DA:88,1
@@ -364,9 +366,8 @@ DA:89,1
 DA:90,1
 DA:91,1
 DA:92,1
-DA:93,1
-LF:93
-LH:78
+LF:92
+LH:77
 BRDA:5,0,0,1
 BRDA:26,1,0,0
 BRDA:34,2,0,1
@@ -376,7 +377,7 @@ BRDA:53,5,0,1
 BRDA:59,6,0,0
 BRDA:65,7,0,0
 BRDA:71,8,0,1
-BRDA:82,9,0,0
+BRDA:81,9,0,0
 BRF:10
 BRH:4
 end_of_record

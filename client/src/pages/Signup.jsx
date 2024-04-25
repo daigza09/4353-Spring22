@@ -231,13 +231,6 @@ function Signup() {
                     
                     <div className="d-flex align-items-center justify-content-between mb-4">
                         <div className="form-check d-flex align-items-center">
-                            <input className="form-check-input rounded-circle" type="checkbox" value="" id="rememberMe" />
-                            <label className="form-check-label text-white" htmlFor="rememberMe" style={{ marginLeft: '5px', marginRight: '200px' }}>
-                                Remember Me
-                            </label>
-                            <Link to="/forgot-password" className="text-white" style={{ marginLeft: '5px' }}>
-                                Forgot Password?
-                            </Link>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-success rounded-pill mb-3" style={{ height: '50px', width: '100%', borderRadius: '25px', backgroundColor: '#02363d', marginTop: '40px', color: '#fff' }}>
