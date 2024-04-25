@@ -35,7 +35,7 @@ const getUserAddress = asyncHandler(async (req, res) => {
   try {
     const { email } = req.query;
     const user = await  User.find({ email });
-    console.log(user);
+    //console.log(user);
     if (!user || user.length === 0) {
         return res.status(404).json({ message: 'User not found' });
     }
@@ -50,9 +50,43 @@ const getUserAddress = asyncHandler(async (req, res) => {
   }
 })
 
+const getPastOrders = asyncHandler(async(req,res)=>{
+  try{
+    const { email } = req.query;
+    const user = await FuelQuote.find({ email });
+    //console.log(user);
 
+    const hasOrdered = user.length > 0 ? true : false;
+
+    res.status(200).json({ message: 'Past orders have been retrieved', hasOrdered });
+
+    console.log(hasOrdered);
+
+  } catch(err){
+    console.error('Error retreiving users previous orders:', error);
+    res.status(500).json({error: 'An error occured while retreiving users orders'});
+  }
+})
+
+const getUserState = async(req, res) => {
+  try{
+    const { email } = req.query;
+    const user = await User.find({ email });
+
+    const userState = user[0].state;
+    console.log(`User with email ${email} exists!!`);
+    console.log(userState);
+
+    res.status(201).json({ message: 'State retrieved successfully', userState});
+  } catch(err){
+    console.error('Error retrieving user state:', err);
+    res.status(500).json({ error: 'An error occurred while retreiving user state' });
+  }
+}
 
 module.exports  = {
   makeOrder,
   getUserAddress, 
+  getPastOrders,
+  getUserState,
 }
