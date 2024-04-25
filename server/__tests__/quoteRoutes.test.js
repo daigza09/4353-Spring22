@@ -48,3 +48,32 @@ describe('GET /fuelForm/getAddress', () => {
     expect(response.body.dataAdd).toBeDefined(); // Assuming dataAdd is returned in the response
   });
 });
+
+describe('GET /fuelForm/prevOrders', () => {
+  test('should check if user has ordered before', async () =>{
+    const userEmail = 'daisy_tester@example.com';
+    const response = await request(app)
+      .get('/fuelForm/prevOrders') // Updated URL with leading slash
+      .query({ email: userEmail })
+      .set('Accept', 'application/json');
+      
+    expect(response.status).toBe(200); // Assuming successful retrieval returns 200
+    expect(response.body.message).toBe('Past orders have been retrieved');
+    expect(response.body.hasOrdered).toBeDefined(); //
+  });
+});
+
+
+describe('GET /fuelForm/userState', () => {
+  test('should retrieve the users state', async () =>{
+    const userEmail = 'daisy_tester@example.com';
+    const response = await request(app)
+      .get('/fuelForm/userState') // Updated URL with leading slash
+      .query({ email: userEmail })
+      .set('Accept', 'application/json');
+      
+    expect(response.status).toBe(201); // Assuming successful retrieval returns 200
+    expect(response.body.message).toBe('State retrieved successfully');
+    expect(response.body.userState).toBeDefined(); //
+  });
+});
