@@ -85,7 +85,7 @@ describe('GET /fuelForm/pricingModule', () =>{
     const numGallons = 1000;
     
     const response = await request(app)
-      .get('fuelForm/pricingModule')
+      .get('/fuelForm/pricingModule')
       .query({email: userEmail, numGallons: numGallons})
       .set('Accept', 'applocation/json');
 
