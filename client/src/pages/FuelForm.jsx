@@ -4,10 +4,7 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [priceData, setPriceData] = useState({
-        state:'', 
-        prevOrder: false
-    });
+
     const [userData, setUserData] = useState({}); 
     const [formData, setFormData] = useState({
         email: '',
@@ -57,49 +54,65 @@ function FuelForm() {
             });
         }
     };
-    const handleStateChange = async () => {
-        console.log(formData.email);
-        try {
-            const res = await axios.get("http://localhost:8080/fuelForm/userState", {
+    
+    /*const handlePricingChange = async () => {
+          const {success, data} = await setPricingChanges();
+          if(success){
+            setFormData({
+                ...total,
+                ...pricePerGallon, 
+                total: data.total,
+                pricePerGallon: data.suggestedPPG,
+            })
+          }
+    };*/
+
+    useEffect(() => {
+        const handlePricingChange = async () => {
+                if (formData.email && formData.numGallons) {
+                const { success, data } = await setPricingChanges(formData.email, formData.numGallons);
+                if (success) {
+                    setFormData((prevData) => ({
+                    ...prevData,
+                    total: data.total,
+                    pricePerGallon: data.suggestedPPG,
+                    }));
+                } else {
+                    console.error('Error setting pricing changes:', data.err);
+                }
+                }
+            };
+    
+            handlePricingChange(); // Trigger handlePricingChange() when component mounts or when formData.email/numGallons changes
+        }, [formData.email, formData.numGallons]); // Update dependency array
+
+    async function setPricingChanges(){
+        const userEmail = formData.email;
+        const reqGal = formData.numGallons;
+        console.log("Testig :3", userEmail);
+        console.log("Testing gal :3", reqGal);
+        try{
+            const res = await axios.get("http://localhost:8080/fuelForm/pricingModule", {
                 params: {
-                    email: formData.email,
-                },
+                    email: userEmail, 
+                    numGallons: reqGal
+                }
             });
-            if (res.status != 201) {
-                throw new Error("Unable to retrieve user state");
+            console.log("RES STATUS :3", res.status);
+            if(res.status != 200){
+                throw new Error("Unable to retrieve user email");
             }
-            const data = await res.data.userState;
+            
+            const data = await res.data;
             console.log(data);
-            setPriceData({
-                ...priceData,
-                state: data,
-            });
-        } catch (err) {
-            console.error("Error fetching user state", err);
+            console.log(data.sugTotal);
+            console.log(data.suggestedPPG);
+            return { success: true, data };
+        }catch(err){
+            console.error("Error fetching email", err);
+            return { success: false, err };
         }
-    };
-    const handlePrevOrderChange = async () => {
-        console.log(formData.email);
-        try {
-            const res = await axios.get("http://localhost:8080/fuelForm/prevOrders", {
-                params: {
-                    email: formData.email,
-                },
-            });
-            if (res.status === 200) { // Check for a successful response status
-                const data = await res.data.hasOrdered;
-                console.log(data);
-                setPriceData({
-                    ...priceData,
-                    prevOrder: data,
-                });
-            } else {
-                throw new Error("Unable to retrieve users previous orders");
-            }
-        } catch (err) {
-            console.error("Error fetching users previous orders", err);
-        }
-    };
+    }
     async function setAddressLine1(){
         const userEmail = formData.email;
         console.log('TESTING USER EMAIL:', userEmail);
@@ -124,17 +137,13 @@ function FuelForm() {
     }
     useEffect(() => {
         const fetchData = async () => {
-            await checkLoggedIn(); // Wait for checkLoggedIn() to complete
-            // Once logged in, update address, state, and previous order based on email
+            await checkLoggedIn(); 
+            // once its logged in handle the address change 
             handleAddressChange();
-            handleStateChange();
-            handlePrevOrderChange();
         };
     
         fetchData(); // Trigger fetchData() when component mounts or when formData.email changes
     }, [formData.email, isLoggedIn]);
-    console.log("Previous Order Status:", priceData.prevOrder);
-    console.log("looking at form data email!!! ", formData.email);
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -149,11 +158,11 @@ function FuelForm() {
         setFormData((prevData) => ({
             ...prevData,
             fuelType: selectedFuelType,
-            pricePerGallon: getInitialPricePerGallon(selectedFuelType),
+            //pricePerGallon: getInitialPricePerGallon(selectedFuelType),
         }));
     };
 
-    const getInitialPricePerGallon = (fuelType) => {
+    /*const getInitialPricePerGallon = (fuelType) => {
         switch (fuelType) {
             case 'Diesel':
                 return 3.14;
@@ -162,7 +171,7 @@ function FuelForm() {
             default:
                 return 0;
         }
-    };
+    };*/
 
     const handleTotalChange = () => {
         const parsedNumGallons = parseFloat(formData.numGallons);
@@ -176,6 +185,9 @@ function FuelForm() {
             }));
         }
     };
+    
+
+      
     async function registerOrder() {
         try {
             const res = await axios.post('http://localhost:8080/fuelForm/', formData);
