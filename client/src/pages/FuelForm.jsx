@@ -4,10 +4,10 @@ import axios from "axios";
 function FuelForm() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [priceData, setPriceData] = useState({
+    /*const [priceData, setPriceData] = useState({
         state:'', 
         prevOrder: false
-    });
+    });*/
     const [userData, setUserData] = useState({}); 
     const [formData, setFormData] = useState({
         email: '',
@@ -57,7 +57,7 @@ function FuelForm() {
             });
         }
     };
-    const handleStateChange = async () => {
+    /*const handleStateChange = async () => {
         console.log(formData.email);
         try {
             const res = await axios.get("http://localhost:8080/fuelForm/userState", {
@@ -99,7 +99,44 @@ function FuelForm() {
         } catch (err) {
             console.error("Error fetching users previous orders", err);
         }
+    };*/
+    const handlePricingChange = async () => {
+          const {success, data} = await setPricingChanges();
+          if(success){
+            setFormData({
+                ...total,
+                ...pricePerGallon, 
+                total: data.total,
+                pricePerGallon: data.suggestedPPG,
+            })
+          }
     };
+
+    async function setPricingChanges(){
+        const userEmail = formData.email;
+        const reqGal = formData.email;
+        console.log("Testig :3", userEmail);
+        console.log("Testing gal :3", reqGal);
+        try{
+            const res = await axios.get("http://localhost:8080/fuelForm/pricingModule", {
+                params: {
+                    email: userEmail, 
+                    numGallons: reqGal
+                }
+            });
+            console.log("RES STATUS :3", res.status);
+            if(res.status != 200){
+                throw new Error("Unable to retrieve user email");
+            }
+            const data = await res.data;
+            console.log(data.total);
+            console.log(data.suggestedPPG);
+            return { success: true, data };
+        }catch(err){
+            console.error("Error fetching email", err);
+            return { success: false, err };
+        }
+    }
     async function setAddressLine1(){
         const userEmail = formData.email;
         console.log('TESTING USER EMAIL:', userEmail);
@@ -127,14 +164,12 @@ function FuelForm() {
             await checkLoggedIn(); // Wait for checkLoggedIn() to complete
             // Once logged in, update address, state, and previous order based on email
             handleAddressChange();
-            handleStateChange();
-            handlePrevOrderChange();
+            //handleStateChange();
+            //handlePrevOrderChange();
         };
     
         fetchData(); // Trigger fetchData() when component mounts or when formData.email changes
     }, [formData.email, isLoggedIn]);
-    console.log("Previous Order Status:", priceData.prevOrder);
-    console.log("looking at form data email!!! ", formData.email);
     
     const handleChange = (e) => {
         const { name, value } = e.target;
