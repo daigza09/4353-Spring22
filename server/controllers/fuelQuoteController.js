@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const HistoryData = require('../models/History');
+const FuelQuote = require('../models/FuelQuote');
 
   const createFuelForm = asyncHandler(async (req, res) => {
     try{
@@ -27,7 +28,7 @@ const HistoryData = require('../models/History');
   
   const getAllOrders = asyncHandler(async (req, res) => {
     try {
-      const orders = await HistoryData.find();
+      const orders = await FuelQuote.find();
   
       console.log(orders);
       res.json(orders);

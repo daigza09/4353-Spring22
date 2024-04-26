@@ -36,14 +36,62 @@ describe('POST /fuelForm', () => {
   });
 });
 
-describe('GET /fuelForm/getAddress', ()=>{
+describe('GET /fuelForm/getAddress', () => {
   test('should retrieve user address given email', async () => {
-    const userEmail = {email: 'janedoe@example.com'};
+    const userEmail = 'daisy_tester@example.com'; // Just the email string, not an object
     const response = await request(app)
       .get('/fuelForm/getAddress')
-      .send(userEmail)
+      .query({ email: userEmail }) // Send the email as a query parameter
       .set('Accept', 'application/json');
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Address retrieved successfully');
+    expect(response.body.dataAdd).toBeDefined(); // Assuming dataAdd is returned in the response
   });
+});
+
+describe('GET /fuelForm/prevOrders', () => {
+  test('should check if user has ordered before', async () =>{
+    const userEmail = 'daisy_tester@example.com';
+    const response = await request(app)
+      .get('/fuelForm/prevOrders') // Updated URL with leading slash
+      .query({ email: userEmail })
+      .set('Accept', 'application/json');
+      
+    expect(response.status).toBe(200); // Assuming successful retrieval returns 200
+    expect(response.body.message).toBe('Past orders have been retrieved');
+    expect(response.body.hasOrdered).toBeDefined(); //
+  });
+});
+
+
+describe('GET /fuelForm/userState', () => {
+  test('should retrieve the users state', async () =>{
+    const userEmail = 'daisy_tester@example.com';
+    const response = await request(app)
+      .get('/fuelForm/userState') // Updated URL with leading slash
+      .query({ email: userEmail })
+      .set('Accept', 'application/json');
+      
+    expect(response.status).toBe(201); // Assuming successful retrieval returns 200
+    expect(response.body.message).toBe('State retrieved successfully');
+    expect(response.body.userState).toBeDefined(); //
+  });
+});
+
+
+describe('GET /fuelForm/pricingModule', () =>{
+  test('should retrieve the price for the order', async () => {
+    const userEmail = 'daisy_tester@example.com';
+    const numGallons = 1000;
+    
+    const response = await request(app)
+      .get('/fuelForm/pricingModule')
+      .query({email: userEmail, numGallons: numGallons})
+      .set('Accept', 'applocation/json');
+
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe('Price calculated successfully');
+    expect(response.body.suggestedPPG).toBeDefined();
+    expect(response.body.sugTotal).toBeDefined();
+  })
 });

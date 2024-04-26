@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -78,13 +78,7 @@
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -101,20 +95,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
 const router = express.Router();
+&nbsp;
 const { 
-    createUser, 
-    getUserProfileByEmail2, 
-    updateUserProfile
+    updateUserProfile, 
+    getUserInfo
 } = require('../controllers/profileController');
 &nbsp;
-// create a new user
-router.post('/api/users', createUser); // STEP 1 * MODIFIABLE *
-&nbsp;
-// get user profile by email , to create
-router.post('/api/users/getByEmail', getUserProfileByEmail2); // STEP 2
-&nbsp;
 // updates user profile, to update
-router.put('/api/users/:email', updateUserProfile); // STEP 3
+router.put('/api/users/:email', updateUserProfile); 
+&nbsp;
+// returns user info
+router.get('/info', getUserInfo);
 &nbsp;
 module.exports = router;
 &nbsp;</pre></td></tr></table></pre>

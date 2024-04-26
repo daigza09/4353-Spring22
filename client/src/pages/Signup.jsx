@@ -88,13 +88,13 @@ function Signup() {
     };
 
     return (
-        <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px' }}>
-            <div className="p-4 rounded" style={{ width: '50%', minWidth: '100px', maxWidth: '500px', position: 'absolute', top: '55%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                <h2 className="text-white mb-3" style={{ marginTop: '-80px', fontSize: '24px' }}><strong>REGISTRATION</strong></h2>
-                <p className="text-white mb-5">
-                    Have an account, <a href="/login" className="text-white">Sign In</a>
-                </p>
-                <form onSubmit={handleSignIn}>
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
+        <div className="p-4 rounded" style={{ width: '90%', maxWidth: '500px' }}>
+            <h2 className="text-white mb-3" style={{ fontSize: '28px' }}><strong>REGISTRATION</strong></h2>
+            <p className="text-white mb-5">
+                Have an account, <Link to="/login" className="text-white">Sign In</Link>
+            </p>
+            <form onSubmit={handleSignIn}>
                     <div className="mb-4" style={{ position: 'relative' }}>
                         <label htmlFor="email" className="text-white mb-2">
                             <strong>Email</strong>
@@ -231,13 +231,6 @@ function Signup() {
                     
                     <div className="d-flex align-items-center justify-content-between mb-4">
                         <div className="form-check d-flex align-items-center">
-                            <input className="form-check-input rounded-circle" type="checkbox" value="" id="rememberMe" />
-                            <label className="form-check-label text-white" htmlFor="rememberMe" style={{ marginLeft: '5px', marginRight: '200px' }}>
-                                Remember Me
-                            </label>
-                            <Link to="/forgot-password" className="text-white" style={{ marginLeft: '5px' }}>
-                                Forgot Password?
-                            </Link>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-success rounded-pill mb-3" style={{ height: '50px', width: '100%', borderRadius: '25px', backgroundColor: '#02363d', marginTop: '40px', color: '#fff' }}>
@@ -250,12 +243,3 @@ function Signup() {
 }
 
 export default Signup;
-
-
-
-
-
-
-
-
-

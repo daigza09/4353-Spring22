@@ -4,52 +4,126 @@ import axios from 'axios';
 function ProfileManagement() {
   const [user, setUser] = useState({
     fullName: '',
-    email: 'johndoe@example.com',
-    address1: '',
-    address2: '',
+    email: '',
+    addressLine1: '',
+    addressLine2: '',
     city: '',
-    userLocation: '',
-    zipcodeNumber: '',
+    state: '',
+    zipcode: '',
   });
+
   const [isEditable, setIsEditable] = useState({
     fullName: false,
-    address1: false,
-    address2: false,
+    addressLine1: false,
+    addressLine2: false,
     city: false,
-    userLocation: false,
-    zipcodeNumber: false,
+    state: false,
+    zipcode: false,
   });
 
+  const checkLoggedIn = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        const response = await axios.get("http://localhost:8080/auth/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        if (response.status === 200) {
+          const userData = response.data;
+          setUser({
+            fullName: userData.fullName || '',
+            email: userData.email || '',
+            addressLine1: userData.addressLine1 || '',
+            addressLine2: userData.addressLine2 || '',
+            city: userData.city || '',
+            state: userData.state || '',
+            zipcode: userData.zipcode || '',
+          });
+          handleUserChange(userData.email); // this is where fetch user would be 
+        }
+      } else {
+        // if no access token, consider the user not logged in
+        console.log('user not logged in!');
+        window.location.href = '/login';
+
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      console.log('Error Response:', error.response);
+    }
+  };
+  
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await axios.post('http://localhost:8080/profileManagement/api/users/getByEmail', { email: user.email });
-      setUser(response.data);
-    };
-    fetchUser();
+    checkLoggedIn();
   }, []);
 
+  const handleUserChange = async (email) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/user/info`, {
+        params: { email: email }
+      });
+      if (response.status === 201) {
+        const useData = response.data.user;
+        setUser(prevState => ({
+          ...prevState,
+          fullName: useData.fullName,
+          addressLine1: useData.addressLine1,
+          addressLine2: useData.addressLine2,
+          city: useData.city,
+          state: useData.state,
+          zipcode: useData.zipcode,
+        }));
+        console.log(useData.fullName)
+      }
+    } catch (error) {
+      console.error('Error fetching user  info:', error);
+    }
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser(prevUser => ({
+      ...prevUser,
+      [name]: value
+    }));
   };
-
   const handleSaveChanges = async (field) => {
-    if (user.fullName.length > 50 ||
-        user.address1.length > 100 ||
-        user.address2.length > 100 ||
-        user.city.length > 100 ||
-        user.zipcodeNumber.length > 9 ||
-        user.zipcodeNumber.length < 5 ||
-        user.fullName === '' ||
-        user.address1 === '' ||
-        user.city === '' ||
-        user.userLocation === '') {
-      alert("Please make sure all required fields are filled out correctly.");
+    const fieldValue = user[field];
+    const fieldValidations = {
+      fullName: fieldValue.length > 50 || fieldValue === '',
+      addressLine1: fieldValue.length > 100 || fieldValue === '',
+      addressLine2: fieldValue.length > 100,
+      city: fieldValue.length > 100 || fieldValue === '',
+      state: fieldValue === '',
+      zipcode: fieldValue.length > 9 || fieldValue.length < 5,
+    };
+  
+    if (fieldValidations[field]) {
+      alert('Please make sure the field is filled out correctly.');
       return;
     }
-
-    await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, user); 
-    setIsEditable({ ...isEditable, [field]: false });
+  
+    try {
+      const response = await axios.put(`http://localhost:8080/profileManagement/api/users/${user.email}`, {
+        [field]: fieldValue // Send only the updated field
+      });
+      if (response.status === 200) {
+        console.log('User updated successfully');
+        setIsEditable(prevIsEditable => ({
+          ...prevIsEditable,
+          [field]: false
+        }));
+      } else {
+        console.error('Failed to update user:', response.status);
+        console.log('Response:', response.data); // log the server's response data
+      }
+    } catch ( error ) {
+      console.error('Error saving changes:', error);
+      if (error.response) {
+        console.log('Error Response:', error.response.data); // detailed error information
+      }
+    }
   };
 
   const handleEditClick = (field) => {
@@ -61,6 +135,7 @@ function ProfileManagement() {
   };
 
   const renderField = (label, name, type = 'text', isSelect = false, options = []) => {
+    console.log('Rendering Field:', name, user[name]);
     return (
       <div>
         <label htmlFor={name} className="block text-gray-800 text-lg" style={{ fontFamily: 'Barlow, SemiBold' }}>{label}</label>
@@ -91,37 +166,38 @@ function ProfileManagement() {
               style={{ borderRadius: '10px', padding: '8px', height: '55px', color: 'black' }}
             />
           )}
-          {isEditable[name] ? (
+          {name !== 'email' && isEditable[name] ? (
             <>
               <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleSaveChanges(name)}>Save</button>
               <button className="ml-2 bg-gray-600 text-white rounded-lg px-4" onClick={() => handleCancel(name)}>Cancel</button>
             </>
-          ) : (
+          ) : name !== 'email' ? (
             <button className="ml-2 bg-teal-900 text-white rounded-lg px-4" onClick={() => handleEditClick(name)}>Edit</button>
-          )}
+          ) : null}
         </div>
       </div>
     );
   };
+  
 
   return (
     <main className="min-h-screen flex items-start">
       <div className="p-6 rounded w-full sm:max-w-xl mx-auto">
         <h2 className="text-4xl font-semibold text-center mb-8" style={{ fontFamily: 'Barlow, SemiBold' }}>Edit Profile</h2>
         <form className="space-y-6">
+        {renderField('Email', 'email')}
           <div className="flex flex-col gap-6">
             {renderField('Full Name', 'fullName')}
-            {renderField('Email', 'email')}
-            {renderField('Address 1', 'address1')}
-            {renderField('Address 2', 'address2')}
+            {renderField('Address 1', 'addressLine1')}
+            {renderField('Address 2', 'addressLine2')}
             {renderField('City', 'city')}
-            {renderField('State', 'userLocation', 'select', true, [
+            {renderField('State', 'state', 'select', true, [
               { value: '', label: 'Select a state' },
-              { value: 'TX-1', label: 'TX' },
-              { value: 'FL-1', label: 'FL' },
-              { value: 'NY-1', label: 'NY' },
+              { value: 'TX-1', label: '01- TX' },
+              { value: 'FL-1', label: '02 - FL' },
+              { value: 'NY-1', label: '03 - NY' },
             ])}
-            {renderField('Zipcode', 'zipcodeNumber', 'text')}
+            {renderField('Zipcode', 'zipcode', 'text')}
           </div>
         </form>
       </div>
@@ -130,4 +206,3 @@ function ProfileManagement() {
 }
 
 export default ProfileManagement;
-
