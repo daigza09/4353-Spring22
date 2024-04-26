@@ -109,10 +109,8 @@ const getPrice = asyncHandler(async(req, res) => {
     let locationFactor = 0.04; // Default location factor
     if (userState === '01 - TX') {
       locationFactor = 0.02;
-    } else if (userState === '02 - FL') {
-      locationFactor = 0.05;
-    } else if (userState === '03 - NY') {
-      locationFactor = 0.10;
+    } else{
+      locationFactor = 0.04;
     }
 
     const gallonsFactor = numGallons > 1000 ? 0.02 : 0.03;
