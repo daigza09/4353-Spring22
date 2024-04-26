@@ -193,7 +193,7 @@ function ProfileManagement() {
             {renderField('City', 'city')}
             {renderField('State', 'state', 'select', true, [
               { value: '', label: 'Select a state' },
-              { value: 'TX-1', label: '01- TX' },
+              { value: 'TX-1', label: '01 - TX' },
               { value: 'FL-1', label: '02 - FL' },
               { value: 'NY-1', label: '03 - NY' },
             ])}
