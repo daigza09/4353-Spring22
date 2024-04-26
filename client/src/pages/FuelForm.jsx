@@ -74,7 +74,7 @@ function FuelForm() {
                 if (success) {
                     setFormData((prevData) => ({
                     ...prevData,
-                    total: data.total,
+                    total: data.sugTotal,
                     pricePerGallon: data.suggestedPPG,
                     }));
                 } else {
@@ -173,18 +173,19 @@ function FuelForm() {
         }
     };*/
 
-    const handleTotalChange = () => {
+    /*const handleTotalChange = () => {
         const parsedNumGallons = parseFloat(formData.numGallons);
         const parsedPricePerGallon = parseFloat(formData.pricePerGallon);
 
         if (!isNaN(parsedNumGallons) && !isNaN(parsedPricePerGallon)) {
             const calculatedTotal = parsedNumGallons * parsedPricePerGallon;
+            console.log("CALCULATED TOTAL:", calculatedTotal);
             setFormData((prevData) => ({
                 ...prevData,
                 total: calculatedTotal.toFixed(2),
             }));
         }
-    };
+    };*/
     
 
       
@@ -203,9 +204,9 @@ function FuelForm() {
         }
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         handleTotalChange(); // Automatically update total when numGallons or pricePerGallon changes
-    }, [formData.numGallons, formData.pricePerGallon]);
+    }, [formData.numGallons, formData.pricePerGallon]);*/
 
     const handleOrder = (e) => {
         e.preventDefault(); // Prevent the form from submitting (to avoid page reload)
