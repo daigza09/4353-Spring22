@@ -5,11 +5,40 @@ import axios from "axios";
 
 function History() {
   const [data, setData] = useState([]);
+  const [email, setEmail] = useState(""); // State to store email address
+
+  const checkLoggedIn = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        const res = await axios.get("http://localhost:8080/auth/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        if (res.status === 200) {
+          setEmail(res.data.email); // Set email address if user is logged in
+          console.log("User Email:", res.data.email);
+          console.log("USER EMAIL: ", res.data.email);
+        }
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error("Error checking login status:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/history/");
+        const response = await axios.get(
+          `http://localhost:8080/history/?email=${email}`
+        );
         if (Array.isArray(response.data)) {
           setData(response.data); // Setting data to response data from the backend
           console.log(response.data);
@@ -24,8 +53,11 @@ function History() {
       }
     };
 
-    fetchHistory(); // Call fetchHistory when the component mounts
-  }, []);
+    if (email) {
+      // Check if email is not empty before fetching history
+      fetchHistory(); // Call fetchHistory when the component mounts or when email changes
+    }
+  }, [email]); // Include email in the dependency array
 
   return (
     <main>

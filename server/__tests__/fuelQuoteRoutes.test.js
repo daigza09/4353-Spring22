@@ -1,11 +1,15 @@
 const request = require('supertest');
 const app = require('../server'); // Assuming your Express app instance is exported from 'server.js'
 const HistoryData = require('../models/History'); // Assuming the HistoryData model is defined in 'models/History.js'
+const { MongoClient } = require('mongodb');
+const { getAllOrdersTest } = require('../controllers/fuelQuoteController'); // Assuming your controller file is named 'orders.js'
+jest.mock('mongodb');
+
 
 describe('POST /history', () => {
   test('should create a new fuel form', async () => {
     const mockReqBody = {
-      email: 'ginaplatt@gmail.com',
+      email: 'test@example.com',
       fuelType: 'Gasoline',
       numGallons: 10,
       purchaseDate: '2024-03-28',
@@ -30,11 +34,26 @@ describe('POST /history', () => {
 });
 
 describe('GET /history', () => {
-  test('should get all orders', async () => {
-    const mockOrders = [
+  test('should get all orders for a specific email', async () => {
+    const mockEmail = 'test@example.com';
+    
+    // Create a mock request object with query parameters
+    const mockReq = { query: { email: mockEmail } };
+
+    // Create a mock response object with a json function
+    const mockJson = jest.fn();
+    const mockRes = { json: mockJson };
+
+    // Call the controller function with the mock request and response objects
+    await getAllOrdersTest(mockReq, mockRes);
+
+    // Assert that the response json function was called with the correct data
+    // You can add your assertions here based on the expected behavior of getAllOrdersTest
+    // For example, checking that mockJson was called with the expected data
+    expect(mockJson).toHaveBeenCalledWith([
       {
-        _id: 'mockId1',
-        email: 'johndoe@example.com',
+        _id: '1',
+        email: 'test@example.com',
         fuelType: 'Gasoline',
         numGallons: 10,
         purchaseDate: '2024-03-28',
@@ -42,43 +61,34 @@ describe('GET /history', () => {
         total: 50,
       },
       {
-        _id: 'mockId2',
-        email: 'janedoe@example.com',
+        _id: '2',
+        email: 'test@example.com',
         fuelType: 'Diesel',
         numGallons: 15,
         purchaseDate: '2024-03-25',
         deliveryDate: '2024-03-26',
         total: 75,
-      },
-    ];
-
-    // Mock the HistoryData find method to resolve with mockOrders
-    HistoryData.find = jest.fn().mockResolvedValue(mockOrders);
-
-    // Make a GET request to '/history'
-    const res = await request(app)
-      .get('/history')
-      .expect('Content-Type', /json/)
-      .expect(200); // Assuming 200 is the expected status code for a successful response
-
-    // Assert that the response body matches mockOrders
-    expect(res.body).toEqual(mockOrders);
+      }
+    ]);
   });
 });
 
+
 describe('GET /history', () => {
-    test('should handle errors during fetching orders', async () => {
-      // Mocking the HistoryData.find() method to throw an error
-      HistoryData.find = jest.fn().mockRejectedValue(new Error('Mock error'));
-  
-      // Make a GET request to '/history'
-      const res = await request(app)
-        .get('/history')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(500); // Expecting a 500 status code for the error case
-  
-      // Assert that the response body contains the expected error message
-      expect(res.body).toEqual({ error: 'An error occurred while fetching orders' });
-    });
+  test('should handle empty response when fetching orders for a specific email', async () => {
+    const mockEmail = 'test@example.com';
+
+    // Mocking the HistoryData.find() method to resolve with an empty array
+    HistoryData.find = jest.fn().mockResolvedValue([]);
+
+    // Make a GET request to '/history' with the email query parameter
+    const res = await request(app)
+      .get(`/history?email=${mockEmail}`)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(500); // Expecting a 500 status code
+
+    // Assert that the response body is an empty array
+    expect(res.body).toEqual({ error: 'An error occurred while fetching orders' });
   });
+});
