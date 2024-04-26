@@ -29,33 +29,116 @@ const makeOrder = asyncHandler(async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the order' });
   }
 
-  
 })
 
 const getUserAddress = asyncHandler(async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.query;
     const user = await  User.find({ email });
-    console.log(user);
-    if (!user) {
+    //console.log(user);
+    if (!user || user.length === 0) {
         return res.status(404).json({ message: 'User not found' });
     }
-    const addressLine1 = user[0].addressLine1;
+    const dataAdd = user[0].addressLine1;
 
     console.log(`User with email ${email} exists!!`);
-    res.status(201).json({ message: 'Address retrieved successfully', addressLine1});
-    /*res.json({
-      addressLine1,
-    });*/
+    console.log(dataAdd);
+    res.status(201).json({ message: 'Address retrieved successfully', dataAdd});
   } catch (error){
     console.error('Error retrieving user address:', error);
     res.status(500).json({ error: 'An error occurred while retreiving user address' });
   }
 })
 
+const getPastOrders = asyncHandler(async(req,res)=>{
+  try{
+    const { email } = req.query;
+    const user = await FuelQuote.find({ email });
+    //console.log(user);
 
+    const hasOrdered = user.length > 0 ? true : false;
+
+    res.status(200).json({ message: 'Past orders have been retrieved', hasOrdered });
+
+    console.log(hasOrdered);
+
+  } catch(err){
+    console.error('Error retreiving users previous orders:', error);
+    res.status(500).json({error: 'An error occured while retreiving users orders'});
+  }
+})
+
+const getUserState = async(req, res) => {
+  try{
+    const { email } = req.query;
+    const user = await User.find({ email });
+
+    const userState = user[0].state;
+    console.log(`User with email ${email} exists!!`);
+    console.log(userState);
+
+    res.status(201).json({ message: 'State retrieved successfully', userState});
+  } catch(err){
+    console.error('Error retrieving user state:', err);
+    res.status(500).json({ error: 'An error occurred while retreiving user state' });
+  }
+}
+
+const getPrice = asyncHandler(async(req, res) => {
+  try {
+    const { email, numGallons } = req.query;
+
+    // Setting User Info
+    const user = await User.find({ email });
+
+    var userState;
+    var hasOrdered;
+
+    if (!user || user.length === 0){
+      userState = '01 - TX';
+      hasOrdered = false;
+    } else {
+      userState = user[0].state;
+      console.log(`User with email ${email} exists!!`);
+      console.log(userState);
+  
+      hasOrdered = user.length > 0 ? true : false;
+      console.log(hasOrdered);  
+    }
+
+    let locationFactor = 0.04; // Default location factor
+    if (userState === '01 - TX') {
+      locationFactor = 0.02;
+    } else{
+      locationFactor = 0.04;
+    }
+
+    const gallonsFactor = numGallons > 1000 ? 0.02 : 0.03;
+    const historyFactor = hasOrdered ? 0.01 : 0.00;
+
+    const currentPPG = 1.50; // Default current price per gallon
+    const companyProfit = 0.10; // Default company profit per gallon
+
+    const margin = currentPPG * (locationFactor - historyFactor + gallonsFactor + companyProfit);
+    const suggestedPPG = currentPPG + margin;
+
+    const sugTotal = (suggestedPPG * numGallons).toFixed(2);
+    res.status(200).json({
+      message: 'Price calculated successfully',
+      margin,
+      suggestedPPG,
+      sugTotal,
+    });
+  } catch (err) {
+    console.error('Error calculating price:', err);
+    res.status(500).json({ error: 'An error occurred while calculating price' });
+  }
+});
 
 module.exports  = {
   makeOrder,
   getUserAddress, 
+  getPastOrders,
+  getUserState,
+  getPrice,
 }
