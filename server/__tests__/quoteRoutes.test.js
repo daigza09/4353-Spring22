@@ -77,3 +77,21 @@ describe('GET /fuelForm/userState', () => {
     expect(response.body.userState).toBeDefined(); //
   });
 });
+
+
+describe('GET /fuelForm/pricingModule', () =>{
+  test('should retrieve the price for the order', async () => {
+    const userEmail = 'daisy_tester@example.com';
+    const numGallons = 1000;
+    
+    const response = await request(app)
+      .get('/fuelForm/pricingModule')
+      .query({email: userEmail, numGallons: numGallons})
+      .set('Accept', 'applocation/json');
+
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe('Price calculated successfully');
+    expect(response.body.suggestedPPG).toBeDefined();
+    expect(response.body.total).toBeDefined();
+  })
+});
