@@ -122,7 +122,7 @@ const getPrice = asyncHandler(async(req, res) => {
     const margin = currentPPG * (locationFactor - historyFactor + gallonsFactor + companyProfit);
     const suggestedPPG = currentPPG + margin;
 
-    const sugTotal = suggestedPPG * numGallons;
+    const sugTotal = (suggestedPPG * numGallons).toFixed(2);
     res.status(200).json({
       message: 'Price calculated successfully',
       margin,
