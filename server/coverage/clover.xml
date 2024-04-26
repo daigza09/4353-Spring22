@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712974635558" clover="3.2.0">
-  <project timestamp="1712974635558" name="All files">
-    <metrics statements="600" coveredstatements="538" conditionals="59" coveredconditionals="40" methods="6" coveredmethods="4" elements="665" coveredelements="582" complexity="0" loc="600" ncloc="600" packages="6" files="19" classes="19"/>
+<coverage generated="1714105385970" clover="3.2.0">
+  <project timestamp="1714105385970" name="All files">
+    <metrics statements="693" coveredstatements="619" conditionals="71" coveredconditionals="43" methods="7" coveredmethods="5" elements="771" coveredelements="667" complexity="0" loc="693" ncloc="693" packages="6" files="19" classes="19"/>
     <package name="server">
       <metrics statements="57" coveredstatements="56" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
-      <file name="server.js" path="/Users/lisa/4353-Spring22/server/server.js">
+      <file name="server.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\server.js">
         <metrics statements="57" coveredstatements="56" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -67,7 +67,7 @@
     </package>
     <package name="server.config">
       <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
-      <file name="db.js" path="/Users/lisa/4353-Spring22/server/config/db.js">
+      <file name="db.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\config\db.js">
         <metrics statements="13" coveredstatements="11" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -85,8 +85,8 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="271" coveredstatements="236" conditionals="34" coveredconditionals="24" methods="2" coveredmethods="1"/>
-      <file name="fuelQuoteController.js" path="/Users/lisa/4353-Spring22/server/controllers/fuelQuoteController.js">
+      <metrics statements="357" coveredstatements="310" conditionals="46" coveredconditionals="27" methods="3" coveredmethods="2"/>
+      <file name="fuelQuoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\fuelQuoteController.js">
         <metrics statements="45" coveredstatements="42" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -134,7 +134,7 @@
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
       </file>
-      <file name="loginController.js" path="/Users/lisa/4353-Spring22/server/controllers/loginController.js">
+      <file name="loginController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\loginController.js">
         <metrics statements="41" coveredstatements="37" conditionals="7" coveredconditionals="5" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -178,7 +178,7 @@
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
       </file>
-      <file name="profileController.js" path="/Users/lisa/4353-Spring22/server/controllers/profileController.js">
+      <file name="profileController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\profileController.js">
         <metrics statements="45" coveredstatements="39" conditionals="6" coveredconditionals="4" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -226,8 +226,8 @@
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
       </file>
-      <file name="quoteController.js" path="/Users/lisa/4353-Spring22/server/controllers/quoteController.js">
-        <metrics statements="58" coveredstatements="49" conditionals="5" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="quoteController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\quoteController.js">
+        <metrics statements="144" coveredstatements="123" conditionals="17" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -280,14 +280,100 @@
         <line num="50" count="0" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
+        <line num="53" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="54" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
         <line num="57" count="1" type="stmt"/>
         <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="87" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="97" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="110" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+        <line num="116" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="117" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="129" count="1" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="132" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+        <line num="144" count="1" type="stmt"/>
       </file>
-      <file name="signUpController.js" path="/Users/lisa/4353-Spring22/server/controllers/signUpController.js">
+      <file name="signUpController.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\controllers\signUpController.js">
         <metrics statements="82" coveredstatements="69" conditionals="12" coveredconditionals="10" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -375,7 +461,7 @@
     </package>
     <package name="server.middlewares">
       <metrics statements="77" coveredstatements="63" conditionals="14" coveredconditionals="11" methods="3" coveredmethods="2"/>
-      <file name="authMiddleware.js" path="/Users/lisa/4353-Spring22/server/middlewares/authMiddleware.js">
+      <file name="authMiddleware.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\middlewares\authMiddleware.js">
         <metrics statements="63" coveredstatements="56" conditionals="14" coveredconditionals="11" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -441,7 +527,7 @@
         <line num="62" count="1" type="stmt"/>
         <line num="63" count="3" type="stmt"/>
       </file>
-      <file name="errorMiddleware.js" path="/Users/lisa/4353-Spring22/server/middlewares/errorMiddleware.js">
+      <file name="errorMiddleware.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\middlewares\errorMiddleware.js">
         <metrics statements="14" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -461,7 +547,7 @@
     </package>
     <package name="server.models">
       <metrics statements="59" coveredstatements="59" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="FuelQuote.js" path="/Users/lisa/4353-Spring22/server/models/FuelQuote.js">
+      <file name="FuelQuote.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\FuelQuote.js">
         <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -481,7 +567,7 @@
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
       </file>
-      <file name="History.js" path="/Users/lisa/4353-Spring22/server/models/History.js">
+      <file name="History.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\History.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -498,7 +584,7 @@
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
-      <file name="Login.js" path="/Users/lisa/4353-Spring22/server/models/Login.js">
+      <file name="Login.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\Login.js">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -513,7 +599,7 @@
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="User.js" path="/Users/lisa/4353-Spring22/server/models/User.js">
+      <file name="User.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\models\User.js">
         <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -534,8 +620,8 @@
       </file>
     </package>
     <package name="server.routes">
-      <metrics statements="123" coveredstatements="113" conditionals="6" coveredconditionals="2" methods="0" coveredmethods="0"/>
-      <file name="authRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/authRoutes.js">
+      <metrics statements="130" coveredstatements="120" conditionals="6" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="authRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\authRoutes.js">
         <metrics statements="45" coveredstatements="35" conditionals="6" coveredconditionals="2" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -583,7 +669,7 @@
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
       </file>
-      <file name="fuelQuoteRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/fuelQuoteRoutes.js">
+      <file name="fuelQuoteRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\fuelQuoteRoutes.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -600,7 +686,7 @@
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
-      <file name="loginRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/loginRoutes.js">
+      <file name="loginRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\loginRoutes.js">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -613,7 +699,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="profileRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/profileRoutes.js">
+      <file name="profileRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\profileRoutes.js">
         <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -631,8 +717,8 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="quoteRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/quoteRoutes.js">
-        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="quoteRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\quoteRoutes.js">
+        <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -647,8 +733,15 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
       </file>
-      <file name="signUpRoutes.js" path="/Users/lisa/4353-Spring22/server/routes/signUpRoutes.js">
+      <file name="signUpRoutes.js" path="C:\Users\13468\Desktop\4353-S22\4353-Spring22\server\routes\signUpRoutes.js">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
