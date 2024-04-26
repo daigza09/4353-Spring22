@@ -92,6 +92,6 @@ describe('GET /fuelForm/pricingModule', () =>{
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Price calculated successfully');
     expect(response.body.suggestedPPG).toBeDefined();
-    expect(response.body.total).toBeDefined();
+    expect(response.body.sugTotal).toBeDefined();
   })
 });
