@@ -53,8 +53,11 @@ function History() {
       }
     };
 
-    fetchHistory(); // Call fetchHistory when the component mounts
-  }, []);
+    if (email) {
+      // Check if email is not empty before fetching history
+      fetchHistory(); // Call fetchHistory when the component mounts or when email changes
+    }
+  }, [email]); // Include email in the dependency array
 
   return (
     <main>

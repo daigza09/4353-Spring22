@@ -59,7 +59,44 @@ const client = new MongoClient(uri);
     }
   };
 
+  const getAllOrdersTest = async (req, res) => {
+    const { email } = req.query; // Extract email parameter from the request query
+    
+    try {
+      // Simulate fetching orders (replace this with your actual data or mock)
+      const orders = [
+        {
+          _id: '1',
+          email: 'test@example.com',
+          fuelType: 'Gasoline',
+          numGallons: 10,
+          purchaseDate: '2024-03-28',
+          deliveryDate: '2024-03-29',
+          total: 50,
+        },
+        {
+          _id: '2',
+          email: 'test@example.com',
+          fuelType: 'Diesel',
+          numGallons: 15,
+          purchaseDate: '2024-03-25',
+          deliveryDate: '2024-03-26',
+          total: 75,
+        }
+      ];
+      
+      // Simulate sending the orders as a JSON response
+      res.json(orders);
+    } catch (error) {
+      // Handle any errors that occur during fetching orders
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'An error occurred while fetching orders' });
+    }
+  };
+
+
   module.exports  = {
     getAllOrders,
     createFuelForm,
+    getAllOrdersTest
   }
