@@ -9,7 +9,7 @@ const {
 // retreiving all customer orders
 
 router.get('/', getAllOrders);
-router.get('/', getAllOrdersTest);
+router.get('/testOrders', getAllOrdersTest);
 
 router.post('/createHistory', createFuelForm);
 
