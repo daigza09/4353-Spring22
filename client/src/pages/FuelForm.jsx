@@ -114,7 +114,7 @@ function FuelForm() {
 
     async function setPricingChanges(){
         const userEmail = formData.email;
-        const reqGal = formData.email;
+        const reqGal = formData.numGallons;
         console.log("Testig :3", userEmail);
         console.log("Testing gal :3", reqGal);
         try{
@@ -128,8 +128,10 @@ function FuelForm() {
             if(res.status != 200){
                 throw new Error("Unable to retrieve user email");
             }
+            
             const data = await res.data;
-            console.log(data.total);
+            console.log(data);
+            console.log(data.sugTotal);
             console.log(data.suggestedPPG);
             return { success: true, data };
         }catch(err){
@@ -211,6 +213,16 @@ function FuelForm() {
             }));
         }
     };
+    useEffect(() => {
+        const handlePricingChange = async () => {
+          if (formData.email && formData.numGallons) {
+            await setPricingChanges(formData.email, formData.numGallons);
+          }
+        };
+      
+        handlePricingChange(); // Trigger handlePricingChange() when component mounts or when formData.email/numGallons changes
+      }, [formData.email, formData.numGallons]);
+      
     async function registerOrder() {
         try {
             const res = await axios.post('http://localhost:8080/fuelForm/', formData);
