@@ -84,9 +84,63 @@ const getUserState = async(req, res) => {
   }
 }
 
+const getPrice = asyncHandler(async(req, res) => {
+  try {
+    const { email, numGallons } = req.query;
+
+    // Setting User Info
+    const user = await User.find({ email });
+
+    var userState;
+    var hasOrdered;
+
+    if (!user || user.length === 0){
+      userState = '01 - TX';
+      hasOrdered = false;
+    } else {
+      userState = user[0].state;
+      console.log(`User with email ${email} exists!!`);
+      console.log(userState);
+  
+      hasOrdered = user.length > 0 ? true : false;
+      console.log(hasOrdered);  
+    }
+
+    let locationFactor = 0.04; // Default location factor
+    if (userState === '01 - TX') {
+      locationFactor = 0.02;
+    } else if (userState === '02 - FL') {
+      locationFactor = 0.05;
+    } else if (userState === '03 - NY') {
+      locationFactor = 0.10;
+    }
+
+    const gallonsFactor = numGallons > 1000 ? 0.02 : 0.03;
+    const historyFactor = hasOrdered ? 0.01 : 0.00;
+
+    const currentPPG = 1.50; // Default current price per gallon
+    const companyProfit = 0.10; // Default company profit per gallon
+
+    const margin = currentPPG * (locationFactor - historyFactor + gallonsFactor + companyProfit);
+    const suggestedPPG = currentPPG + margin;
+
+    const total = suggestedPPG * numGallons;
+    res.status(200).json({
+      message: 'Price calculated successfully',
+      margin,
+      suggestedPPG,
+      total,
+    });
+  } catch (err) {
+    console.error('Error calculating price:', err);
+    res.status(500).json({ error: 'An error occurred while calculating price' });
+  }
+});
+
 module.exports  = {
   makeOrder,
   getUserAddress, 
   getPastOrders,
   getUserState,
+  getPrice,
 }

@@ -5,6 +5,7 @@ const {
     getUserAddress, 
     getPastOrders,
     getUserState,
+    getPrice,
 } = require('../controllers/quoteController')
 
 router.get('/getAddress', getUserAddress);
@@ -14,5 +15,7 @@ router.post('/', makeOrder);
 router.get('/prevOrders', getPastOrders);
 
 router.get('/userState', getUserState);
+
+router.get('/pricingModule', getPrice);
 
 module.exports = router;
